@@ -59,6 +59,8 @@ TESTS_SRCS_DIR += ./tests/tests_syntax_analysis
 TESTS_SRCS_DIR += ./tests/tests_lexical_analysis/BDD
 TESTS_SRCS_DIR += ./tests/tests_lexical_analysis/unit_tests
 TESTS_SRCS_DIR += ./tests/tests_syntax_analysis/BDD
+TESTS_SRCS_DIR += ./tests/tests_environment_management
+TESTS_SRCS_DIR += ./tests/tests_environment_management/unit_tests
 
 TESTS_SRCS += tests_main.c
 
@@ -85,6 +87,10 @@ TESTS_SRCS += test_empty_string.c
 TESTS_SRCS += test_just_a_pipe.c
 TESTS_SRCS += test_two_pipes.c
 TESTS_SRCS += free_parser_test.c
+
+# environment management
+
+TESTS_SRCS += test_set_variable.c
 
 # Unity
 

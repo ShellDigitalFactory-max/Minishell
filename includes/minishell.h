@@ -20,6 +20,7 @@
 # include "user_interface.h"
 # include "lexing.h"
 # include "parsing.h"
+# include "environment.h"
 
 # include <stdio.h>
 # include <stdlib.h>
