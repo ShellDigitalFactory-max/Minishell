@@ -23,7 +23,7 @@ void	test_input_two_pipes(void)
 	print_token_list(token_list);
 
 	//ACT
-	parser_output = parser(token_list);
+	parser_output = parse_input(token_list);
 	//print_token_list(token_list);
 
 	//ASSERT

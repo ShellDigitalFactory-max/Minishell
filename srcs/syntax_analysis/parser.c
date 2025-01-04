@@ -85,7 +85,7 @@ static t_syntax_status	check_tokens_sequence(t_token_list token)
 	return (PARSING_IN_PROGRESS);
 }
 
-t_syntax_status	parser(t_token_list token_list)
+t_syntax_status	parse_input(t_token_list token_list)
 {
 	t_token_list	current_token;
 	t_syntax_status	parser_output;

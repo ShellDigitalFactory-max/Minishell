@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_lexing_status	lexical_analysis(t_minishell *minishell_data)
+t_lexing_status	lexe_input(t_minishell *minishell_data)
 {
 	minishell_data->tokenized_user_input_line
 		= tokenize(minishell_data->user_input_line);

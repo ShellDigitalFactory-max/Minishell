@@ -40,7 +40,7 @@ typedef struct s_minishell
 
 int				exit_shell_routine(void);
 char			*prompt_gets_user_input(void);
-t_lexing_status	lexical_analysis(t_minishell *minishell_data);
-t_syntax_status	syntaxic_analysis(t_token_list token_list);
+t_lexing_status	lexe_input(t_minishell *minishell_data);
+t_syntax_status	parse_input(t_token_list token_list);
 
 #endif

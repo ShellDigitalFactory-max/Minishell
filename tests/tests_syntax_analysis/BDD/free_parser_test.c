@@ -23,7 +23,6 @@ void	test_free(void)
 	scanf("%[^\n]", input);
 	printf("\n");
 
-	t_syntax_status	parser_output;
 	t_token_list	token_list = tokenize(input);
 
 	print_token_list(token_list);
@@ -31,7 +30,7 @@ void	test_free(void)
 	printf("TOKEN LIST SIZE: %d\n\n", ft_lstsize(token_list));
 
 	//ACT
-	parser_output = parser(token_list);
+	parse_input(token_list);
 	//print_token_list(token_list);
 
 	//ASSERT
