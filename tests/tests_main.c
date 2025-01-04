@@ -39,5 +39,9 @@ int	main(void)
 	printf("Testing minishell parser comportments\n\n");
 	RUN_TEST(parsing_bdd_tests);
 
+	// ENVIRONMENT MANAGEMENT
+
+	RUN_TEST(unit_tests_environment_management);
+
 	return (UNITY_END());
 }

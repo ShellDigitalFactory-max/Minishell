@@ -45,4 +45,9 @@ void	test_input_just_a_pipe(void);
 void	test_input_two_pipes(void);
 void	test_free(void);
 
+// ENVIRONMENT MANAGEMENT
+
+void	unit_tests_environment_management(void);
+void	test_set_variable(void);
+
 #endif

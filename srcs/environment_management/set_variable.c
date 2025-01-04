@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_set_variable.c                                :+:      :+:    :+:   */
+/*   set_variable.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 19:38:36 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/04 19:38:45 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/04 20:49:55 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/04 20:50:06 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tests.h"
+#include "minishell.h"
 
-void	test_set_variable(void)
+//find variable (avec listiter ou listfind, pis creer ou modif)
+
+t_variable	*set_variable(const char *key, const char *value,
+				bool make_it_exportable)
 {
-	// ARRANGE
-
-	char	*key = "VAR_NAME";
-	char	*value = "test";
-
-	// ACT
-
-	t_variable	*variable = set_variable(key, value, true);
-
-	//ASSERT
-
-	TEST_ASSERT_EQUAL(0, ft_strncmp(key, variable->key, ft_strlen(key)));
-	TEST_ASSERT_EQUAL(0, ft_strncmp(key, variable->value, ft_strlen(value)));
-	//TEST_ASSERT_EQUAL(EXPORTABLE | SET, variable->state);
+	//if (value == NULL)
+		//activer FLAG unset avec un "ou egal" UNSET
 }

@@ -23,25 +23,17 @@ typedef char * t_string;
 
 // ENUMS
 
-typedef enum e_state
-{
-	NO_STATE = 0x00,
-	SET = 0x01,
-	EXPORTABLE = 0x02,
-	READONLY = 0x04
-}			t_state;
-
 // STRUCTURES
 
 typedef struct s_variable
 {
 	t_string	key;
 	t_string	value;
-	t_state		state;
+	bool		is_exportable;
 }				t_variable;
 
 // PROTOTYPES
 
-
+// QUAND COPIE ENV VERIFIER SI VALEUR EST NULLE OU EXPORTABLE
 
 #endif

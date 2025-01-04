@@ -90,6 +90,7 @@ TESTS_SRCS += free_parser_test.c
 
 # environment management
 
+TESTS_SRCS += unit_tests_environment.c
 TESTS_SRCS += test_set_variable.c
 
 # Unity
