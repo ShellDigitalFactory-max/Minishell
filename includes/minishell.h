@@ -31,17 +31,22 @@
 
 // STRUCTURES
 
-typedef struct s_minishell
+typedef struct s_current_loop_data
 {
 	char			*user_input_line;
 	t_token_list	tokenized_user_input_line;
-}				t_minishell;
+}				t_current_loop_data;
+
+typedef struct s_minishell_data
+{
+	t_variable_list	variables_list;
+}				t_minishell_data;
 
 // PROTOTYPES
 
 int				exit_shell_routine(void);
 char			*prompt_gets_user_input(void);
-t_lexing_status	lexe_input(t_minishell *minishell_data);
+t_lexing_status	lexe_input(t_current_loop_data *loop_data);
 t_syntax_status	parse_input(t_token_list token_list);
 
 #endif

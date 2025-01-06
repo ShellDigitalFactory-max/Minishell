@@ -47,6 +47,13 @@ SRCS += lexer_utils.c
 
 SRCS += parser.c
 
+# srcs/environment_management
+
+SRCS += set_variable.c
+SRCS += create_variable.c
+SRCS += add_variable_to_variables_list.c
+SRCS += delete_variable.c
+
 vpath %.c $(PATH_SRCS)
 
 ### TETS SRCS ################################################################

@@ -12,11 +12,22 @@
 
 #include "minishell.h"
 
-//find variable (avec listiter ou listfind, pis creer ou modif)
+extern t_minishell_data	minishell_data;
 
-t_variable	*set_variable(const char *key, const char *value,
+int	set_variable(const char *key, const char *value,
 				bool make_it_exportable)
 {
-	//if (value == NULL)
-		//activer FLAG unset avec un "ou egal" UNSET
+	//const t_variable	*variable = get_variable(key);
+
+	// if (variable == NULL)
+	// 	update_variable(variable, value, make_it_exportable);
+	// else
+	add_variable_to_variables_list(key, value,
+		make_it_exportable);
+		//print error and return si necessaire
+	return (EXIT_SUCCESS);
 }
+
+// Le reste (update_variable -> modifier une variable qui existe deja)
+// est commente  car pour l'instant implementation de l'US ajouter
+// une variable a l'env uniquement.

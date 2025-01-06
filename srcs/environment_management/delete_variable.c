@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexical_analyse.c                                  :+:      :+:    :+:   */
+/*   delete_variable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/27 14:11:02 by tchobert          #+#    #+#             */
-/*   Updated: 2024/12/27 14:11:21 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/06 21:04:28 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/06 21:05:22 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_lexing_status	lexe_input(t_current_loop_data *loop_data)
+extern t_minishell_data	minishell_data;
+
+void	delete_variable(void *data)
 {
-	loop_data->tokenized_user_input_line
-		= tokenize(loop_data->user_input_line);
-	if (loop_data->tokenized_user_input_line == NULL)
-		return (LEXING_FAILURE);
-	return (LEXING_SUCCESS);
+	t_variable	*variable_to_delete;
+
+	variable_to_delete = (t_variable *)data;
+	free(variable_to_delete->key);
+	if (variable_to_delete->value != NULL)
+		free(variable_to_delete->value);
+	free(variable_to_delete);
 }

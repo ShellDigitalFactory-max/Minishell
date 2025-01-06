@@ -23,9 +23,8 @@ void	test_set_variable(void)
 
 	t_variable	*variable = set_variable(key, value, true);
 
-	//ASSERT
+	// ASSERT
 
 	TEST_ASSERT_EQUAL(0, ft_strncmp(key, variable->key, ft_strlen(key)));
 	TEST_ASSERT_EQUAL(0, ft_strncmp(key, variable->value, ft_strlen(value)));
-	//TEST_ASSERT_EQUAL(EXPORTABLE | SET, variable->state);
 }

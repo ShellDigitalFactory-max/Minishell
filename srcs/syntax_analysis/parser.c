@@ -100,5 +100,6 @@ t_syntax_status	parse_input(t_token_list token_list)
 	}
 	if (parser_output == INVALID_SYNTAX)
 		display_syntax_error(current_token->next);
+	//set variable $? !!!!
 	return (parser_output);
 }
