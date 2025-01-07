@@ -13,7 +13,7 @@
 #include "minishell.h"
 #ifndef TEST_MODE
 
-t_minishell_data	minishell_data;
+extern t_minishell_data	minishell_data;
 
 static int	main_process(t_current_loop_data *loop_data)
 {
@@ -27,7 +27,6 @@ static int	main_process(t_current_loop_data *loop_data)
 	if (parse_input(loop_data->tokenized_user_input_line)
 		== INVALID_SYNTAX)
 	{
-		//ici pour set $? ??
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

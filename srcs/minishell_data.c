@@ -1,20 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unit_tests_environment.c                           :+:      :+:    :+:   */
+/*   minishell_data.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 19:58:30 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/04 19:58:40 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/07 14:33:55 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/07 14:34:29 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tests.h"
+#include "minishell.h"
 
-void	unit_tests_environment_management(void)
-{
-	printf("\nTesting environment management -> unit tests\n\n");
-	test_create_variable();
-	printf("\n");
-}
+t_minishell_data	minishell_data;

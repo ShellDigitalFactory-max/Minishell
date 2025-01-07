@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unit_tests_environment.c                           :+:      :+:    :+:   */
+/*   delete_variables_list.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 19:58:30 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/04 19:58:40 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/07 14:13:55 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/07 14:14:08 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tests.h"
+#include "minishell.h"
 
-void	unit_tests_environment_management(void)
+void	delete_variables_list(t_variable_list variables_list)
 {
-	printf("\nTesting environment management -> unit tests\n\n");
-	test_create_variable();
-	printf("\n");
+	ft_lstclear(&variables_list, delete_variable);
 }

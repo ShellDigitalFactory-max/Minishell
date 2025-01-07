@@ -14,8 +14,10 @@ PATH_SRCS += srcs/history
 PATH_SRCS += srcs/syntax_analysis
 PATH_SRCS += srcs/lexical_analysis
 PATH_SRCS += srcs/syntax_analysis
+PATH_SRCS += srcs/environment_management
 
 SRCS += main.c
+SRCS += minishell_data.c
 SRCS += exit_shell_routine.c
 
 # scrs/user_interface
@@ -53,6 +55,7 @@ SRCS += set_variable.c
 SRCS += create_variable.c
 SRCS += add_variable_to_variables_list.c
 SRCS += delete_variable.c
+SRCS += delete_variables_list.c
 
 vpath %.c $(PATH_SRCS)
 
@@ -98,7 +101,7 @@ TESTS_SRCS += free_parser_test.c
 # environment management
 
 TESTS_SRCS += unit_tests_environment.c
-TESTS_SRCS += test_set_variable.c
+TESTS_SRCS += test_create_variable.c
 
 # Unity
 

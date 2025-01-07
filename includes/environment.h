@@ -20,7 +20,6 @@
 // TYPEDEFS
 
 typedef t_list *	t_variable_list;
-typedef char *		t_string;
 
 // ENUMS
 
@@ -28,8 +27,8 @@ typedef char *		t_string;
 
 typedef struct s_variable
 {
-	t_string	key;
-	t_string	value;
+	char	*key;
+	char	*value;
 	bool		is_exportable;
 }				t_variable;
 
@@ -38,8 +37,11 @@ typedef struct s_variable
 int			set_variable(const char *key, const char *value,
 				bool make_it_exportable);
 t_variable	*create_variable(const char *key, const char *value,
-						bool is_exportable);
+				bool is_exportable);
+int			add_variable_to_variables_list(const char *key,
+				const char *value, bool is_exportable);
 void		delete_variable(void *data);
+void		delete_variables_list(t_variable_list variables_list);
 
 // QUAND COPIE ENV VERIFIER SI VALEUR EST NULLE OU EXPORTABLE
 

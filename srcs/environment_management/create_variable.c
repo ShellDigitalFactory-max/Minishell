@@ -36,7 +36,7 @@ t_variable	*create_variable(const char *key, const char *value,
 	if (new_variable == NULL)
 		return (NULL);
 	new_variable->is_exportable = is_exportable;
-	if (set_variable_values(new_variable, key, value == EXIT_FAILURE))
+	if (set_variable_values(new_variable, key, value) == EXIT_FAILURE)
 	{
 		delete_variable(new_variable);
 		return (NULL);

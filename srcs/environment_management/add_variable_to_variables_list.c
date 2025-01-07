@@ -33,6 +33,6 @@ int	add_variable_to_variables_list(const char *key,
 		delete_variables_list(minishell_data.variables_list);
 		return (EXIT_FAILURE);
 	}
-	ft_lstadd_back(&minishell_data.variables_list, new_variable);
+	ft_lstadd_back(&minishell_data.variables_list, new_node);
 	return (EXIT_SUCCESS);
 }

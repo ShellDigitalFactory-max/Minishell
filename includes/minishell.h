@@ -42,6 +42,8 @@ typedef struct s_minishell_data
 	t_variable_list	variables_list;
 }				t_minishell_data;
 
+extern t_minishell_data	minishell_data;
+
 // PROTOTYPES
 
 int				exit_shell_routine(void);

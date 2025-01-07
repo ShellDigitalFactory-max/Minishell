@@ -23,17 +23,21 @@ void	test_create_variable(void)
 
 	// ACT
 
-	const t_variable	*variable = create_variable(key, value, true);
-	const t_variable	*variable_2 = create_variable(key_2, value_2, false);
+	t_variable	*variable = create_variable(key, value, true);
+	t_variable	*variable_2 = create_variable(key_2, value_2, false);
 
 	// ASSERT
 
 	TEST_ASSERT_EQUAL(0, ft_strncmp(key, variable->key, ft_strlen(key)));
-	TEST_ASSERT_EQUAL(0, ft_strncmp(key, variable->value, ft_strlen(value)));
+	printf("Variable key = %s\n", variable->key);
+	TEST_ASSERT_EQUAL(0, ft_strncmp(value, variable->value, ft_strlen(value)));
+	printf("Variable value = %s\n", variable->value);
 	TEST_ASSERT_EQUAL(true, variable->is_exportable);
 
 	TEST_ASSERT_EQUAL(0,ft_strncmp(key_2, variable_2->key, ft_strlen(key_2)));
+	printf("Variable 2 key = %s\n", variable_2->key);
 	TEST_ASSERT_EQUAL(0, *variable_2->value);
+	printf("Variable 2 value = %s\n", variable_2->value);
 	TEST_ASSERT_EQUAL(false, variable_2->is_exportable);
 
 	// CLEAN
