@@ -12,11 +12,11 @@
 
 #include "minishell.h"
 
-t_lexing_status	lexe_input(t_current_loop_data *loop_data)
+t_lexing_status	lexe_input(t_command_session *current_command)
 {
-	loop_data->tokenized_user_input_line
-		= tokenize(loop_data->user_input_line);
-	if (loop_data->tokenized_user_input_line == NULL)
+	current_command->tokenized_user_input_line
+		= tokenize(current_command->user_input_line);
+	if (current_command->tokenized_user_input_line == NULL)
 		return (LEXING_FAILURE);
 	return (LEXING_SUCCESS);
 }

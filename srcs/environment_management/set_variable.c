@@ -12,12 +12,10 @@
 
 #include "minishell.h"
 
-extern t_minishell_data	minishell_data;
-
-int	set_variable(const char *key, const char *value,
-				bool make_it_exportable)
+int	set_variable(t_variable_list variable_list, 
+		const char *key, const char *value, bool make_it_exportable)
 {
-	add_variable_to_variables_list(key, value,
+	add_variable_to_variables_list(variable_list, key, value,
 		make_it_exportable);
 	return (EXIT_SUCCESS);
 }

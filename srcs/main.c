@@ -13,18 +13,17 @@
 #include "minishell.h"
 #ifndef TEST_MODE
 
-extern t_minishell_data	minishell_data;
-
-static int	main_process(t_current_loop_data *loop_data)
+static int	main_process(t_minishell_context *minishell_context)
 {
-	if (loop_data->user_input_line == CTRL_D)
+	if (minishell_context->command_session.user_input_line == CTRL_D)
 		exit_shell_routine();
-	if (lexe_input(loop_data) == LEXING_FAILURE)
+	if (lexe_input(&minishell_context->command_session)
+		== LEXING_FAILURE)
 	{
 		ft_dprintf(STDERR_FILENO, "Memory allocation failure during lexing.\n");
 		return (EXIT_FAILURE);
 	}
-	if (parse_input(loop_data->tokenized_user_input_line)
+	if (parse_input(minishell_context->command_session.tokenized_user_input_line)
 		== INVALID_SYNTAX)
 	{
 		return (EXIT_FAILURE);
@@ -32,27 +31,27 @@ static int	main_process(t_current_loop_data *loop_data)
 	return (EXIT_SUCCESS);
 }
 
-static int	core_routine(t_current_loop_data *loop_data)
+static int	core_routine(t_minishell_context *minishell_context)
 {
 	while (MSH_LOOP)
 	{
-		loop_data->user_input_line = prompt_gets_user_input();
-		main_process(loop_data);
-		free(loop_data->user_input_line);
-		delete_token_list(loop_data->tokenized_user_input_line);
+		minishell_context->command_session.user_input_line
+			= prompt_gets_user_input();
+		main_process(minishell_context);
+		free(minishell_context->command_session.user_input_line);
+		delete_token_list(minishell_context->command_session.user_input_line);
 	}
 	return (EXIT_SUCCESS);
 }
 
 static int	launch_shell(void)
 {
-	t_current_loop_data	loop_data;
+	t_minishell_context	minishell_context;
 	struct sigaction	sa;
 
-	ft_bzero(&minishell_data, sizeof(minishell_data));
-	ft_bzero(&loop_data, sizeof(loop_data));
+	ft_bzero(&minishell_context, sizeof(minishell_context));
 	setup_signals(&sa);
-	return (core_routine(&loop_data));
+	return (core_routine(&minishell_context));
 }
 
 int	main(void)

@@ -16,5 +16,6 @@ void	unit_tests_environment_management(void)
 {
 	printf("\nTesting environment management -> unit tests\n\n");
 	test_create_variable();
+	test_add_variable_to_variables_list();
 	printf("\n");
 }

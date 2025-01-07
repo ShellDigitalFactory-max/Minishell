@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-extern t_minishell_data	minishell_data;
-
 void	delete_variable(void *data)
 {
 	t_variable	*variable_to_delete;

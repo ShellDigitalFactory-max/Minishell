@@ -49,5 +49,6 @@ void	test_free(void);
 
 void	unit_tests_environment_management(void);
 void	test_create_variable(void);
+void	test_add_variable_to_variables_list(void);
 
 #endif

@@ -34,14 +34,14 @@ typedef struct s_variable
 
 // PROTOTYPES
 
-int			set_variable(const char *key, const char *value,
-				bool make_it_exportable);
-t_variable	*create_variable(const char *key, const char *value,
-				bool is_exportable);
-int			add_variable_to_variables_list(const char *key,
-				const char *value, bool is_exportable);
-void		delete_variable(void *data);
-void		delete_variables_list(t_variable_list variables_list);
+int				set_variable(t_variable_list variables_list,
+				const char *key, const char *value, bool make_it_exportable);
+t_variable		*create_variable(const char *key, const char *value,
+					bool is_exportable);
+t_variable_list	add_variable_to_variables_list(t_variable_list variables_list,
+					const char *key, const char *value, bool is_exportable);
+void			delete_variable(void *data);
+void			delete_variables_list(t_variable_list variables_list);
 
 // QUAND COPIE ENV VERIFIER SI VALEUR EST NULLE OU EXPORTABLE
 

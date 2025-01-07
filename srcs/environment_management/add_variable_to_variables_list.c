@@ -12,10 +12,8 @@
 
 #include "minishell.h"
 
-extern t_minishell_data	minishell_data;
-
-int	add_variable_to_variables_list(const char *key,
-				const char *value, bool is_exportable)
+t_variable_list add_variable_to_variables_list(t_variable_list variables_list,
+		const char *key, const char *value, bool is_exportable)
 {
 	t_variable		*new_variable;
 	t_variable_list	new_node;
@@ -23,16 +21,14 @@ int	add_variable_to_variables_list(const char *key,
 	new_variable = create_variable(key, value, is_exportable);
 	if (new_variable == NULL)
 	{
-		delete_variables_list(minishell_data.variables_list);
-		return (EXIT_FAILURE);
+		return (NULL);
 	}
 	new_node = ft_lstnew(new_variable);
 	if (new_node == NULL)
 	{
 		free(new_node);
-		delete_variables_list(minishell_data.variables_list);
-		return (EXIT_FAILURE);
+		return (NULL);
 	}
-	ft_lstadd_back(&minishell_data.variables_list, new_node);
-	return (EXIT_SUCCESS);
+	ft_lstadd_back(&variables_list, new_node);
+	return (variables_list);
 }
