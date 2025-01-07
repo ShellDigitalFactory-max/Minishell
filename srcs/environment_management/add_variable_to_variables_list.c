@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int add_variable_to_environment(t_variable_list environment,
+t_adding_status	add_variable_to_environment(t_variable_list environment,
 		const char *key, const char *value, bool is_exportable)
 {
 	t_variable		*new_variable;

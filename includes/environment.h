@@ -25,8 +25,9 @@ typedef t_list *	t_variable_list;
 
 typedef enum e_adding_status
 {
-	
-}
+	ADDING_SUCCESS,
+	ADDING_FAILURE
+}			t_adding_status;
 
 // STRUCTURES
 
