@@ -12,19 +12,32 @@
 
 #include "tests.h"
 
-void	test_set_variable(void)
+void	test_create_variable(void)
 {
 	// ARRANGE
 
-	char	*key = "VAR_NAME";
-	char	*value = "test";
+	const char	*key = "VAR_NAME";
+	const char	*value = "test";
+	const char	*key_2 = "NAME_VAR";
+	const char	*value_2 = "";
 
 	// ACT
 
-	t_variable	*variable = set_variable(key, value, true);
+	const t_variable	*variable = create_variable(key, value, true);
+	const t_variable	*variable_2 = create_variable(key_2, value_2, false);
 
 	// ASSERT
 
 	TEST_ASSERT_EQUAL(0, ft_strncmp(key, variable->key, ft_strlen(key)));
 	TEST_ASSERT_EQUAL(0, ft_strncmp(key, variable->value, ft_strlen(value)));
+	TEST_ASSERT_EQUAL(true, variable->is_exportable);
+
+	TEST_ASSERT_EQUAL(0,ft_strncmp(key_2, variable_2->key, ft_strlen(key_2)));
+	TEST_ASSERT_EQUAL(0, *variable_2->value);
+	TEST_ASSERT_EQUAL(false, variable_2->is_exportable);
+
+	// CLEAN
+
+	delete_variable(variable);
+	delete_variable(variable_2);
 }

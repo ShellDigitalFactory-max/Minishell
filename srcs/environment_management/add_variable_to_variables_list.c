@@ -14,7 +14,7 @@
 
 extern t_minishell_data	minishell_data;
 
-static int	add_variable_to_variables_list(const char *key,
+int	add_variable_to_variables_list(const char *key,
 				const char *value, bool is_exportable)
 {
 	t_variable		*new_variable;
@@ -27,12 +27,12 @@ static int	add_variable_to_variables_list(const char *key,
 		return (EXIT_FAILURE);
 	}
 	new_node = ft_lstnew(new_variable);
-	if (new_variable == NULL)
+	if (new_node == NULL)
 	{
 		free(new_node);
 		delete_variables_list(minishell_data.variables_list);
 		return (EXIT_FAILURE);
 	}
-	ft_lstadd_back(minishell_data.variables_list, new_variable);
+	ft_lstadd_back(&minishell_data.variables_list, new_variable);
 	return (EXIT_SUCCESS);
 }

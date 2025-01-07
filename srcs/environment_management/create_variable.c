@@ -19,10 +19,7 @@ static int	set_variable_values(t_variable *variable, const char *key,
 	if (variable->key == NULL)
 		return (EXIT_FAILURE);
 	if (value == NULL)
-	{
-		//variable->is_exportable = false;
 		variable->value = ft_strdup("");
-	}
 	else
 		variable->value = ft_strndup(value, ft_strlen(value));
 	if (variable->value == NULL)
