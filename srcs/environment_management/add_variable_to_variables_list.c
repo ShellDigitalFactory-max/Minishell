@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_variable_list add_variable_to_variables_list(t_variable_list variables_list,
+int add_variable_to_environment(t_variable_list environment,
 		const char *key, const char *value, bool is_exportable)
 {
 	t_variable		*new_variable;
@@ -21,14 +21,14 @@ t_variable_list add_variable_to_variables_list(t_variable_list variables_list,
 	new_variable = create_variable(key, value, is_exportable);
 	if (new_variable == NULL)
 	{
-		return (NULL);
+		return (ADDING_FAILURE);
 	}
 	new_node = ft_lstnew(new_variable);
 	if (new_node == NULL)
 	{
 		free(new_node);
-		return (NULL);
+		return (ADDING_FAILURE);
 	}
-	ft_lstadd_back(&variables_list, new_node);
-	return (variables_list);
+	ft_lstadd_back(&environment, new_node);
+	return (ADDING_SUCCESS);
 }

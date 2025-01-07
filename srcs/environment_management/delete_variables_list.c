@@ -12,7 +12,10 @@
 
 #include "minishell.h"
 
-void	delete_variables_list(t_variable_list variables_list)
+void	delete_variables_list(void)
 {
-	ft_lstclear(&variables_list, delete_variable);
+	t_variable_list	*env;
+
+	env = get_environment();
+	ft_lstclear(&env, delete_variable);
 }

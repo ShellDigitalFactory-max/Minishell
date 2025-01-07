@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_variable.c                                     :+:      :+:    :+:   */
+/*   get_environment.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 20:49:55 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/04 20:50:06 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/07 20:39:36 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/07 20:39:48 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	set_variable(const char *key, const char *value, bool make_it_exportable)
+static t_variable_list	get_environment_access(void)
 {
-	t_variable_list	env;
+	static t_variable_list	environment;
 
-	env = get_environment();
-	add_variable_to_variables_list(env, key, value,
-		make_it_exportable);
-	return (EXIT_SUCCESS);
+	return (environment);
+}
+
+t_variable_list	get_environment(void)
+{
+	return (get_environment_access());
 }

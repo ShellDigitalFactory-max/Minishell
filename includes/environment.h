@@ -23,6 +23,11 @@ typedef t_list *	t_variable_list;
 
 // ENUMS
 
+typedef enum e_adding_status
+{
+	
+}
+
 // STRUCTURES
 
 typedef struct s_variable
@@ -34,6 +39,7 @@ typedef struct s_variable
 
 // PROTOTYPES
 
+t_variable_list	get_environment(void);
 int				set_variable(t_variable_list variables_list,
 				const char *key, const char *value, bool make_it_exportable);
 t_variable		*create_variable(const char *key, const char *value,
