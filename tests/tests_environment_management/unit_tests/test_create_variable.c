@@ -15,6 +15,7 @@
 void	test_create_variable(void)
 {
 	printf("Testing function \"create_variable\"\n");
+	
 	// ARRANGE
 
 	const char	*key = "VAR_NAME";
