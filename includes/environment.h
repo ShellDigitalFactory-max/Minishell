@@ -50,7 +50,7 @@ t_status		update_variable(t_variable *variable, const char* value,
 t_variable		*find_variable_from_key(const t_variable_list *environment,
 					const char *key);
 bool			is_variable_key_equal(void *variable_as_content, void *key);
-t_status		add_variable_to_environment(const t_variable_list *environment,
+t_status		add_variable_to_environment(t_variable_list *environment,
 				t_variable *variable);
 void			delete_variable(void *data);
 void			delete_variables_list(void);

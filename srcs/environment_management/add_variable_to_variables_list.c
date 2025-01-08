@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_status	add_variable_to_environment(const t_variable_list *environment,
+t_status	add_variable_to_environment(t_variable_list *environment,
 				t_variable *variable)
 {
 	t_variable_list	new_node;
@@ -20,6 +20,6 @@ t_status	add_variable_to_environment(const t_variable_list *environment,
 	new_node = ft_lstnew(variable);
 	if (new_node == NULL)
 		return (PROCESS_FAILURE);
-	ft_lstadd_back((t_variable_list *)environment, new_node);
+	ft_lstadd_back(environment, new_node);
 	return (PROCESS_SUCCESS);
 }
