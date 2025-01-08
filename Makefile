@@ -50,11 +50,15 @@ SRCS += parser.c
 
 # srcs/environment_management
 
+SRCS += get_environment.c
 SRCS += set_variable.c
+SRCS += set_variable_from_keyvalue.c
 SRCS += create_variable.c
+SRCS += update_variable.c
 SRCS += add_variable_to_variables_list.c
 SRCS += delete_variable.c
 SRCS += delete_variables_list.c
+SRCS += find_variable_from_key.c
 
 vpath %.c $(PATH_SRCS)
 
@@ -102,6 +106,7 @@ TESTS_SRCS += free_parser_test.c
 TESTS_SRCS += unit_tests_environment.c
 TESTS_SRCS += test_create_variable.c
 TESTS_SRCS += test_add_variable_to_variables_list.c
+TESTS_SRCS += delete_variables_list_test_version.c
 
 # Unity
 

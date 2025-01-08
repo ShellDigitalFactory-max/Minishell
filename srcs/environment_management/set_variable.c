@@ -14,10 +14,18 @@
 
 int	set_variable(const char *key, const char *value, bool make_it_exportable)
 {
-	t_variable_list	env;
+	const t_variable_list	*environment = get_environment();
+	const bool				is_exportable = make_it_exportable == true;
+	t_variable				*variable;
 
-	env = get_environment();
-	add_variable_to_variables_list(env, key, value,
-		make_it_exportable);
-	return (EXIT_SUCCESS);
+	variable = find_variable_form_key(environment, key);
+	if (variable != NULL)
+	{
+		return (update_variable(variable, value, is_exportable));
+	}
+	else
+	{
+		variable = create_variable(key, value, is_exportable);
+		return (add_variable_to_environment(environment, variable));
+	}
 }

@@ -23,11 +23,11 @@ typedef t_list *	t_variable_list;
 
 // ENUMS
 
-typedef enum e_adding_status
+typedef enum e_status
 {
-	ADDING_SUCCESS,
-	ADDING_FAILURE
-}			t_adding_status;
+	PROCESS_SUCCESS,
+	PROCESS_FAILURE
+}			t_status;
 
 // STRUCTURES
 
@@ -41,14 +41,19 @@ typedef struct s_variable
 // PROTOTYPES
 
 t_variable_list	get_environment(void);
-int				set_variable(t_variable_list variables_list,
-				const char *key, const char *value, bool make_it_exportable);
+int				set_variable(const char *key, const char *value,
+					bool make_it_exportable);
 t_variable		*create_variable(const char *key, const char *value,
 					bool is_exportable);
-t_variable_list	add_variable_to_variables_list(t_variable_list variables_list,
-					const char *key, const char *value, bool is_exportable);
+t_status		update_variable(t_variable *variable, const char* value,
+					const bool is_exportable);
+t_variable		*find_variable_from_key(t_variable_list *environment,
+					const char *key);
+bool			is_variable_key_equal(void *variable_as_content, void *key);
+t_status		add_variable_to_environment(t_variable_list *environment,
+				t_variable *variable);
 void			delete_variable(void *data);
-void			delete_variables_list(t_variable_list variables_list);
+void			delete_variables_list(void);
 
 // QUAND COPIE ENV VERIFIER SI VALEUR EST NULLE OU EXPORTABLE
 

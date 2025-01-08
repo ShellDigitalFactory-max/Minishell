@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete_variables_list.c                            :+:      :+:    :+:   */
+/*   update_variable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 14:13:55 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/07 14:14:08 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/08 13:45:48 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/08 13:46:03 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	delete_variables_list(void)
+t_status	update_variable(t_variable *variable, const char* value,
+					const bool is_exportable)
 {
-	t_variable_list	*env;
-
-	env = get_environment();
-	ft_lstclear(env, delete_variable);
+	variable->is_exportable = is_exportable;
+	if (value != NULL)
+	{
+		free(variable->value);
+		variable->value = ft_strdup(value);
+		if (variable->value == NULL)
+			return (PROCESS_FAILURE);
+	}
+	return (PROCESS_SUCCESS);
 }

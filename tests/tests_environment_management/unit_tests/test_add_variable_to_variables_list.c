@@ -17,7 +17,7 @@ void	test_add_variable_to_variables_list(void)
 	printf("Testing function \"add_variable_to_variable_list\"\n");
 	//ARRANGE
 
-	t_variable_list	variables_list = NULL;
+	t_variable_list	*variables_list = NULL;
 
 	const char	*key = "KEY";
 	const char	*value = "VALUE";
@@ -28,15 +28,15 @@ void	test_add_variable_to_variables_list(void)
 
 	//ASSERT
 
-	TEST_ASSERT_EQUAL(0, ft_strncmp(((t_variable *)variables_list->content)->key, key, ft_strlen(key)));
-	TEST_ASSERT_EQUAL(0, ft_strncmp(((t_variable *)variables_list->content)->value, value, ft_strlen(value)));
-	TEST_ASSERT_EQUAL(true, ((t_variable *)variables_list->content)->is_exportable);
+	TEST_ASSERT_EQUAL(0, ft_strncmp(((t_variable *)(*variables_list)->content)->key, key, ft_strlen(key)));
+	TEST_ASSERT_EQUAL(0, ft_strncmp(((t_variable *)(*variables_list)->content)->value, value, ft_strlen(value)));
+	TEST_ASSERT_EQUAL(true, ((t_variable *)(*variables_list)->content)->is_exportable);
 
-	printf("Variable_list first node key = %s\n", ((t_variable *)variables_list->content)->key);
-	printf("Variable list first node value = %s\n", ((t_variable *)variables_list->content)->key);
+	printf("Variable_list first node key = %s\n", ((t_variable *)(*variables_list)->content)->key);
+	printf("Variable list first node value = %s\n", ((t_variable *)(*variables_list)->content)->key);
 
 	//CLEAN
 
-	delete_variables_list(variables_list);
+	delete_variables_list_tests_version(variables_list);
 	printf("\n");
 }
