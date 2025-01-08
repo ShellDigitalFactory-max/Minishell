@@ -18,7 +18,7 @@ int	set_variable(const char *key, const char *value, bool make_it_exportable)
 	const bool				is_exportable = make_it_exportable == true;
 	t_variable				*variable;
 
-	variable = find_variable_form_key(environment, key);
+	variable = find_variable_from_key(environment, key);
 	if (variable != NULL)
 	{
 		return (update_variable(variable, value, is_exportable));

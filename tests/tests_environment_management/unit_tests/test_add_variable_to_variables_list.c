@@ -15,21 +15,23 @@
 void	test_add_variable_to_variables_list(void)
 {
 	printf("Testing function \"add_variable_to_variable_list\"\n");
+	
 	//ARRANGE
-
-	t_variable_list	*variables_list = NULL;
 
 	const char	*key = "KEY";
 	const char	*value = "VALUE";
+	t_variable_list	*variables_list = NULL;
+
+	t_variable	variable = {.key = "KEY", .value = "VALUE", .is_exportable = true};
 
 	//ACT
 
-	variables_list = add_variable_to_variables_list(variables_list, key, value, true);
+	add_variable_to_environment(variables_list, &variable);
 
 	//ASSERT
 
-	TEST_ASSERT_EQUAL(0, ft_strncmp(((t_variable *)(*variables_list)->content)->key, key, ft_strlen(key)));
-	TEST_ASSERT_EQUAL(0, ft_strncmp(((t_variable *)(*variables_list)->content)->value, value, ft_strlen(value)));
+	TEST_ASSERT_EQUAL(0, ft_strcmp(((t_variable *)(*variables_list)->content)->key, key));
+	TEST_ASSERT_EQUAL(0, ft_strcmp(((t_variable *)(*variables_list)->content)->value, value));
 	TEST_ASSERT_EQUAL(true, ((t_variable *)(*variables_list)->content)->is_exportable);
 
 	printf("Variable_list first node key = %s\n", ((t_variable *)(*variables_list)->content)->key);

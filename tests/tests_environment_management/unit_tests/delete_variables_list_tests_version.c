@@ -12,10 +12,7 @@
 
 #include "tests.h"
 
-void	delete_variables_list_test_version(t_variable_list **variable_list)
+void	delete_variables_list_tests_version(t_variable_list *variable_list)
 {
-	t_variable_list	*env;
-
-	env = get_environment();
 	ft_lstclear(variable_list, delete_variable);
 }

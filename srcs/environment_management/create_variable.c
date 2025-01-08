@@ -20,6 +20,7 @@ t_variable	*create_variable(const char *key, const char *value,
 	new_variable = (t_variable *)ft_calloc(1, sizeof(t_variable));
 	if (new_variable == NULL)
 		return (NULL);
+	new_variable->key = ft_strdup(key);
 	if (new_variable->key == NULL
 			|| update_variable(new_variable, value, is_exportable)
 				== PROCESS_FAILURE)

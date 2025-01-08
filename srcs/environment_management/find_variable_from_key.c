@@ -21,9 +21,9 @@ bool	is_variable_key_equal(void *variable_as_content, void *key)
 	return (ft_strcmp(variable->key, key) == 0);
 }
 
-t_variable	*find_variable_from_key(t_variable_list *environment,
+t_variable	*find_variable_from_key(const t_variable_list *environment,
 				const char *key)
 {
-	return (ft_list_find_first_content_match(environment, key,
-				is_variable_key_equal));
+	return (ft_list_find_first_content_match((t_variable_list)*environment,
+				(char *)key, is_variable_key_equal));
 }

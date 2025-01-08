@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_variable_list	get_environment(void)
+t_variable_list	*get_environment(void)
 {
 	static t_variable_list	environment = NULL;
 
