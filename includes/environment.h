@@ -17,6 +17,10 @@
 
 # include "minishell.h"
 
+// DEFINES
+
+# define EQUAL_OPERATOR '='
+
 // TYPEDEFS
 
 typedef t_list *	t_variable_list;
@@ -54,6 +58,8 @@ t_status		add_variable_to_environment(t_variable_list *environment,
 				t_variable *variable);
 void			delete_variable(void *data);
 void			delete_variables_list(void);
+char			*get_variable_key(const char *keyvalue);
+char			*get_variable_value(const char *keyvalue);
 
 // QUAND COPIE ENV VERIFIER SI VALEUR EST NULLE OU EXPORTABLE
 

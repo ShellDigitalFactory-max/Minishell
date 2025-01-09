@@ -12,9 +12,22 @@
 
 #include "minishell.h"
 
-// int	set_variable_form_keyvalue(t_variable_list variables_list,
+// t_status set_variable_from_keyvalue(t_variable_list variables_list,
 // 		const char *keyvalue, bool make_it_exportable)
 // {
-	
-// 	return (set_variable(variables_list, key, value, make_it_exportable));
+// 	char	*key;
+// 	char	*value;
+
+// 	key = get_variable_key(keyvalue);
+// 	if (key == NULL)
+// 		return (PROCESS_FAILURE);
+// 	value = get_variable_value(keyvalue);
+// 	if (value == NULL)
+// 	{
+// 		free(key);
+// 		return (PROCESS_FAILURE);
+// 	}
+// 	return (PROCESS_SUCCESS);
+// 	//verifier si le nom de la variable est correct
+// 	return (set_variable(key, value, make_it_exportable));
 // }

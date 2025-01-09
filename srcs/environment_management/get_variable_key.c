@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unit_tests_environment.c                           :+:      :+:    :+:   */
+/*   get_variable_key.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 19:58:30 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/04 19:58:40 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/09 17:27:49 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/09 17:28:01 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tests.h"
+#include "minishell.h"
 
-void	unit_tests_environment_management(void)
+char	*get_variable_key(const char *keyvalue)
 {
-	printf("\nTesting environment management -> unit tests\n\n");
-	test_create_variable();
-	test_add_variable_to_environment();
-	test_get_variable_key();
-	test_get_variable_value();
-	printf("\n");
+	char	*key;
+	size_t	i;
+
+	i = 0;
+	while (keyvalue[i] != EQUAL_OPERATOR)
+	{
+		++i;
+	}
+	key = ft_strndup(keyvalue, (i));
+	return (key);
 }

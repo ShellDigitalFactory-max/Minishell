@@ -15,6 +15,7 @@ PATH_SRCS += srcs/syntax_analysis
 PATH_SRCS += srcs/lexical_analysis
 PATH_SRCS += srcs/syntax_analysis
 PATH_SRCS += srcs/environment_management
+PATH_SRCS += srcs/environment_building
 
 SRCS += main.c
 SRCS += exit_shell_routine.c
@@ -59,6 +60,10 @@ SRCS += add_variable_to_environment.c
 SRCS += delete_variable.c
 SRCS += delete_variables_list.c
 SRCS += find_variable_from_key.c
+SRCS += get_variable_key.c
+SRCS += get_variable_value.c
+
+# srcs/environment_building
 
 vpath %.c $(PATH_SRCS)
 
@@ -74,6 +79,8 @@ TESTS_SRCS_DIR += ./tests/tests_lexical_analysis/unit_tests
 TESTS_SRCS_DIR += ./tests/tests_syntax_analysis/BDD
 TESTS_SRCS_DIR += ./tests/tests_environment_management
 TESTS_SRCS_DIR += ./tests/tests_environment_management/unit_tests
+TESTS_SRCS_DIR += ./tests/tests_environment_building
+TESTS_SRCS_DIR += ./tests/tests_environment_building/unit_tests
 
 TESTS_SRCS += tests_main.c
 
@@ -107,6 +114,12 @@ TESTS_SRCS += unit_tests_environment.c
 TESTS_SRCS += test_create_variable.c
 TESTS_SRCS += test_add_variable_to_variables_list.c
 TESTS_SRCS += delete_variables_list_tests_version.c
+TESTS_SRCS += test_get_variable_key.c
+TESTS_SRCS += test_get_variable_value.c
+
+# environemt building
+
+TESTS_SRCS += unit_tests_environment_building.c
 
 # Unity
 
