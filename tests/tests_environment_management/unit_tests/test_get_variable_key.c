@@ -29,5 +29,6 @@ void	test_get_variable_key(void)
 	// ASSERT
 
 	TEST_ASSERT_EQUAL(0, ft_strcmp(key, expected_key));
-	printf("Extracted key = %s\n", key);
+	printf("Extracted key = %s\n\n", key);
+	free(key);
 }

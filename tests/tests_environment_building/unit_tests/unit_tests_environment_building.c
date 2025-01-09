@@ -12,26 +12,26 @@
 
 #include "tests.h"
 
-void	unit_tests_environment_building(void)
-{
-	printf("Testing function \"build_environment\"\n\n");
+// void	unit_tests_environment_building(void)
+// {
+// 	printf("Testing function \"build_environment\"\n\n");
 
-	// ARRANGE
+// 	// ARRANGE
 
-	char	env_test[][10] ={
-		{"VAR1=first"},
-		{"VAR2=second"},
-		{"VAR3=third"},
-		{"VAR4=fourth"},
-		{"VAR5=fifth"},
-		{"VAR6=sixth"},
-		{"VAR7=seventh"},
-		{"VAR8=eight"},
-	};
+// 	char	env_test[][10] ={
+// 		{"VAR1=first"},
+// 		{"VAR2=second"},
+// 		{"VAR3=third"},
+// 		{"VAR4=fourth"},
+// 		{"VAR5=fifth"},
+// 		{"VAR6=sixth"},
+// 		{"VAR7=seventh"},
+// 		{"VAR8=eight"},
+// 	};
 
-	// ACT
+// 	// ACT
 
 	
 
-	printf("\n");
-}
+// 	printf("\n");
+// }

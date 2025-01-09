@@ -27,5 +27,8 @@ t_status set_variable_from_keyvalue(const char *keyvalue,
 		free(key);
 		return (PROCESS_FAILURE);
 	}
-	return (set_variable(key, value, make_it_exportable));
+	set_variable(key, value, make_it_exportable);
+	free(key);
+	free(value);
+	return (PROCESS_SUCCESS);
 }

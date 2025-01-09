@@ -29,5 +29,6 @@ void	test_get_variable_value(void)
 	// ASSERT
 
 	TEST_ASSERT_EQUAL(0, ft_strcmp(value, expected_value));
-	printf("Extracted value = %s\n", value);
+	printf("Extracted value = %s\n\n", value);
+	free(value);
 }
