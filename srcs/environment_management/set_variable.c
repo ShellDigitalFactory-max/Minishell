@@ -14,8 +14,8 @@
 
 int	set_variable(const char *key, const char *value, bool make_it_exportable)
 {
-	const t_variable_list	*environment = get_environment();
-	const bool				is_exportable = make_it_exportable == true;
+	t_variable_list	*environment = get_environment();
+	bool				is_exportable = make_it_exportable == true;
 	t_variable				*variable;
 
 	variable = find_variable_from_key(environment, key);
