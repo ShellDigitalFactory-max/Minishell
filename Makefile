@@ -63,7 +63,11 @@ SRCS += find_variable_from_key.c
 SRCS += get_variable_key.c
 SRCS += get_variable_value.c
 
+SRCS += print_env.c
+
 # srcs/environment_building
+
+SRCS += build_environment.c
 
 vpath %.c $(PATH_SRCS)
 

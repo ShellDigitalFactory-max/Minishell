@@ -15,7 +15,7 @@
 void	test_add_variable_to_environment(void)
 {
 	printf("Testing function \"add_variable_to_variable_list\"\n\n");
-	
+
 	//ARRANGE
 
 	char	*key = "KEY";

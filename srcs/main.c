@@ -45,18 +45,27 @@ static int	core_routine(t_minishell_context *minishell_context)
 	return (EXIT_SUCCESS);
 }
 
-static int	launch_shell(void)
+static int	launch_shell(char **env)
 {
 	t_minishell_context	minishell_context;
 	struct sigaction	sa;
 
 	ft_bzero(&minishell_context, sizeof(minishell_context));
+	if (build_environment(env) == PROCESS_FAILURE)
+	{
+		ft_dprintf(STDERR_FILENO, "Fatal error while initializing minishell's"
+		" environment\n");
+		exit(EXIT_FAILURE);
+	}
+	print_env();
 	setup_signals(&sa);
 	return (core_routine(&minishell_context));
 }
 
-int	main(void)
+int	main(int ac, char **av, char **env)
 {
-	return (launch_shell());
+	(void)ac;
+	(void)av;
+	return (launch_shell(env));
 }
 #endif
