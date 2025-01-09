@@ -48,7 +48,7 @@ t_variable		*create_variable(const char *key, const char *value,
 t_status		update_variable(t_variable *variable, const char* value,
 					const bool is_exportable);
 t_variable		*find_variable_from_key(const t_variable_list *environment,
-					const char *key);
+					char *key);
 bool			is_variable_key_equal(void *variable_as_content, void *key);
 t_status		add_variable_to_environment(t_variable_list *environment,
 				t_variable *variable);

@@ -18,10 +18,10 @@ void	test_add_variable_to_environment(void)
 	
 	//ARRANGE
 
-	const char	*key = "KEY";
-	const char	*value = "VALUE";
-	const char	*key_2 = "KEY_2";
-	const char	*value_2 = "VALUE_2";
+	char	*key = "KEY";
+	char	*value = "VALUE";
+	char	*key_2 = "KEY_2";
+	char	*value_2 = "VALUE_2";
 	t_variable_list	variables_list = NULL;
 
 	t_variable	variable = {.key = "KEY", .value = "VALUE", .is_exportable = true};

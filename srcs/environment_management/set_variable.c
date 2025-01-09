@@ -14,11 +14,14 @@
 
 int	set_variable(const char *key, const char *value, bool make_it_exportable)
 {
-	t_variable_list	*environment = get_environment();
-	bool				is_exportable = make_it_exportable == true;
-	t_variable				*variable;
+	const bool			is_exportable = make_it_exportable == true;
+	t_variable_list		*environment;
+	t_variable			*variable;
+	char				*key_to_find;
 
-	variable = find_variable_from_key(environment, key);
+	environment = get_environment();
+	key_to_find = (char *)key;
+	variable = find_variable_from_key(environment, key_to_find);
 	if (variable != NULL)
 	{
 		return (update_variable(variable, value, is_exportable));
