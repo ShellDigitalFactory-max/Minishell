@@ -18,7 +18,7 @@ char	*get_variable_value(const char *keyvalue)
 	size_t	i;
 
 	i = 0;
-	while(keyvalue[i] != EQUAL_OPERATOR)
+	while (keyvalue[i] != EQUAL_OPERATOR)
 	{
 		++i;
 	}

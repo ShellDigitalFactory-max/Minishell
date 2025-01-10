@@ -99,7 +99,10 @@ t_syntax_status	parse_input(t_token_list token_list)
 			current_token = current_token->next;
 	}
 	if (parser_output == INVALID_SYNTAX)
+	{
 		display_syntax_error(current_token->next);
-	//set variable $? !!!!
+		set_variable_from_keyvalue("?=2", false);
+	}
+	set_variable_from_keyvalue("?=0", false);
 	return (parser_output);
 }

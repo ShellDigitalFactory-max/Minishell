@@ -20,7 +20,7 @@
 // DEFINES
 
 # define EQUAL_OPERATOR '='
-# define EXPORTABLE true
+# define EXPORTABLE 1
 
 // TYPEDEFS
 
@@ -40,26 +40,26 @@ typedef struct s_variable
 {
 	char	*key;
 	char	*value;
-	bool		is_exportable;
+	bool	is_exportable;
 }				t_variable;
 
 // PROTOTYPES
 
 t_variable_list	*get_environment(void);
 t_status		build_environment(char **variables);
-t_status 		set_variable_from_keyvalue(const char *keyvalue,
+t_status		set_variable_from_keyvalue(const char *keyvalue,
 					bool make_it_exportable);
 t_status		set_variable(const char *key, const char *value,
 					bool make_it_exportable);
 t_variable		*create_variable(const char *key, const char *value,
 					bool is_exportable);
-t_status		update_variable(t_variable *variable, const char* value,
+t_status		update_variable(t_variable *variable, const char *value,
 					const bool is_exportable);
 t_variable		*find_variable_from_key(const t_variable_list *environment,
 					char *key);
 bool			is_variable_key_equal(void *variable_as_content, void *key);
 t_status		add_variable_to_environment(t_variable_list *environment,
-				t_variable *variable);
+					t_variable *variable);
 void			delete_variable(void *data);
 void			delete_variables_list(void);
 char			*get_variable_key(const char *keyvalue);

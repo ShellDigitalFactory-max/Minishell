@@ -22,8 +22,8 @@ t_variable	*create_variable(const char *key, const char *value,
 		return (NULL);
 	new_variable->key = ft_strdup(key);
 	if (new_variable->key == NULL
-			|| update_variable(new_variable, value, is_exportable)
-				== PROCESS_FAILURE)
+		|| update_variable(new_variable, value, is_exportable)
+		== PROCESS_FAILURE)
 	{
 		delete_variable(new_variable);
 		return (NULL);

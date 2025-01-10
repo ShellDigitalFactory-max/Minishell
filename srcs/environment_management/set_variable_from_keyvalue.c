@@ -12,23 +12,24 @@
 
 #include "minishell.h"
 
-t_status set_variable_from_keyvalue(const char *keyvalue,
+t_status	set_variable_from_keyvalue(const char *keyvalue,
 			bool make_it_exportable)
 {
-	char	*key;
-	char	*value;
+	t_status	process_status;
+	char		*key;
+	char		*value;
 
 	key = get_variable_key(keyvalue);
 	if (key == NULL)
-		return (PROCESS_FAILURE);
+		return (process_status = PROCESS_FAILURE);
 	value = get_variable_value(keyvalue);
 	if (value == NULL)
 	{
 		free(key);
-		return (PROCESS_FAILURE);
+		return (process_status = PROCESS_FAILURE);
 	}
-	set_variable(key, value, make_it_exportable);
+	process_status = set_variable(key, value, make_it_exportable);
 	free(key);
 	free(value);
-	return (PROCESS_SUCCESS);
+	return (process_status);
 }

@@ -14,6 +14,7 @@
 
 int	exit_shell_routine(void)
 {
+	delete_variables_list();
 	printf("exit\n");
 	exit (EXIT_SUCCESS);
 }

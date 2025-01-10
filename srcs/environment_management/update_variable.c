@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_status	update_variable(t_variable *variable, const char* value,
+t_status	update_variable(t_variable *variable, const char *value,
 					const bool is_exportable)
 {
 	variable->is_exportable = is_exportable;

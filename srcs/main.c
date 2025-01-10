@@ -16,14 +16,17 @@
 static int	main_process(t_minishell_context *minishell_context)
 {
 	if (minishell_context->command_session.user_input_line == CTRL_D)
+	{
 		exit_shell_routine();
+	}
 	if (lexe_input(&minishell_context->command_session)
 		== LEXING_FAILURE)
 	{
 		ft_dprintf(STDERR_FILENO, "Memory allocation failure during lexing.\n");
 		return (EXIT_FAILURE);
 	}
-	if (parse_input(minishell_context->command_session.tokenized_user_input_line)
+	if (parse_input(
+			minishell_context->command_session.tokenized_user_input_line)
 		== INVALID_SYNTAX)
 	{
 		return (EXIT_FAILURE);
@@ -33,6 +36,7 @@ static int	main_process(t_minishell_context *minishell_context)
 
 static int	core_routine(t_minishell_context *minishell_context)
 {
+	(void)minishell_context;
 	while (MSH_LOOP)
 	{
 		minishell_context->command_session.user_input_line
@@ -54,10 +58,9 @@ static int	launch_shell(char **env)
 	if (build_environment(env) == PROCESS_FAILURE)
 	{
 		ft_dprintf(STDERR_FILENO, "Fatal error while initializing minishell's"
-		" environment\n");
+			" environment\n");
 		exit(EXIT_FAILURE);
 	}
-	print_env();
 	setup_signals(&sa);
 	return (core_routine(&minishell_context));
 }

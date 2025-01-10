@@ -17,6 +17,8 @@ PATH_SRCS += srcs/syntax_analysis
 PATH_SRCS += srcs/environment_management
 PATH_SRCS += srcs/environment_building
 
+PATH_SRCS += srcs/functions_for_debug
+
 SRCS += main.c
 SRCS += exit_shell_routine.c
 
@@ -37,8 +39,6 @@ SRCS += add_token_to_token_list.c
 SRCS += create_token.c
 SRCS += delete_token.c
 SRCS += delete_token_list.c
-SRCS += print_token.c
-SRCS += print_token_list.c
 
 SRCS += tokenize_operator.c
 SRCS += tokenize_word.c
@@ -63,11 +63,15 @@ SRCS += find_variable_from_key.c
 SRCS += get_variable_key.c
 SRCS += get_variable_value.c
 
-SRCS += print_env.c
-
 # srcs/environment_building
 
 SRCS += build_environment.c
+
+# print_functions just for debug
+
+# SRCS += print_env.c
+# SRCS += print_token.c
+# SRCS += print_token_list.c
 
 vpath %.c $(PATH_SRCS)
 
