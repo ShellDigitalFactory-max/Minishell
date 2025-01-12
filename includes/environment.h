@@ -67,6 +67,4 @@ char			*get_variable_value(const char *keyvalue);
 
 void			print_env(void);
 
-// QUAND COPIE ENV VERIFIER SI VALEUR EST NULLE OU EXPORTABLE
-
 #endif

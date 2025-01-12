@@ -67,7 +67,7 @@ SRCS += get_variable_value.c
 
 SRCS += build_environment.c
 
-# print_functions just for debug
+# print_functions to use for debug and tests
 
 # SRCS += print_env.c
 # SRCS += print_token.c

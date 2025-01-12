@@ -40,7 +40,6 @@ typedef struct s_command_session
 typedef struct s_minishell_context
 {
 	t_command_session	command_session;
-	t_variable_list		variables_list;
 }				t_minishell_context;
 
 // PROTOTYPES
