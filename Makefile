@@ -16,6 +16,7 @@ PATH_SRCS += srcs/lexical_analysis
 PATH_SRCS += srcs/syntax_analysis
 PATH_SRCS += srcs/environment_management
 PATH_SRCS += srcs/environment_building
+PATH_SRCS += srcs/semantic_analysis
 
 PATH_SRCS += srcs/functions_for_debug
 
@@ -67,11 +68,15 @@ SRCS += get_variable_value.c
 
 SRCS += build_environment.c
 
+# srcs/semantic_analysis
+
+SRCS += assignation_checker.c
+
 # print_functions to use for debug and tests
 
-# SRCS += print_env.c
-# SRCS += print_token.c
-# SRCS += print_token_list.c
+SRCS += print_env.c
+SRCS += print_token.c
+SRCS += print_token_list.c
 
 vpath %.c $(PATH_SRCS)
 
@@ -89,6 +94,8 @@ TESTS_SRCS_DIR += ./tests/tests_environment_management
 TESTS_SRCS_DIR += ./tests/tests_environment_management/unit_tests
 TESTS_SRCS_DIR += ./tests/tests_environment_building
 TESTS_SRCS_DIR += ./tests/tests_environment_building/unit_tests
+TESTS_SRCS_DIR += ./tests/tests_semantic_analysis
+TESTS_SRCS_DIR += ./tests/tests_semantic_analysis/unit_tests
 
 TESTS_SRCS += tests_main.c
 
@@ -128,6 +135,11 @@ TESTS_SRCS += test_get_variable_value.c
 # environemt building
 
 TESTS_SRCS += unit_tests_environment_building.c
+
+# semantic analysis
+
+TESTS_SRCS += unit_tests_semantic_analyzer.c
+TESTS_SRCS += tests_assignation_checker.c
 
 # Unity
 

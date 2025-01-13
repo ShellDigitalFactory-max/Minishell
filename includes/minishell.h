@@ -21,6 +21,7 @@
 # include "lexing.h"
 # include "parsing.h"
 # include "environment.h"
+# include "semantic.h"
 
 # include <stdio.h>
 # include <stdlib.h>

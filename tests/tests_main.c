@@ -43,5 +43,9 @@ int	main(void)
 
 	RUN_TEST(unit_tests_environment_management);
 
+	// SEMANTIC ANALYSIS
+
+	RUN_TEST(unit_tests_semantic_analyzer);
+
 	return (UNITY_END());
 }

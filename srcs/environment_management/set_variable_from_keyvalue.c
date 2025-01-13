@@ -29,7 +29,10 @@ t_status	set_variable_from_keyvalue(const char *keyvalue,
 		return (process_status = PROCESS_FAILURE);
 	}
 	process_status = set_variable(key, value, make_it_exportable);
-	free(key);
-	free(value);
+	if (process_status != PROCESS_FAILURE)
+	{
+		free(key);
+		free(value);
+	}
 	return (process_status);
 }
