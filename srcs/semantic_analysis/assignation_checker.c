@@ -21,7 +21,19 @@ static bool	is_assignation(const char *assignation)
 
 t_assignation_status	assignation_checker(char *assignation)
 {
-	if (is_assignation(assignation) == false)
+	char	*probable_key;
+	size_t	i;
+
+	if (is_assignation(assignation) == false || ft_isdigit(*assignation)
+			== true)
 		return (INVALID_ASSIGNATION);
+	probable_key = get_variable_key(assignation);
+	i = 0;
+	while (probable_key[i] != '\0')
+	{
+		if (ft_isalnum(probable_key[i]) == false)
+			return (INVALID_ASSIGNATION);
+		++i;
+	}
 	return (VALID_ASSIGNATION);
 }

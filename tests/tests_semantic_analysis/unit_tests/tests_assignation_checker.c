@@ -24,6 +24,10 @@ void	tests_assignation_checker(void)
 	char	*assignation_5 = "=variable";
 	char	*assignation_6 = "=";
 	char	*assignation_7 = "";
+	char	*assignation_8 = "2VAR=test";
+	char	*assignation_9 = "VA*R=test";
+	char	*assignation_10 = "VA!!R=test";
+	char	*assignation_11 = "VAR=tes****t";
 
 	// ACT
 
@@ -35,6 +39,11 @@ void	tests_assignation_checker(void)
 	t_assignation_status	assign_6 = assignation_checker(assignation_6);
 	t_assignation_status	assign_7 = assignation_checker(assignation_7);
 
+	t_assignation_status	assign_8 = assignation_checker(assignation_8);
+	t_assignation_status	assign_9 = assignation_checker(assignation_9);
+	t_assignation_status	assign_10 = assignation_checker(assignation_10);
+	t_assignation_status	assign_11 = assignation_checker(assignation_11);
+
 	// ASSERT
 
 	TEST_ASSERT_EQUAL(VALID_ASSIGNATION, assign_1);
@@ -44,4 +53,8 @@ void	tests_assignation_checker(void)
 	TEST_ASSERT_EQUAL(INVALID_ASSIGNATION, assign_5);
 	TEST_ASSERT_EQUAL(INVALID_ASSIGNATION, assign_6);
 	TEST_ASSERT_EQUAL(INVALID_ASSIGNATION, assign_7);
+	TEST_ASSERT_EQUAL(INVALID_ASSIGNATION, assign_8);
+	TEST_ASSERT_EQUAL(INVALID_ASSIGNATION, assign_9);
+	TEST_ASSERT_EQUAL(INVALID_ASSIGNATION, assign_10);
+	TEST_ASSERT_EQUAL(VALID_ASSIGNATION, assign_11);
 }
