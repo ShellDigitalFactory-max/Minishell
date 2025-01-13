@@ -14,6 +14,10 @@ PATH_SRCS += srcs/history
 PATH_SRCS += srcs/syntax_analysis
 PATH_SRCS += srcs/lexical_analysis
 PATH_SRCS += srcs/syntax_analysis
+PATH_SRCS += srcs/environment_management
+PATH_SRCS += srcs/environment_building
+
+PATH_SRCS += srcs/functions_for_debug
 
 SRCS += main.c
 SRCS += exit_shell_routine.c
@@ -29,14 +33,12 @@ SRCS += add_history.c
 
 # srcs/lexing
 
-SRCS += lexical_analysis.c
+SRCS += lexe_input.c
 SRCS += tokenizer.c
 SRCS += add_token_to_token_list.c
 SRCS += create_token.c
 SRCS += delete_token.c
 SRCS += delete_token_list.c
-# SRCS += print_token.c
-# SRCS += print_token_list.c
 
 SRCS += tokenize_operator.c
 SRCS += tokenize_word.c
@@ -45,8 +47,31 @@ SRCS += lexer_utils.c
 
 # srcs/parsing
 
-SRCS += syntax_analysis.c
 SRCS += parser.c
+
+# srcs/environment_management
+
+SRCS += get_environment.c
+SRCS += set_variable.c
+SRCS += set_variable_from_keyvalue.c
+SRCS += create_variable.c
+SRCS += update_variable.c
+SRCS += add_variable_to_environment.c
+SRCS += delete_variable.c
+SRCS += delete_variables_list.c
+SRCS += find_variable_from_key.c
+SRCS += get_variable_key.c
+SRCS += get_variable_value.c
+
+# srcs/environment_building
+
+SRCS += build_environment.c
+
+# print_functions to use for debug and tests
+
+# SRCS += print_env.c
+# SRCS += print_token.c
+# SRCS += print_token_list.c
 
 vpath %.c $(PATH_SRCS)
 
@@ -60,6 +85,10 @@ TESTS_SRCS_DIR += ./tests/tests_syntax_analysis
 TESTS_SRCS_DIR += ./tests/tests_lexical_analysis/BDD
 TESTS_SRCS_DIR += ./tests/tests_lexical_analysis/unit_tests
 TESTS_SRCS_DIR += ./tests/tests_syntax_analysis/BDD
+TESTS_SRCS_DIR += ./tests/tests_environment_management
+TESTS_SRCS_DIR += ./tests/tests_environment_management/unit_tests
+TESTS_SRCS_DIR += ./tests/tests_environment_building
+TESTS_SRCS_DIR += ./tests/tests_environment_building/unit_tests
 
 TESTS_SRCS += tests_main.c
 
@@ -86,6 +115,19 @@ TESTS_SRCS += test_empty_string.c
 TESTS_SRCS += test_just_a_pipe.c
 TESTS_SRCS += test_two_pipes.c
 TESTS_SRCS += free_parser_test.c
+
+# environment management
+
+TESTS_SRCS += unit_tests_environment.c
+TESTS_SRCS += test_create_variable.c
+TESTS_SRCS += test_add_variable_to_variables_list.c
+TESTS_SRCS += delete_variables_list_tests_version.c
+TESTS_SRCS += test_get_variable_key.c
+TESTS_SRCS += test_get_variable_value.c
+
+# environemt building
+
+TESTS_SRCS += unit_tests_environment_building.c
 
 # Unity
 

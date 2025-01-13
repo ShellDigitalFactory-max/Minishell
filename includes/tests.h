@@ -45,4 +45,15 @@ void	test_input_just_a_pipe(void);
 void	test_input_two_pipes(void);
 void	test_free(void);
 
+// ENVIRONMENT MANAGEMENT
+
+void	unit_tests_environment_management(void);
+void	test_create_variable(void);
+void	test_add_variable_to_environment(void);
+void	delete_variables_list_tests_version(t_variable_list *variable_list);
+void	test_get_variable_key(void);
+void	test_get_variable_value(void);
+
+// ENVIRONMENT BUILDING
+
 #endif

@@ -13,16 +13,20 @@
 #include "minishell.h"
 #ifndef TEST_MODE
 
-static int	main_process(t_minishell *minishell_data)
+static int	main_process(t_minishell_context *minishell_context)
 {
-	if (minishell_data->user_input_line == CTRL_D)
+	if (minishell_context->command_session.user_input_line == CTRL_D)
+	{
 		exit_shell_routine();
-	if (lexical_analysis(minishell_data) == LEXING_FAILURE)
+	}
+	if (lexe_input(&minishell_context->command_session)
+		== LEXING_FAILURE)
 	{
 		ft_dprintf(STDERR_FILENO, "Memory allocation failure during lexing.\n");
 		return (EXIT_FAILURE);
 	}
-	if (syntaxic_analysis(minishell_data->tokenized_user_input_line)
+	if (parse_input(
+			minishell_context->command_session.tokenized_user_input_line)
 		== INVALID_SYNTAX)
 	{
 		return (EXIT_FAILURE);
@@ -30,30 +34,41 @@ static int	main_process(t_minishell *minishell_data)
 	return (EXIT_SUCCESS);
 }
 
-static int	core_routine(t_minishell *minishell_data)
+static int	core_routine(t_minishell_context *minishell_context)
 {
+	(void)minishell_context;
 	while (MSH_LOOP)
 	{
-		minishell_data->user_input_line = prompt_gets_user_input();
-		main_process(minishell_data);
-		free(minishell_data->user_input_line);
-		delete_token_list(minishell_data->tokenized_user_input_line);
+		minishell_context->command_session.user_input_line
+			= prompt_gets_user_input();
+		main_process(minishell_context);
+		free(minishell_context->command_session.user_input_line);
+		delete_token_list(
+			minishell_context->command_session.tokenized_user_input_line);
 	}
 	return (EXIT_SUCCESS);
 }
 
-static int	launch_shell(void)
+static int	launch_shell(char **env)
 {
-	t_minishell			minishell_data;
+	t_minishell_context	minishell_context;
 	struct sigaction	sa;
 
-	ft_bzero(&minishell_data, sizeof(minishell_data));
+	ft_bzero(&minishell_context, sizeof(minishell_context));
+	if (build_environment(env) == PROCESS_FAILURE)
+	{
+		ft_dprintf(STDERR_FILENO, "Fatal error while initializing minishell's"
+			" environment\n");
+		exit(EXIT_FAILURE);
+	}
 	setup_signals(&sa);
-	return (core_routine(&minishell_data));
+	return (core_routine(&minishell_context));
 }
 
-int	main(void)
+int	main(int ac, char **av, char **env)
 {
-	return (launch_shell());
+	(void)ac;
+	(void)av;
+	return (launch_shell(env));
 }
 #endif

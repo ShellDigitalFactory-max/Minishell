@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_two_pipes.c                                   :+:      :+:    :+:   */
+/*   test_get_variable_value.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 14:40:46 by tchobert          #+#    #+#             */
-/*   Updated: 2024/12/29 14:41:00 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/09 17:55:28 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/09 17:55:38 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests.h"
 
-void	test_input_two_pipes(void)
+void	test_get_variable_value(void)
 {
-	printf("Testing parsing: two pipes\n");
+	printf("Testing function \"get_variable_value\"\n\n");
+
 	//ARRANGE
 
-	t_syntax_status	parser_output;
-	t_token_list	token_list = tokenize("<<");
+	const char	*variable_keyvalue = "TEST=test";
+	const char	*expected_value = "test";
+	char	*value;
 
-	print_token_list(token_list);
+	// ACT
 
-	//ACT
-	parser_output = parse_input(token_list);
-	//print_token_list(token_list);
+	value = get_variable_value(variable_keyvalue);
 
-	//ASSERT
-	TEST_ASSERT_EQUAL(INVALID_SYNTAX, parser_output);
+	// ASSERT
 
-	//CLEAN
-	delete_token_list(token_list);
+	TEST_ASSERT_EQUAL(0, ft_strcmp(value, expected_value));
+	printf("Extracted value = %s\n\n", value);
+	free(value);
 }

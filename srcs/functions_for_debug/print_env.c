@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_two_pipes.c                                   :+:      :+:    :+:   */
+/*   print_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 14:40:46 by tchobert          #+#    #+#             */
-/*   Updated: 2024/12/29 14:41:00 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/09 19:36:34 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/09 19:36:49 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tests.h"
+#include "minishell.h"
 
-void	test_input_two_pipes(void)
+static void	print_variable(void *content)
 {
-	printf("Testing parsing: two pipes\n");
-	//ARRANGE
+	const t_variable	*variable = (t_variable *)content;
 
-	t_syntax_status	parser_output;
-	t_token_list	token_list = tokenize("<<");
+	printf("%s", variable->key);
+	printf("=");
+	printf("%s\n", variable->value);
+}
 
-	print_token_list(token_list);
+void	print_env(void)
+{
+	t_variable_list	*env = get_environment();
 
-	//ACT
-	parser_output = parse_input(token_list);
-	//print_token_list(token_list);
-
-	//ASSERT
-	TEST_ASSERT_EQUAL(INVALID_SYNTAX, parser_output);
-
-	//CLEAN
-	delete_token_list(token_list);
+	ft_lstiter(*env, print_variable);
 }

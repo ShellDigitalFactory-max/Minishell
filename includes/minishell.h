@@ -20,6 +20,7 @@
 # include "user_interface.h"
 # include "lexing.h"
 # include "parsing.h"
+# include "environment.h"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -30,17 +31,22 @@
 
 // STRUCTURES
 
-typedef struct s_minishell
+typedef struct s_command_session
 {
 	char			*user_input_line;
 	t_token_list	tokenized_user_input_line;
-}				t_minishell;
+}				t_command_session;
+
+typedef struct s_minishell_context
+{
+	t_command_session	command_session;
+}				t_minishell_context;
 
 // PROTOTYPES
 
 int				exit_shell_routine(void);
 char			*prompt_gets_user_input(void);
-t_lexing_status	lexical_analysis(t_minishell *minishell_data);
-t_syntax_status	syntaxic_analysis(t_token_list token_list);
+t_lexing_status	lexe_input(t_command_session *current_command);
+t_syntax_status	parse_input(t_token_list token_list);
 
 #endif

@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_shell_routine.c                               :+:      :+:    :+:   */
+/*   build_environment.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchobert <tchobert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 18:01:58 by hucherea          #+#    #+#             */
-/*   Updated: 2024/12/11 13:56:45 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/09 16:26:17 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/09 16:26:28 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exit_shell_routine(void)
+t_status	build_environment(char **variables)
 {
-	delete_variables_list();
-	printf("exit\n");
-	exit (EXIT_SUCCESS);
+	size_t	i;
+
+	i = 0;
+	while (variables[i] != NULL)
+	{
+		if (set_variable_from_keyvalue(variables[i], EXPORTABLE)
+			== PROCESS_FAILURE)
+			return (PROCESS_FAILURE);
+		++i;
+	}
+	return (PROCESS_SUCCESS);
 }

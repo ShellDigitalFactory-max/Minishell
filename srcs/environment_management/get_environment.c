@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_shell_routine.c                               :+:      :+:    :+:   */
+/*   get_environment.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchobert <tchobert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 18:01:58 by hucherea          #+#    #+#             */
-/*   Updated: 2024/12/11 13:56:45 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/07 20:39:36 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/07 20:39:48 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exit_shell_routine(void)
+t_variable_list	*get_environment(void)
 {
-	delete_variables_list();
-	printf("exit\n");
-	exit (EXIT_SUCCESS);
+	static t_variable_list	environment = NULL;
+
+	return (&environment);
 }

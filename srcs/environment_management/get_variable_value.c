@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax_analysis.c                                  :+:      :+:    :+:   */
+/*   get_variable_value.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/30 16:43:13 by tchobert          #+#    #+#             */
-/*   Updated: 2024/12/30 16:43:24 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/09 17:34:36 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/09 17:34:52 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_syntax_status	syntaxic_analysis(const t_token_list token_list)
+char	*get_variable_value(const char *keyvalue)
 {
-	t_syntax_status	parser_output;
+	char	*value;
+	size_t	i;
 
-	parser_output = parser(token_list);
-	return (parser_output);
+	i = 0;
+	while (keyvalue[i] != EQUAL_OPERATOR)
+	{
+		++i;
+	}
+	value = ft_strdup(keyvalue + (i + 1));
+	return (value);
 }

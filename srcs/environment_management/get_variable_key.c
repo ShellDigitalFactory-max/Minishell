@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexical_analyse.c                                  :+:      :+:    :+:   */
+/*   get_variable_key.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/27 14:11:02 by tchobert          #+#    #+#             */
-/*   Updated: 2024/12/27 14:11:21 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/09 17:27:49 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/09 17:28:01 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_lexing_status	lexical_analysis(t_minishell *minishell_data)
+char	*get_variable_key(const char *keyvalue)
 {
-	minishell_data->tokenized_user_input_line
-		= tokenize(minishell_data->user_input_line);
-	if (minishell_data->tokenized_user_input_line == NULL)
-		return (LEXING_FAILURE);
-	return (LEXING_SUCCESS);
+	char	*key;
+	size_t	i;
+
+	i = 0;
+	while (keyvalue[i] != EQUAL_OPERATOR)
+	{
+		++i;
+	}
+	key = ft_strndup(keyvalue, (i));
+	return (key);
 }
