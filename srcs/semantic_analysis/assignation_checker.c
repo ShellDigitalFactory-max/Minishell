@@ -12,6 +12,11 @@
 
 #include "minishell.h"
 
+static bool	is_first_letter_valid(const char c)
+{
+	return (ft_isalpha(c) || c == '_');
+}
+
 static bool	is_assignation(const char *assignation)
 {
 	const char	*is_equal_operator = ft_strchr(assignation, EQUAL_OPERATOR);
@@ -24,16 +29,25 @@ t_assignation_status	assignation_checker(char *assignation)
 	char	*probable_key;
 	size_t	i;
 
-	if (is_assignation(assignation) == false || ft_isdigit(*assignation)
-			== true)
+	if (is_assignation(assignation) == false
+		|| is_first_letter_valid(*assignation) == false)
 		return (INVALID_ASSIGNATION);
 	probable_key = get_variable_key(assignation);
-	i = 0;
+	if (probable_key == NULL)
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: malloc failure. Aborting.\n");
+		exit(FAILURE);
+	}
+	i = 1;
 	while (probable_key[i] != '\0')
 	{
 		if (ft_isalnum(probable_key[i]) == false)
+		{
+			free(probable_key);
 			return (INVALID_ASSIGNATION);
+		}
 		++i;
 	}
+	free(probable_key);
 	return (VALID_ASSIGNATION);
 }
