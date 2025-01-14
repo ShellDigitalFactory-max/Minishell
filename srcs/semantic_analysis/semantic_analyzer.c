@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_utils.c                                      :+:      :+:    :+:   */
+/*   semantic_analyzer.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/21 15:33:28 by tchobert          #+#    #+#             */
-/*   Updated: 2024/12/21 15:33:44 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/14 13:37:14 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/14 13:37:26 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	is_input_end(const char *input)
+t_command_pipeline	semantic_analyzer(t_token_list token_list)
 {
-	return (*input == '\0');
-}
+	static 
+	t_command_pipeline	command_pipeline;
+	t_machine_states	machine_state;
 
-bool	is_separator(const char c)
-{
-	return (c == ' ' || c == '\t');
-}
-
-char	*is_operator(const char c)
-{
-	return (ft_strchr(OPERATORS_DICTIONARY, c));
+	return (command_pipeline);
 }
