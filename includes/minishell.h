@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchobert <tchobert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:11:56 by hucherea          #+#    #+#             */
-/*   Updated: 2024/12/13 17:56:47 by tchobert         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:50:52 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "lexing.h"
 # include "parsing.h"
 # include "environment.h"
+# include "exec.h"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -48,5 +49,6 @@ int				exit_shell_routine(void);
 char			*prompt_gets_user_input(void);
 t_lexing_status	lexe_input(t_command_session *current_command);
 t_syntax_status	parse_input(t_token_list token_list);
+t_status		exec_process(t_minishell_context *ms_context);
 
 #endif

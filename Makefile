@@ -16,6 +16,9 @@ PATH_SRCS += srcs/lexical_analysis
 PATH_SRCS += srcs/syntax_analysis
 PATH_SRCS += srcs/environment_management
 PATH_SRCS += srcs/environment_building
+PATH_SRCS += srcs/environment_interactions
+PATH_SRCS += srcs/exec_process
+PATH_SRCS += srcs/exec_process/builtin
 
 PATH_SRCS += srcs/functions_for_debug
 
@@ -66,6 +69,20 @@ SRCS += get_variable_value.c
 # srcs/environment_building
 
 SRCS += build_environment.c
+
+# srcs/environment_interactions
+
+SRCS += env.c
+
+# srcs/exec_process
+
+SRCS += main_exec_process.c
+
+# srcs/exec_process/builtin
+
+SRCS += builtin_tab.c
+SRCS += exec_builtin.c
+SRCS += is_builtin.c
 
 # print_functions to use for debug and tests
 

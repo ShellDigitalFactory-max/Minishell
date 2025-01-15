@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchobert <tchobert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:11:39 by hucherea          #+#    #+#             */
-/*   Updated: 2024/12/14 16:25:29 by tchobert         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:20:24 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static int	main_process(t_minishell_context *minishell_context)
 	{
 		return (EXIT_FAILURE);
 	}
+	exec_process(minishell_context);
 	return (EXIT_SUCCESS);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 18:54:09 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/04 18:58:35 by tchobert         ###   ########.fr       */
+/*   Updated: 2025/01/15 18:14:47 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void			delete_variable(void *data);
 void			delete_variables_list(void);
 char			*get_variable_key(const char *keyvalue);
 char			*get_variable_value(const char *keyvalue);
-
 void			print_env(void);
 
 #endif
