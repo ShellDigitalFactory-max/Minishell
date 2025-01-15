@@ -12,18 +12,17 @@
 
 #include "minishell.h"
 
-t_machine_states	run_assignation(t_token_list current_token,
-						t_command_data *current_command_data)
+t_machine_states	run_assignation(t_token *current_token,
+						t_command_data *current_command_data,
+						char **temp_environment)
 {
-	const t_token_list	token = (t_token_list)current_token;
-	t_machine_states	next_machine_state;
+	t_machine_states	machine_next_state;
+	char				*assignation_value;
 
-	if (((t_token *)token->next->content)->token_type == TOKEN_LIST_END)
-		return (next_machine_state = END);
-	if (assignation_checker(((t_token *)token->content)->token_lexem)
-			== INVALID_ASSIGNATION)
-		return (next_machine_state = INPUT_REDIR);
-	if (((t_token *)token->next->content)->token_type == WORD)
-		store_assignation(((t_token *)token->content)->token_lexem);
-	return (next_machine_state = ASSIGNATION);
+	assignation_value = NULL;
+	if (assignation_checker(current_token->token_lexem) == INVALID_ASSIGNATION)
+	{
+		return (machine_next_state = REDIRECTION);
+	}
+	else
 }

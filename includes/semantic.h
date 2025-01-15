@@ -26,16 +26,13 @@ typedef enum e_assignation_status
 	INVALID_ASSIGNATION
 }				t_assignation_status;
 
-// typedef enum e_machine_states
-// {
-// 	ERROR = -1,
-// 	ASSIGNATION,
-// 	INPUT_REDIR,
-// 	APPEND_REDIR,
-// 	OUTPUT_REDIR,
-// 	COMMAND,
-// 	END
-// }			t_machine_states;
+typedef enum e_machine_states
+{
+	//ERROR = -1,
+	REDIRECTION,
+	COMMAND,
+	//END
+}			t_machine_states;
 
 // STRUCTURES
 
