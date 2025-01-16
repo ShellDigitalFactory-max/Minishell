@@ -17,6 +17,8 @@
 
 typedef t_list *	t_command_pipeline;
 typedef t_list *	t_command;
+typedef t_list *	t_temporary_environment;
+typedef t_list		t_temporary_variable;
 
 // ENUMS
 
@@ -29,9 +31,10 @@ typedef enum e_assignation_status
 typedef enum e_machine_states
 {
 	//ERROR = -1,
+	ASSIGNATION,
 	REDIRECTION,
 	COMMAND,
-	//END
+	SEMANTIC_PROCESS_END
 }			t_machine_states;
 
 // STRUCTURES
@@ -52,6 +55,11 @@ typedef struct s_command_data
 
 // PROTOTYPES
 
+t_temporary_environment	*get_temp_env(void);
+void					clear_temp_env(void);
+void					print_temp_env(void);
+
 t_assignation_status	assignation_checker(char *assignation);
+t_machine_states		run_assignation(t_token *current_token);
 
 #endif

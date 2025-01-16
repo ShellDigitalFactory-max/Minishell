@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_env.c                                        :+:      :+:    :+:   */
+/*   get_temporary_environment.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 19:36:34 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/09 19:36:49 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/16 13:56:47 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/16 13:56:59 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_variable(void *content)
+t_temporary_environment	*get_temp_env(void)
 {
-	const t_variable	*variable = (t_variable *)content;
+	static t_temporary_environment	temp_env = NULL;
 
-	if (variable->is_exportable == true)
-	{
-		printf("%s", variable->key);
-		printf("=");
-		printf("%s\n", variable->value);
-	}
-}
-
-void	print_env(void)
-{
-	t_variable_list	*env = get_environment();
-
-	ft_lstiter(*env, print_variable);
+	return (&temp_env);
 }
