@@ -17,7 +17,8 @@ static void	delete_temporary_node(void *data)
 	char	*to_clear;
 
 	to_clear = (char *)data;
-	free(to_clear);
+	//free(to_clear);
+	to_clear = NULL;
 }
 
 void	clear_temp_env(void)

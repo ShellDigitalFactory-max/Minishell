@@ -12,15 +12,23 @@
 
 #include "minishell.h"
 
-static void	add_temp_env_to_environment(void)
-{
-	
-}
+// static void	add_temp_env_to_environment(void)
+// {
+// 	t_temporary_environment	*temp_env;
 
-static void	consume_temp_env(void)
-{
-	add_temp_env_to_environment();
-}
+// 	temp_env = get_temp_env();
+// 	while (*temp_env != NULL)
+// 	{
+// 		set_variable_from_keyvalue((*temp_env)->content, false);
+// 		*temp_env = (*temp_env)->next;
+// 	}
+// 	clear_temp_env();
+// }
+
+// static void	consume_temp_env(void)
+// {
+// 	add_temp_env_to_environment();
+// }
 
 void	semantic_analyzer(t_minishell_context *minishell_context)
 {
@@ -36,7 +44,7 @@ void	semantic_analyzer(t_minishell_context *minishell_context)
 		token_list = token_list->next;
 	}
 	print_temp_env();
-	printf("\n\n\n\n");
-	consume_temp_env();
-	clear_temp_env();
+	// printf("\n\n\n\n");
+	// consume_temp_env();
+	// print_env();
 }

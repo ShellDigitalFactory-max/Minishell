@@ -16,12 +16,9 @@ static void	print_variable(void *content)
 {
 	const t_variable	*variable = (t_variable *)content;
 
-	if (variable->is_exportable == true)
-	{
-		printf("%s", variable->key);
-		printf("=");
-		printf("%s\n", variable->value);
-	}
+	printf("%s", variable->key);
+	printf("=");
+	printf("%s\n", variable->value);
 }
 
 void	print_env(void)
