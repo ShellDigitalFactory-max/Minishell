@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 19:36:34 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/09 19:36:49 by tchobert         ###   ########.fr       */
+/*   Updated: 2025/01/16 12:13:22 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void	print_variable(void *content)
 
 void	print_env(void)
 {
-	t_variable_list	*env = get_environment();
+	t_variable_list	*env;
 
+	env = get_environment();
 	ft_lstiter(*env, print_variable);
 }

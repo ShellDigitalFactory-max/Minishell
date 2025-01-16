@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:47:07 by linux             #+#    #+#             */
-/*   Updated: 2025/01/15 18:09:18 by linux            ###   ########.fr       */
+/*   Updated: 2025/01/16 12:14:33 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ char	**make_builtin_tab(void)
 		"exit",
 		NULL
 	};
+
 	return (builtin_commands);
 }

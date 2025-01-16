@@ -19,6 +19,7 @@ PATH_SRCS += srcs/environment_building
 PATH_SRCS += srcs/environment_interactions
 PATH_SRCS += srcs/exec_process
 PATH_SRCS += srcs/exec_process/builtin
+PATH_SRCS += srcs/utils
 
 PATH_SRCS += srcs/functions_for_debug
 
@@ -83,6 +84,10 @@ SRCS += main_exec_process.c
 SRCS += builtin_tab.c
 SRCS += exec_builtin.c
 SRCS += is_builtin.c
+
+# srcs/utils
+
+SRCS += listtostrs.c
 
 # print_functions to use for debug and tests
 
