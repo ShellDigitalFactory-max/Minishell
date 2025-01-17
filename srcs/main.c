@@ -31,7 +31,7 @@ static int	main_process(t_minishell_context *minishell_context)
 	{
 		return (EXIT_FAILURE);
 	}
-	semantic_analyzer(minishell_context);
+	//semantic_analyzer(minishell_context);
 	return (EXIT_SUCCESS);
 }
 

@@ -14,5 +14,5 @@
 
 void	delete_variables_list_in_environment(t_variable_list *environment)
 {
-	ft_lstclear(environment, get_environment());
+	ft_lstclear(environment, delete_variable);
 }

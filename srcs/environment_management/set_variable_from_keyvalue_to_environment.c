@@ -28,7 +28,8 @@ t_status	set_variable_from_keyvalue_to_environment(const char *keyvalue,
 		free(key);
 		return (process_status = PROCESS_FAILURE);
 	}
-	process_status = set_variable(key, value, make_it_exportable, environment);
+	process_status = set_variable_to_environment(key, value, make_it_exportable,
+						environment);
 	if (process_status != PROCESS_FAILURE)
 	{
 		free(key);

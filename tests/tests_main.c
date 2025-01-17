@@ -45,7 +45,5 @@ int	main(void)
 
 	// SEMANTIC ANALYSIS
 
-	RUN_TEST(unit_tests_semantic_analyzer);
-
 	return (UNITY_END());
 }

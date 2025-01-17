@@ -12,15 +12,15 @@
 
 #include "minishell.h"
 
-#include "minishell.h"
+
 
 void	semantic_analyzer(t_token_list token_list)
 {
 	//t_command_pipeline	command_pipeline;
 	
-	t_machine_states	machine_state;
-	t_command_pipeline	*cmd_pipeline;
-	t_command 			*current_command;
+	t_machine_states						machine_state;
+	t_command_pipeline						*cmd_pipeline;
+	t_command 								*current_command;
 	t_semantic_analysis_state_return		state_return;
 
 
@@ -29,7 +29,8 @@ void	semantic_analyzer(t_token_list token_list)
 	current_command = NULL;
 	while (machine_state != SEMANTIC_PROCESS_END)
 	{
-		if (machine_state == SEMANTIC_PROCESS_START || machine_state == PIPE_OPERATOR) {
+		if (machine_state == SEMANTIC_PROCESS_START || machine_state == PIPE_OPERATOR)
+		{
 			free(current_command);
 			current_command = create_command();
 		}
@@ -37,7 +38,6 @@ void	semantic_analyzer(t_token_list token_list)
 		if (state_return == TOKEN_PROCESSED)
 			token_list = token_list->next;
 	}
-	print_env(get_temporary_environment());
 	return cmd_pipeline;
 }
 
@@ -47,7 +47,7 @@ void state_command(t_token *token, t_machine_states *machine_state, t_command_pi
 	if (token->token_type == INPUT_REDIR_OPERATOR)
 	{
 		*machine_state = STATE_INPUT_REDIRECT;
-		return PASS_TO_NEXT_STATE
+		return (TOKEN_PROCESSED);
 	}
 	add token->lexem to cmd.args
 

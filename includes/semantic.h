@@ -13,53 +13,60 @@
 #ifndef SEMANTIC_H
 # define SEMANTIC_H
 
-// TYPEDEFS
+// // TYPEDEFS
 
-typedef t_list *	t_command_pipeline;
-typedef t_list *	t_command;
-typedef t_list *	t_temporary_environment;
-typedef t_list		t_temporary_variable;
+// typedef t_list *	t_command_pipeline;
+// typedef t_list *	t_command;
+// typedef t_list *	t_temporary_environment;
+// typedef t_list		t_temporary_variable;
 
-// ENUMS
+// // ENUMS
 
-typedef enum e_assignation_status
-{
-	VALID_ASSIGNATION,
-	INVALID_ASSIGNATION
-}				t_assignation_status;
+// typedef enum s_semantic_analysis_state_return
+// {
+// 	TOKEN_NOT_PROCESSED,
+// 	TOKEN_PROCESSED
+// }				t_semantic_analysis_state_return;
 
-typedef enum e_machine_states
-{
-	//ERROR = -1,
-	SEMANTIC_PROCESS_START,
-	ASSIGNATION,
-	REDIRECTION,
-	COMMAND,
-	SEMANTIC_PROCESS_END
-}			t_machine_states;
 
-// STRUCTURES
+// typedef enum e_assignation_status
+// {
+// 	VALID_ASSIGNATION,
+// 	INVALID_ASSIGNATION
+// }				t_assignation_status;
 
-typedef struct s_command_redirections
-{
-	int	input_redirection;
-	int	output_redirection;
-}				t_command_redirections;
+// typedef enum e_machine_states
+// {
+// 	STATE_ERROR = -1,
+// 	SEMANTIC_PROCESS_START,
+// 	STATE_ASSIGNATION,
+// 	STATE_INPUT_REDIRECT,
+// 	STATE_COMMAND,
+// 	SEMANTIC_PROCESS_END
+// }			t_machine_states;
 
-typedef struct s_command_data
-{
-	char					*command_name;
-	char					**command_and_args;
-	char					**command_environment;
-	t_command_redirections	command_redirections;
-}				t_command_data;
+// // STRUCTURES
 
-// PROTOTYPES
+// typedef struct s_command_redirections
+// {
+// 	int	input_redirection;
+// 	int	output_redirection;
+// }				t_command_redirections;
 
-t_temporary_environment	*get_temporary_environment(void);
-void					print_temp_env(void);
+// typedef struct s_command
+// {
+// 	char					*command_name;
+// 	char					**args;
+// 	t_variable_list			command_environment;
+// 	t_command_redirections	command_redirections;
+// }				t_command;
 
-t_assignation_status	assignation_checker(char *assignation);
-t_machine_states		run_assignation(t_token *current_token);
+// // PROTOTYPES
+
+// t_temporary_environment	*get_temporary_environment(void);
+// void					print_temp_env(void);
+
+// t_assignation_status	assignation_checker(char *assignation);
+// t_machine_states		run_assignation(t_token *current_token);
 
 #endif

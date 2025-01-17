@@ -13,8 +13,8 @@
 #include "minishell.h"
 
 t_status	set_variable_from_keyvalue(const char *keyvalue,
-			bool make_it_exportable, t_variable_list *environment)
+			bool make_it_exportable)
 {
-	return (set_variable_from_key_value_to_environment(keyvalue,
+	return (set_variable_from_keyvalue_to_environment(keyvalue,
 				make_it_exportable, get_environment()));
 }

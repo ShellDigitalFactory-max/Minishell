@@ -14,5 +14,5 @@
 
 void	delete_variables_list(void)
 {
-	delete_variables_list_in_environment(get_environment);
+	delete_variables_list_in_environment(get_environment());
 }
