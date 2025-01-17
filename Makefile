@@ -74,14 +74,12 @@ SRCS += assignation_checker.c
 SRCS += semantic_analyzer.c
 SRCS += run_assignation.c
 SRCS += get_temporary_environment.c
-SRCS += clear_temp_env.c
 
 # print_functions to use for debug and tests
 
 SRCS += print_env.c
 SRCS += print_token.c
 SRCS += print_token_list.c
-SRCS += print_temp_env.c
 
 vpath %.c $(PATH_SRCS)
 

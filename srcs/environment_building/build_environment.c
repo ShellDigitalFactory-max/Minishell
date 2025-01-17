@@ -19,7 +19,7 @@ t_status	build_environment(char **variables)
 	i = 0;
 	while (variables[i] != NULL)
 	{
-		if (set_variable_from_keyvalue(variables[i], EXPORTABLE)
+		if (set_variable_from_keyvalue(variables[i], EXPORTABLE, NULL)
 			== PROCESS_FAILURE)
 			return (PROCESS_FAILURE);
 		++i;

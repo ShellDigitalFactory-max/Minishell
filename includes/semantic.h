@@ -31,6 +31,7 @@ typedef enum e_assignation_status
 typedef enum e_machine_states
 {
 	//ERROR = -1,
+	SEMANTIC_PROCESS_START,
 	ASSIGNATION,
 	REDIRECTION,
 	COMMAND,
@@ -55,8 +56,7 @@ typedef struct s_command_data
 
 // PROTOTYPES
 
-t_temporary_environment	*get_temp_env(void);
-void					clear_temp_env(void);
+t_temporary_environment	*get_temporary_environment(void);
 void					print_temp_env(void);
 
 t_assignation_status	assignation_checker(char *assignation);

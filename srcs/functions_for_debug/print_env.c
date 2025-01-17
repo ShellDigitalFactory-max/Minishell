@@ -21,9 +21,7 @@ static void	print_variable(void *content)
 	printf("%s\n", variable->value);
 }
 
-void	print_env(void)
+void	print_env(t_variable_list *env)
 {
-	t_variable_list	*env = get_environment();
-
 	ft_lstiter(*env, print_variable);
 }

@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 t_status	set_variable_from_keyvalue(const char *keyvalue,
-			bool make_it_exportable)
+			bool make_it_exportable, t_variable_list *environment)
 {
 	t_status	process_status;
 	char		*key;
@@ -28,7 +28,7 @@ t_status	set_variable_from_keyvalue(const char *keyvalue,
 		free(key);
 		return (process_status = PROCESS_FAILURE);
 	}
-	process_status = set_variable(key, value, make_it_exportable);
+	process_status = set_variable(key, value, make_it_exportable, environment);
 	if (process_status != PROCESS_FAILURE)
 	{
 		free(key);
