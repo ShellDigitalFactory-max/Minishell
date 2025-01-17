@@ -63,6 +63,10 @@ SRCS += delete_variables_list.c
 SRCS += find_variable_from_key.c
 SRCS += get_variable_key.c
 SRCS += get_variable_value.c
+SRCS += delete_variables_list_in_environment.c
+SRCS += find_variable_in_environment_from_key.c
+SRCS += set_variable_from_keyvalue_to_environment.c
+SRCS += set_variable_to_environment.c
 
 # srcs/environment_building
 
@@ -73,7 +77,6 @@ SRCS += build_environment.c
 SRCS += assignation_checker.c
 SRCS += semantic_analyzer.c
 SRCS += run_assignation.c
-SRCS += get_temporary_environment.c
 
 # print_functions to use for debug and tests
 
