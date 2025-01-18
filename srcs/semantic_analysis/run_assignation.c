@@ -12,13 +12,7 @@
 
 #include "minishell.h"
 
-static t_status	add_assignation_to_temp_env(t_lexem assignation)
-{
-	return (set_variable_from_keyvalue(assignation, NOT_EXPORTABLE,
-			get_temporary_environment()));
-}
-
-t_machine_states	run_assignation(t_token *current_token)
+t_semantic_analysis_state_return state_assignation(t_token *current_token)
 {
 	t_machine_states	machine_next_state;
 
