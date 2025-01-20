@@ -74,9 +74,9 @@ SRCS += build_environment.c
 
 # srcs/semantic_analysis
 
-# SRCS += assignation_checker.c
+SRCS += assignation_checker.c
 # SRCS += semantic_analyzer.c
-# SRCS += run_assignation.c
+SRCS += state_assignation.c
 
 # print_functions to use for debug and tests
 
@@ -144,8 +144,9 @@ TESTS_SRCS += unit_tests_environment_building.c
 
 # semantic analysis
 
-# TESTS_SRCS += unit_tests_semantic_analyzer.c
-# TESTS_SRCS += tests_assignation_checker.c
+TESTS_SRCS += unit_tests_semantic_analyzer.c
+TESTS_SRCS += tests_assignation_checker.c
+TESTS_SRCS += tests_state_assignation.c
 
 # Unity
 

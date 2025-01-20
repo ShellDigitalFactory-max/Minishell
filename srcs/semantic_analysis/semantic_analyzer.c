@@ -14,7 +14,8 @@
 
 static t_semantic_analysis_state_return	run_state(
 											t_machine_states *machine_state,
-											t_token *current_token)
+											t_token *current_token,
+											t_command current_command)
 {
 	const t_token	*token = (t_token *)current_token;
 	static t_semantic_state_function states_functions[] = {
@@ -31,15 +32,15 @@ static t_semantic_analysis_state_return	run_state(
 
 t_status run_state_machine(t_token_list token_list, t_command_pipeline *cmd_pipeline)
 {
-	t_machine_states						machine_state;
-	t_command 								*current_command;
-	t_semantic_analysis_state_return		state_return;
+	t_machine_states					machine_state;
+	t_command 							*current_command;
+	t_semantic_analysis_state_return	state_return;
 
 	machine_state = SEMANTIC_PROCESS_START;
 	current_command = NULL;
 	while (machine_state != SEMANTIC_PROCESS_END)
 	{
-		if (machine_state == SEMANTIC_PROCESS_START || machine_state == STATE_PIPE)
+		if (machine_state == SEMANTIC_PROCESS_START || machine_state == STATE_NEW_COMMAND)
 		{
 			free(current_command);
 			current_command = create_command(); //secu erreur a mettre dedans !
@@ -77,7 +78,7 @@ t_semantic_analysis_state_return	state_command(t_token *token, t_machine_states 
 	}
 	add token->lexem to cmd.args
 
-	return TOKEN_PROCESSED
+	return (TOKEN_PROCESSED);
 
 }
 
@@ -85,11 +86,11 @@ t_semantic_analysis_state_return	state_end_of_command(t_machine_states *machine_
 {
 	if (current_command->args == NULL)
 	{
-		ft_list_add_back(get_environment(), current_command->command_environment);
+		ft_lstadd_back(get_environment(), current_command->command_environment);
 	}
 	else
 	{
-		ft_list_add_back(cmd_pipeline, current_command);
+		ft_lstadd_back(&cmd_pipeline, current_command);
 	}
 	if (current_token->token_type == TOKEN_LIST_END)
 	{
@@ -98,7 +99,7 @@ t_semantic_analysis_state_return	state_end_of_command(t_machine_states *machine_
 	}
 	else
 	{
-		*machine_state = STATE_PIPE;
+		*machine_state = STATE_NEW_COMMAND;
 		return (TOKEN_PROCESSED);
 	}
 }

@@ -56,9 +56,10 @@ void	test_get_variable_value(void);
 
 // ENVIRONMENT BUILDING
 
-// SEMATIC ANALYSIS
+// SEMANTIC ANALYSIS
 
 void	unit_tests_semantic_analyzer(void);
 void	tests_assignation_checker(void);
+void	tests_state_assignation(void);
 
 #endif

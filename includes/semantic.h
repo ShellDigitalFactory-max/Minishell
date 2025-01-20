@@ -16,7 +16,6 @@
 // TYPEDEFS
 
 typedef t_list *	t_command_pipeline;
-typedef t_list *	t_command;
 typedef t_list *	t_temporary_environment;
 typedef t_list		t_temporary_variable;
 
@@ -44,7 +43,7 @@ typedef enum e_machine_states
 	STATE_APPEND_REDIRECT,
 	STATE_HEREDOC,
 	STATE_COMMAND,
-	STATE_PIPE,
+	STATE_NEW_COMMAND,
 	STATE_END_OF_COMMAND,
 	SEMANTIC_PROCESS_START,
 	SEMANTIC_PROCESS_END
@@ -71,10 +70,10 @@ typedef t_semantic_analysis_state_return (*t_semantic_state_function)(
 
 // PROTOTYPES
 
-t_temporary_environment	*get_temporary_environment(void);
-void					print_temp_env(void);
-
 t_assignation_status	assignation_checker(char *assignation);
-t_machine_states		run_assignation(t_token *current_token);
+t_semantic_analysis_state_return state_assignation(
+									t_machine_states *machine_state,
+									t_token *current_token,
+									t_command *current_command);
 
 #endif
