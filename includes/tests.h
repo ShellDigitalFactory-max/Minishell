@@ -61,5 +61,6 @@ void	test_get_variable_value(void);
 void	unit_tests_semantic_analyzer(void);
 void	tests_assignation_checker(void);
 void	tests_state_assignation(void);
+void	tests_state_input_redirection(void);
 
 #endif

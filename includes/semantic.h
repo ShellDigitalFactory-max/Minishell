@@ -15,6 +15,7 @@
 
 // TYPEDEFS
 
+typedef char *		t_stream;
 typedef t_list *	t_command_pipeline;
 typedef t_list *	t_temporary_environment;
 typedef t_list		t_temporary_variable;
@@ -28,6 +29,12 @@ typedef enum s_semantic_analysis_state_return
 	END_OF_TOKEN_LIST
 }				t_semantic_analysis_state_return;
 
+typedef enum e_opening_status
+{
+	OPENING_SUCCESS,
+	NO_INFILE,
+	NO_OUTFILE
+}			t_opening_status;
 
 typedef enum e_assignation_status
 {
@@ -53,8 +60,8 @@ typedef enum e_machine_states
 
 typedef struct s_command_redirections
 {
-	int	input_redirection;
-	int	output_redirection;
+	t_stream	in_stream;
+	t_stream	out_stream;
 }				t_command_redirections;
 
 typedef struct s_command
@@ -72,6 +79,10 @@ typedef t_semantic_analysis_state_return (*t_semantic_state_function)(
 
 t_assignation_status	assignation_checker(char *assignation);
 t_semantic_analysis_state_return state_assignation(
+									t_machine_states *machine_state,
+									t_token *current_token,
+									t_command *current_command);
+t_semantic_analysis_state_return state_input_redirection(
 									t_machine_states *machine_state,
 									t_token *current_token,
 									t_command *current_command);
