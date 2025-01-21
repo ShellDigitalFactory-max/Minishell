@@ -12,24 +12,47 @@
 
 #include "minishell.h"
 
+static void	display_opening_errors(t_lexem file_name)
+{
+	if (errno == ENOENT)
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: %s: No such file or directory\n",
+			file_name);
+	}
+	else if (errno == EACCES)
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: %s: Permission denied\n",
+			file_name);
+	}
+	else if (errno == EMFILE || errno == ENFILE)
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: %s: Too many open files\n", file_name);
+	}
+	else
+		ft_dprintf(STDERR_FILENO, "minishell: %s: failed to open %s: %s\n",
+			file_name, strerror(errno));
+}
+
 t_semantic_analysis_state_return state_input_redirection(
 									t_machine_states *machine_state,
 									t_token *current_token,
 									t_command *current_command)
 {
-	if (current_command->command_redirections.in_stream != NULL)
+	int	infile_fd;
+
+	if (current_command->command_redirections.in_stream != STDIN_FILENO)
 	{
-		free(current_command->command_redirections.in_stream);
-		current_command->command_redirections.in_stream = NULL;
+		if (close(current_command->command_redirections.in_stream) == -1)
+			perror("minishell: close");
 	}
-	current_command->command_redirections.in_stream
-		= ft_strdup(current_token->token_lexem);
-	if (current_command->command_redirections.in_stream == NULL)
+	infile_fd = open(current_token->token_lexem, O_RDONLY | __O_CLOEXEC);
+	if (infile_fd < 0)
 	{
-		ft_dprintf(STDERR_FILENO, "minishell: malloc error during command "
-		"pipeline building. Aborting\n");
-		exit(FAILURE);
+		display_opening_errors(current_token->token_lexem);
+		*machine_state = STATE_COMMAND;
+		return (TOKEN_PROCESSED);
 	}
+	current_command->command_redirections.in_stream = infile_fd;
 	if (current_command->command_name == NULL)
 		*machine_state = STATE_ASSIGNATION;
 	else

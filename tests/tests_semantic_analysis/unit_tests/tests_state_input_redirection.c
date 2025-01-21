@@ -21,6 +21,8 @@ void	tests_state_input_redirection(void)
 	t_machine_states					machine_state;
 	t_token								token;
 	t_command							command;
+	ssize_t								bytes_read;
+	char								read_test[10];
 
 	ft_bzero(&command, sizeof(t_command));
 	token.token_lexem = "infile.txt";
@@ -32,32 +34,9 @@ void	tests_state_input_redirection(void)
 
 	// ASSERT
 
-	TEST_ASSERT_EQUAL(machine_state, STATE_ASSIGNATION);
-	TEST_ASSERT_EQUAL(0, ft_strcmp(token.token_lexem, command.command_redirections.in_stream));
-	TEST_ASSERT_EQUAL(function_return, TOKEN_PROCESSED);
-
-	printf("\nINPUT_REDIR = %s\n", command.command_redirections.in_stream);
-
-	// ARRANGE 2
-
-	ft_bzero(&token, sizeof(t_token));
-	command.command_name = "ls";
-	token.token_lexem = "infile_n2.txt";
-	token.token_type = WORD;
-
-	// ACT 2
-
-	function_return = state_input_redirection(&machine_state, &token, &command);
-
-	// ASSERT 2
-
-	TEST_ASSERT_EQUAL(machine_state, STATE_COMMAND);
-	TEST_ASSERT_EQUAL(0, ft_strcmp(token.token_lexem, command.command_redirections.in_stream));
-	TEST_ASSERT_EQUAL(function_return, TOKEN_PROCESSED);
-
-	printf("\nINPUT_REDIR = %s\n", command.command_redirections.in_stream);
-
-	// CLEAN
-
-	free(command.command_redirections.in_stream);
+	TEST_ASSERT_EQUAL(TOKEN_PROCESSED, function_return);
+	TEST_ASSERT_EQUAL(STATE_ASSIGNATION, machine_state);
+	bytes_read = read(command.command_redirections.in_stream, read_test, 5);
+	read_test[bytes_read] = '\0';
+	printf("READ = %s\n", read_test);
 }

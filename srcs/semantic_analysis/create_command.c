@@ -12,6 +12,12 @@
 
 #include "minishell.h"
 
+void	setup_command_default_redirections(t_command *command)
+{
+	command->command_redirections.in_stream = STDIN_FILENO;
+	command->command_redirections.out_stream = STDOUT_FILENO;
+}
+
 t_command	*create_command(void)
 {
 	t_command	*new_command;
@@ -23,5 +29,6 @@ t_command	*create_command(void)
 		"semantic analysis. Aborting\n");
 		exit(FAILURE);
 	}
+	setup_command_default_redirections(new_command);
 	return (new_command);
 }

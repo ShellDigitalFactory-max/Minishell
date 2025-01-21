@@ -20,7 +20,7 @@
 // TYPEDEFS
 
 typedef t_list *	t_command_pipeline;
-typedef char *		t_stream;
+typedef int			t_stream;
 
 // ENUMS
 
@@ -63,7 +63,7 @@ typedef enum e_machine_states
 typedef struct s_command_redirections
 {
 	t_stream	in_stream;
-	t_stream	out_stream[MAX_REDIRECTIONS];
+	t_stream	out_stream;
 }				t_command_redirections;
 
 typedef struct s_command

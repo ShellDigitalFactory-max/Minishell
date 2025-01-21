@@ -78,7 +78,7 @@ SRCS += assignation_checker.c
 # SRCS += semantic_analyzer.c
 SRCS += state_assignation.c
 SRCS += state_input_redirection.c
-SRCS += state_output_redirection.c
+# SRCS += state_output_redirection.c
 
 # print_functions to use for debug and tests
 
