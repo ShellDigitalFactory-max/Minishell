@@ -20,9 +20,8 @@ static t_semantic_analysis_state_return	run_state(
 	const t_token	*token = (t_token *)current_token;
 	static t_semantic_state_function states_functions[] = {
 		state_assignation,
-		state_input_operator;
 		state_input_redirection,
-		state_output_redir,
+		state_output_redirection,
 		state_append_redir,
 		state_heredoc,
 		state_command,

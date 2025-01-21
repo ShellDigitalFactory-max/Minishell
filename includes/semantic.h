@@ -13,12 +13,14 @@
 #ifndef SEMANTIC_H
 # define SEMANTIC_H
 
+// DEFINES
+
+# define MAX_REDIRECTIONS 100
+
 // TYPEDEFS
 
-typedef char *		t_stream;
 typedef t_list *	t_command_pipeline;
-typedef t_list *	t_temporary_environment;
-typedef t_list		t_temporary_variable;
+typedef char *		t_stream;
 
 // ENUMS
 
@@ -61,7 +63,7 @@ typedef enum e_machine_states
 typedef struct s_command_redirections
 {
 	t_stream	in_stream;
-	t_stream	out_stream;
+	t_stream	out_stream[MAX_REDIRECTIONS];
 }				t_command_redirections;
 
 typedef struct s_command
@@ -83,6 +85,10 @@ t_semantic_analysis_state_return state_assignation(
 									t_token *current_token,
 									t_command *current_command);
 t_semantic_analysis_state_return state_input_redirection(
+									t_machine_states *machine_state,
+									t_token *current_token,
+									t_command *current_command);
+t_semantic_analysis_state_return	state_output_redirection(
 									t_machine_states *machine_state,
 									t_token *current_token,
 									t_command *current_command);
