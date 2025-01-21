@@ -26,7 +26,8 @@ static void	display_opening_errors(t_lexem file_name)
 	}
 	else if (errno == EMFILE || errno == ENFILE)
 	{
-		ft_dprintf(STDERR_FILENO, "minishell: %s: Too many open files\n", file_name);
+		ft_dprintf(STDERR_FILENO, "minishell: %s: Too many open files\n",
+			file_name);
 	}
 	else
 		ft_dprintf(STDERR_FILENO, "minishell: %s: failed to open %s: %s\n",
@@ -40,7 +41,7 @@ t_semantic_analysis_state_return state_input_redirection(
 {
 	int	infile_fd;
 
-	if (current_command->command_redirections.in_stream != STDIN_FILENO)
+	if (current_command->command_redirections.in_stream > STDIN_FILENO)
 	{
 		if (close(current_command->command_redirections.in_stream) == -1)
 			perror("minishell: close");
@@ -50,6 +51,7 @@ t_semantic_analysis_state_return state_input_redirection(
 	{
 		display_opening_errors(current_token->token_lexem);
 		*machine_state = STATE_COMMAND;
+		current_command->command_redirections.in_stream = infile_fd;
 		return (TOKEN_PROCESSED);
 	}
 	current_command->command_redirections.in_stream = infile_fd;
