@@ -12,17 +12,63 @@
 
 #include "tests.h"
 
-// static void	print_redirection_array(t_command *command)
-// {
-// 	size_t i = 0;
+void	tests_state_output_redirections(void)
+{
+	// ARRANGE
 
-// 	while (command->command_redirections.out_stream[i] != NULL)
-// 	{
-// 		printf("redir_array[%zu] = %s\n", i, command->command_redirections.out_stream[i]);
-// 		++i;
-// 	}
-// }
+	printf("\nTesting function \"state_input_redirection\"\n\n");
+	// ARRANGE
 
-// void	tests_state_output_redirections(void)
-// {
-// }
+	t_semantic_analysis_state_return	function_return;
+	t_machine_states					machine_state;
+	t_token								token;
+	t_command							command;
+	char								*write_for_test = "Hello test";
+
+	ft_bzero(&command, sizeof(t_command));
+	token.token_lexem = "./files_for_testing_redirections/outfile.txt";
+	token.token_type = WORD;
+
+	// ACT
+
+	function_return = state_output_redirection(&machine_state, &token, &command);
+
+	//ASSERT
+
+	TEST_ASSERT_EQUAL(TOKEN_PROCESSED, function_return);
+	TEST_ASSERT_EQUAL(STATE_COMMAND, machine_state);
+	//write(command.command_redirections.out_stream, write_for_test, ft_strlen(write_for_test));
+
+	// ARRANGE 2
+
+	ft_bzero(&command, sizeof(t_command));
+	token.token_lexem = "./files_for_testing_redirections/outfile_to_create.txt";
+	token.token_type = WORD;
+
+	// ACT 2
+
+	function_return = state_output_redirection(&machine_state, &token, &command);
+
+	//ASSERT 2
+
+	TEST_ASSERT_EQUAL(TOKEN_PROCESSED, function_return);
+	TEST_ASSERT_EQUAL(STATE_COMMAND, machine_state);
+	write(command.command_redirections.out_stream, write_for_test, ft_strlen(write_for_test));
+
+	// ARRANGE 3
+
+	ft_bzero(&command, sizeof(t_command));
+	token.token_lexem = "./files_for_testing_redirections/dir_for_testing";
+	token.token_type = WORD;
+
+	// ACT 3
+
+	function_return = state_output_redirection(&machine_state, &token, &command);
+
+	//ASSERT 3
+
+	TEST_ASSERT_EQUAL(TOKEN_PROCESSED, function_return);
+	TEST_ASSERT_EQUAL(STATE_COMMAND, machine_state);
+	TEST_ASSERT_EQUAL(OPENING_ERROR, command.command_redirections.out_stream);
+	write(command.command_redirections.out_stream, write_for_test, ft_strlen(write_for_test));
+}

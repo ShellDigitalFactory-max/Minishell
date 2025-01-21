@@ -25,7 +25,7 @@ void	tests_state_input_redirection(void)
 	char								read_test[10];
 
 	ft_bzero(&command, sizeof(t_command));
-	token.token_lexem = "infile.txt";
+	token.token_lexem = "./files_for_testing_redirections/infile.txt";
 	token.token_type = WORD;
 
 	// ACT
@@ -43,7 +43,7 @@ void	tests_state_input_redirection(void)
 	//ARRANGE 2
 
 	ft_bzero(&token, sizeof(t_token));
-	token.token_lexem = "false_file.txt";
+	token.token_lexem = "./files_for_testing_redirections/false_file.txt";
 	token.token_type = WORD;
 	command.command_name = "ls";
 
@@ -60,7 +60,7 @@ void	tests_state_input_redirection(void)
 	//ARRANGE 3
 
 	ft_bzero(&token, sizeof(t_token));
-	token.token_lexem = "infile2.txt";
+	token.token_lexem = "./files_for_testing_redirections/infile2.txt";
 	token.token_type = WORD;
 	command.command_name = "ls";
 
