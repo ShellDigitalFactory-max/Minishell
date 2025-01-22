@@ -17,11 +17,15 @@
 
 # define MAX_REDIRECTIONS 100
 # define OPENING_ERROR -1
+# define MACHINE_IS_ON_COMMAND_STATE 0
+# define MACHINE_IS_NOT_ON_COMMAND_STATE 1
 
 // TYPEDEFS
 
 typedef t_list *	t_command_pipeline;
+typedef t_list		t_command_args;
 typedef int			t_stream;
+typedef char *		command_argument;
 
 // ENUMS
 
@@ -61,6 +65,12 @@ typedef enum e_machine_states
 
 // STRUCTURES
 
+typedef struct	s_token_type_and_machine_state
+{
+	t_token_type 		token_type;
+	t_machine_states	machine_state;
+}				t_token_type_and_machine_state;
+
 typedef struct s_command_redirections
 {
 	t_stream	in_stream;
@@ -95,6 +105,10 @@ t_semantic_analysis_state_return	state_output_redirection(
 										t_token *current_token,
 										t_command *current_command);
 t_semantic_analysis_state_return	state_append_redirection(
+										t_machine_states *machine_state,
+										t_token *current_token,
+										t_command *current_command);
+t_semantic_analysis_state_return	state_heredoc(
 										t_machine_states *machine_state,
 										t_token *current_token,
 										t_command *current_command);

@@ -22,7 +22,7 @@ static t_semantic_analysis_state_return	run_state(
 		state_assignation,
 		state_input_redirection,
 		state_output_redirection,
-		state_append_redir,
+		state_append_redirection,
 		state_heredoc,
 		state_command,
 	};
@@ -48,7 +48,8 @@ t_status run_state_machine(t_token_list token_list, t_command_pipeline *cmd_pipe
 		}
 		state_return = run_state(&machine_state, token_list->content, current_command);
 		if (machine_state == STATE_END_OF_COMMAND)
-			state_return = state_end_of_command(&machine_state, cmd_pipeline, current_command, token_list);
+			state_return = state_end_of_command(&machine_state, cmd_pipeline, 
+				current_command, token_list);
 		if (state_return == TOKEN_PROCESSED)
 			token_list = token_list->next;
 	}
@@ -60,7 +61,8 @@ t_command_pipeline	semantic_analyzer(t_token_list token_list)
 	t_command_pipeline	*cmd_pipeline;
 
 	cmd_pipeline = (t_command_pipeline *)ft_calloc(1, sizeof(t_command_pipeline));
-	if (cmd_pipeline == NULL || run_state_machine(token_list, cmd_pipeline) == PROCESS_FAILURE)
+	if (cmd_pipeline == NULL || run_state_machine(token_list, cmd_pipeline)
+		== PROCESS_FAILURE)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: malloc error during command "
 		"pipeline building. Aborting\n");
@@ -69,11 +71,19 @@ t_command_pipeline	semantic_analyzer(t_token_list token_list)
 	return (cmd_pipeline);
 }
 
-t_semantic_analysis_state_return	state_command(t_token *token, t_machine_states *machine_state, t_command_pipeline	*cmd_pipeline, t_command *current_command)
+int	update_machine_state(t_machine_states *machine_state, const t_token_type token_type)
 {
-	if (token->token_type == INPUT_REDIR_OPERATOR)
+
+}
+
+t_semantic_analysis_state_return	state_command(
+										t_machine_states *machine_state,
+										t_token *current_token,
+										t_command *current_command)
+{
+	if (update_machine_state(machine_state, current_token->token_type)
+		!= MACHINE_IS_ON_COMMAND_STATE)
 	{
-		*machine_state = STATE_INPUT_REDIRECT;
 		return (TOKEN_PROCESSED);
 	}
 	add token->lexem to cmd.args
@@ -82,7 +92,10 @@ t_semantic_analysis_state_return	state_command(t_token *token, t_machine_states 
 
 }
 
-t_semantic_analysis_state_return	state_end_of_command(t_machine_states *machine_state, t_command_pipeline *cmd_pipeline, t_command *current_command, t_token *current_token)
+t_semantic_analysis_state_return	state_end_of_command(t_machine_states *machine_state,
+										t_command_pipeline *cmd_pipeline, 
+										t_command *current_command,
+										t_token *current_token)
 {
 	if (current_command->args == NULL)
 	{

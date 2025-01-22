@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unit_tests_semantic_analyzer.c                     :+:      :+:    :+:   */
+/*   state_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 17:44:09 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/13 17:44:18 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/22 18:51:38 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/22 18:51:48 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tests.h"
+#include "minishell.h"
 
-void	unit_tests_semantic_analyzer(void)
+t_semantic_analysis_state_return	state_heredoc(
+										t_machine_states *machine_state,
+										t_token *current_token,
+										t_command *current_command)
 {
-	printf("\n\nTesting semantic analyzer functions\n\n");
-	tests_assignation_checker();
-	tests_state_assignation();
-	tests_state_input_redirection();
-	tests_state_output_redirections();
-	tests_state_append_redirection();
-	tests_multiple_redirections();
-	tests_state_heredoc();
-	printf("\n");
+	(void)current_token;
+	(void)current_command;
+	*machine_state = STATE_COMMAND;
+	return (TOKEN_PROCESSED);
 }

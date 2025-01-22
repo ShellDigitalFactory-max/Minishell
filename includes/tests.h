@@ -64,6 +64,7 @@ void	tests_state_assignation(void);
 void	tests_state_input_redirection(void);
 void	tests_state_output_redirections(void);
 void	tests_state_append_redirection(void);
+void	tests_state_heredoc(void);
 
 void	tests_multiple_redirections(void);
 
