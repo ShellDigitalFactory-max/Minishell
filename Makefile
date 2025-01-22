@@ -106,6 +106,7 @@ TESTS_SRCS_DIR += ./tests/tests_environment_building
 TESTS_SRCS_DIR += ./tests/tests_environment_building/unit_tests
 TESTS_SRCS_DIR += ./tests/tests_semantic_analysis
 TESTS_SRCS_DIR += ./tests/tests_semantic_analysis/unit_tests
+TESTS_SRCS_DIR += ./tests/tests_semantic_analysis/behavior_tests
 
 TESTS_SRCS += tests_main.c
 
@@ -154,6 +155,8 @@ TESTS_SRCS += tests_state_assignation.c
 TESTS_SRCS += tests_state_input_redirection.c
 TESTS_SRCS += tests_state_output_redirection.c
 TESTS_SRCS += tests_state_append_redirection.c
+
+TESTS_SRCS += tests_multiple_redirections.c
 
 # Unity
 
