@@ -63,5 +63,6 @@ void	tests_assignation_checker(void);
 void	tests_state_assignation(void);
 void	tests_state_input_redirection(void);
 void	tests_state_output_redirections(void);
+void	tests_state_append_redirection(void);
 
 #endif

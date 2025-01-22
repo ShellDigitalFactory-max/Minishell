@@ -80,19 +80,23 @@ typedef t_semantic_analysis_state_return (*t_semantic_state_function)(
 
 // PROTOTYPES
 
-void					display_opening_errors(const char *file_name);
-t_assignation_status	assignation_checker(char *assignation);
-t_semantic_analysis_state_return state_assignation(
-									t_machine_states *machine_state,
-									t_token *current_token,
-									t_command *current_command);
-t_semantic_analysis_state_return state_input_redirection(
-									t_machine_states *machine_state,
-									t_token *current_token,
-									t_command *current_command);
+void								display_opening_errors(const char *file_name);
+t_assignation_status				assignation_checker(char *assignation);
+t_semantic_analysis_state_return	state_assignation(
+										t_machine_states *machine_state,
+										t_token *current_token,
+										t_command *current_command);
+t_semantic_analysis_state_return	state_input_redirection(
+										t_machine_states *machine_state,
+										t_token *current_token,
+										t_command *current_command);
 t_semantic_analysis_state_return	state_output_redirection(
-									t_machine_states *machine_state,
-									t_token *current_token,
-									t_command *current_command);
+										t_machine_states *machine_state,
+										t_token *current_token,
+										t_command *current_command);
+t_semantic_analysis_state_return	state_append_redirection(
+										t_machine_states *machine_state,
+										t_token *current_token,
+										t_command *current_command);
 
 #endif

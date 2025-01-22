@@ -80,6 +80,7 @@ SRCS += state_assignation.c
 SRCS += state_input_redirection.c
 SRCS += state_output_redirection.c
 SRCS += display_opening_errors.c
+SRCS += state_append_redirection.c
 
 # print_functions to use for debug and tests
 
@@ -152,6 +153,7 @@ TESTS_SRCS += tests_assignation_checker.c
 TESTS_SRCS += tests_state_assignation.c
 TESTS_SRCS += tests_state_input_redirection.c
 TESTS_SRCS += tests_state_output_redirection.c
+TESTS_SRCS += tests_state_append_redirection.c
 
 # Unity
 

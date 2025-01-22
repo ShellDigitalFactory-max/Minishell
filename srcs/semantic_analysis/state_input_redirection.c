@@ -12,10 +12,10 @@
 
 #include "minishell.h"
 
-t_semantic_analysis_state_return state_input_redirection(
-									t_machine_states *machine_state,
-									t_token *current_token,
-									t_command *current_command)
+t_semantic_analysis_state_return	state_input_redirection(
+										t_machine_states *machine_state,
+										t_token *current_token,
+										t_command *current_command)
 {
 	int	infile_fd;
 

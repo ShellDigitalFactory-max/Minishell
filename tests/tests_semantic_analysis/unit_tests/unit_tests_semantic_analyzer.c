@@ -19,5 +19,6 @@ void	unit_tests_semantic_analyzer(void)
 	tests_state_assignation();
 	tests_state_input_redirection();
 	tests_state_output_redirections();
+	tests_state_append_redirection();
 	printf("\n");
 }
