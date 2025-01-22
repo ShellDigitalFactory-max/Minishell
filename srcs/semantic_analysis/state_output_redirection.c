@@ -24,16 +24,19 @@ t_semantic_analysis_state_return	state_output_redirection(
 		if (close(current_command->command_redirections.out_stream) == -1)
 			perror("minishell: close");
 	}
-	outfile_fd = open(current_token->token_lexem, O_WRONLY | O_CREAT |O_TRUNC
-					| __O_CLOEXEC, 0644);
-	if (outfile_fd < 0)
+	if (current_command->command_redirections.out_stream != OPENING_ERROR)
 	{
-		display_opening_errors(current_token->token_lexem);
-		current_command->command_redirections.out_stream = OPENING_ERROR;
-		*machine_state = STATE_COMMAND;
-		return (TOKEN_PROCESSED);
+		outfile_fd = open(current_token->token_lexem, O_WRONLY | O_CREAT |O_TRUNC
+						| __O_CLOEXEC, 0644);
+		if (outfile_fd < 0)
+		{
+			display_opening_errors(current_token->token_lexem);
+			current_command->command_redirections.out_stream = OPENING_ERROR;
+			*machine_state = STATE_COMMAND;
+			return (TOKEN_PROCESSED);
+		}
+		current_command->command_redirections.out_stream = outfile_fd;
 	}
-	current_command->command_redirections.out_stream = outfile_fd;
 	*machine_state = STATE_COMMAND;
 	return (TOKEN_PROCESSED);
 }
