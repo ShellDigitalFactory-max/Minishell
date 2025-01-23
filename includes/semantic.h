@@ -105,5 +105,13 @@ t_semantic_analysis_state_return	state_heredoc(
 										t_machine_states *machine_state,
 										t_token *current_token,
 										t_command *current_command);
+t_semantic_analysis_state_return	state_command(
+										t_machine_states *machine_state,
+										t_token *current_token,
+										t_command *current_command);
+t_semantic_analysis_state_return	state_end_of_command(t_machine_states *machine_state,
+										t_command_pipeline *cmd_pipeline, 
+										t_command *current_command,
+										t_token *current_token);
 
 #endif

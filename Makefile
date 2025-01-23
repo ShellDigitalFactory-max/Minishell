@@ -82,6 +82,8 @@ SRCS += state_output_redirection.c
 SRCS += display_opening_errors.c
 SRCS += state_append_redirection.c
 SRCS += state_heredoc.c
+SRCS += state_command.c
+SRCS += state_emd_of_command.c
 
 # print_functions to use for debug and tests
 
