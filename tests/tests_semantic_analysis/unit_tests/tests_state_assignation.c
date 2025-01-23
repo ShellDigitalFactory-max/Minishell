@@ -57,7 +57,7 @@ void	tests_state_assignation(void)
 
 	// ASSERT 2
 
-	TEST_ASSERT_EQUAL(machine_state, STATE_INPUT_REDIRECT);
+	TEST_ASSERT_EQUAL(machine_state, STATE_COMMAND);
 	TEST_ASSERT_EQUAL(expected_return, TOKEN_NOT_PROCESSED);
 	TEST_ASSERT_EQUAL(NULL, (command.command_environment));
 

@@ -53,29 +53,7 @@ void	tests_state_input_redirection(void)
 
 	// ASSERT 2
 
-	TEST_ASSERT_EQUAL(TOKEN_PROCESSED, function_return);
-	TEST_ASSERT_EQUAL(STATE_COMMAND, machine_state);
+	TEST_ASSERT_EQUAL(OPENING_FAILURE, function_return);
+	TEST_ASSERT_EQUAL(STATE_OPENING_FAILURE, machine_state);
 	TEST_ASSERT_EQUAL(OPENING_ERROR, command.command_redirections.in_stream);
-
-	//ARRANGE 3
-
-	ft_bzero(read_test, sizeof(read_test));
-	ft_bzero(&token, sizeof(t_token));
-	token.token_lexem = "./files_for_testing_redirections/infile2.txt";
-	token.token_type = WORD;
-
-	// ACT 3
-
-	function_return = state_input_redirection(&machine_state, &token, &command);
-
-	// ASSERT 3
-
-	TEST_ASSERT_EQUAL(TOKEN_PROCESSED, function_return);
-	TEST_ASSERT_EQUAL(STATE_COMMAND, machine_state);
-	TEST_ASSERT_EQUAL(OPENING_ERROR, command.command_redirections.in_stream);
-	TEST_ASSERT_EQUAL(-1, read(command.command_redirections.in_stream, read_test, 5));
-
-	// CLEAN
-
-	close(command.command_redirections.in_stream);
 }

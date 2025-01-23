@@ -37,6 +37,7 @@ t_semantic_analysis_state_return	state_command(
 										t_token *current_token,
 										t_command *current_command)
 {
+	(void)current_command;
 	if (current_token->token_type != WORD)
 	{
 		return (update_machine_state(current_token->token_type, machine_state));

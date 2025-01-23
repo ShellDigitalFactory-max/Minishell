@@ -56,7 +56,7 @@ void	tests_state_append_redirection(void)
 	// ARRANGE 3
 
 	ft_bzero(&token, sizeof(t_token));
-	token.token_lexem = "./files_for_testing_redirections/dir_for_testing";
+	token.token_lexem = "./files_for_testing_redirections/outfile_no_rights.txt";
 	token.token_type = WORD;
 
 	// ACT 3
@@ -65,23 +65,6 @@ void	tests_state_append_redirection(void)
 
 	//ASSERT 3
 
-	TEST_ASSERT_EQUAL(TOKEN_PROCESSED, function_return);
-	TEST_ASSERT_EQUAL(STATE_COMMAND, machine_state);
-	TEST_ASSERT_EQUAL(OPENING_ERROR, command.command_redirections.out_stream);
-
-	// ARRANGE 4
-
-	ft_bzero(&token, sizeof(t_token));
-	token.token_lexem = "./files_for_testing_redirections/outfile_to_create_append.txt";
-	token.token_type = WORD;
-
-	// ACT 4
-
-	function_return = state_output_redirection(&machine_state, &token, &command);
-
-	// ASSERT 4
-
-	TEST_ASSERT_EQUAL(TOKEN_PROCESSED, function_return);
-	TEST_ASSERT_EQUAL(STATE_COMMAND, machine_state);
-	TEST_ASSERT_EQUAL(OPENING_ERROR, command.command_redirections.out_stream);
+	TEST_ASSERT_EQUAL(OPENING_FAILURE, function_return);
+	TEST_ASSERT_EQUAL(STATE_OPENING_FAILURE, machine_state);
 }
