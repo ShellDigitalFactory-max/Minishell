@@ -82,7 +82,7 @@ SRCS += state_output_redirection.c
 SRCS += display_opening_errors.c
 SRCS += state_append_redirection.c
 # SRCS += state_heredoc.c
-# SRCS += state_command.c
+SRCS += state_command.c
 # SRCS += state_end_of_command.c
 
 # print_functions to use for debug and tests
@@ -159,6 +159,7 @@ TESTS_SRCS += tests_state_input_redirection.c
 TESTS_SRCS += tests_state_output_redirection.c
 TESTS_SRCS += tests_state_append_redirection.c
 # TESTS_SRCS += tests_state_heredoc.c
+TESTS_SRCS += tests_state_command.c
 
 # TESTS_SRCS += tests_multiple_redirections.c
 
