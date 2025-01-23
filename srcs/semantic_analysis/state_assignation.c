@@ -26,7 +26,7 @@ t_semantic_analysis_state_return state_assignation(
 {
 	if (assignation_checker(current_token->token_lexem) == INVALID_ASSIGNATION)
 	{
-		*machine_state = STATE_INPUT_REDIRECT;
+		*machine_state = STATE_COMMAND;
 		return (TOKEN_NOT_PROCESSED);
 	}
 	else

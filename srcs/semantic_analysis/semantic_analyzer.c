@@ -30,7 +30,7 @@ static t_semantic_analysis_state_return	run_state(
 	return (states_functions[*machine_state](machine_state, token));
 }
 
-static t_status run_state_machine(t_token_list token_list, t_command_pipeline *cmd_pipeline)
+static t_status	run_state_machine(t_token_list token_list, t_command_pipeline *cmd_pipeline)
 {
 	t_machine_states					machine_state;
 	t_command 							*current_command;
