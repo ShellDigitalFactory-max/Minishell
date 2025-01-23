@@ -38,7 +38,7 @@ t_status run_state_machine(t_token_list token_list, t_command_pipeline *cmd_pipe
 
 	machine_state = SEMANTIC_PROCESS_START;
 	current_command = NULL;
-	while (machine_state != SEMANTIC_PROCESS_END)
+	while (machine_state != SEMANTIC_PROCESS_END && machine_state != STATE_OPENING_FAILURE)
 	{
 		if (machine_state == SEMANTIC_PROCESS_START || machine_state == STATE_NEW_COMMAND)
 		{
@@ -53,6 +53,8 @@ t_status run_state_machine(t_token_list token_list, t_command_pipeline *cmd_pipe
 		if (state_return == TOKEN_PROCESSED)
 			token_list = token_list->next;
 	}
+	if (machine_state == STATE_OPENING_FAILURE)
+		return (PROCESS_FAILURE);
 	return (PROCESS_SUCCESS);
 }
 
@@ -61,14 +63,17 @@ t_command_pipeline	semantic_analyzer(t_token_list token_list)
 	t_command_pipeline	*cmd_pipeline;
 
 	cmd_pipeline = (t_command_pipeline *)ft_calloc(1, sizeof(t_command_pipeline));
-	if (cmd_pipeline == NULL || run_state_machine(token_list, cmd_pipeline)
-		== PROCESS_FAILURE)
+	if (cmd_pipeline == NULL)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: malloc error during command "
 		"pipeline building. Aborting\n");
 		exit(FAILURE);
 	}
-	return (cmd_pipeline);
+	if (run_state_machine == PROCESS_FAILURE)
+	{
+		delete_commad_pipeline(&cmd_pipeline);
+	}
+	return (NULL);
 }
 
 int	update_machine_state(t_machine_states *machine_state, const t_token_type token_type)

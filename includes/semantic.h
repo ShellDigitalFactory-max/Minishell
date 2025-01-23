@@ -17,8 +17,6 @@
 
 # define MAX_REDIRECTIONS 100
 # define OPENING_ERROR -1
-# define MACHINE_IS_ON_COMMAND_STATE 0
-# define MACHINE_IS_NOT_ON_COMMAND_STATE 1
 
 // TYPEDEFS
 
@@ -31,17 +29,11 @@ typedef char *		command_argument;
 
 typedef enum s_semantic_analysis_state_return
 {
+	OPENING_FAILURE = -1,
 	TOKEN_NOT_PROCESSED,
 	TOKEN_PROCESSED,
 	END_OF_TOKEN_LIST
 }				t_semantic_analysis_state_return;
-
-typedef enum e_opening_status
-{
-	OPENING_SUCCESS,
-	NO_INFILE,
-	NO_OUTFILE
-}			t_opening_status;
 
 typedef enum e_assignation_status
 {
@@ -51,6 +43,7 @@ typedef enum e_assignation_status
 
 typedef enum e_machine_states
 {
+	STATE_OPENING_FAILURE = -1,
 	STATE_ASSIGNATION,
 	STATE_INPUT_REDIRECT,
 	STATE_OUTPUT_REDIRECT,
