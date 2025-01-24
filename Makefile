@@ -161,6 +161,7 @@ TESTS_SRCS += tests_state_append_redirection.c
 # TESTS_SRCS += tests_state_heredoc.c
 TESTS_SRCS += tests_state_command.c
 
+TESTS_SRCS += print_argument.c
 # TESTS_SRCS += tests_multiple_redirections.c
 
 # Unity

@@ -21,9 +21,9 @@
 // TYPEDEFS
 
 typedef t_list *	t_command_pipeline;
-typedef t_list		t_command_args;
+typedef t_list *	t_command_args;
 typedef int			t_stream;
-typedef char *		command_argument;
+typedef char *		t_command_argument;
 
 // ENUMS
 
@@ -73,7 +73,7 @@ typedef struct s_command_redirections
 typedef struct s_command
 {
 	char					*command_name;
-	char					**args;
+	t_command_args			command_args;
 	t_variable_list			command_environment;
 	t_command_redirections	command_redirections;
 }				t_command;
