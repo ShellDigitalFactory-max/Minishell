@@ -80,6 +80,10 @@ typedef struct s_command
 typedef t_semantic_analysis_state_return (*t_semantic_state_function)(
 			t_machine_states *machine_state, t_token *current_token, t_command *current_command);
 
+// BUILTINS
+
+//const char*	builtins_dictionary
+
 // PROTOTYPES
 
 void								display_opening_errors(const char *file_name);

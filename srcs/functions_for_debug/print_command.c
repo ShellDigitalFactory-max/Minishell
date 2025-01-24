@@ -16,12 +16,14 @@ void	print_command(void *to_print)
 {
 	t_command	*command_struct = (t_command *)to_print;
 
-	printf("arguments =\n");
+	printf("\nCOMMAND COMPOSITION:\n\n");
+	printf("Command arguments:\n\n");
 	print_arguments_list((t_command_args)command_struct->command_args);
 
 	if ((t_variable_list *)command_struct->command_environment != NULL)
 	{
-		printf("env=\n");
-		print_env((t_variable_list *)command_struct->command_environment);
+		printf("\nCommand environment:\n\n");
+		print_env((t_variable_list *)(&command_struct->command_environment));
 	}
+	printf("\n-----------------------------\n\n");
 }

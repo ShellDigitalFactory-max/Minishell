@@ -41,7 +41,6 @@ static t_status	run_state_machine(t_token_list token_list, t_command_pipeline *c
 	{
 		if (machine_state == SEMANTIC_PROCESS_START || machine_state == STATE_NEW_COMMAND)
 		{
-			free(current_command);
 			current_command = create_command();
 			machine_state = STATE_ASSIGNATION;
 		}
