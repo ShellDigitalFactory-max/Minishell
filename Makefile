@@ -74,22 +74,27 @@ SRCS += build_environment.c
 
 # srcs/semantic_analysis
 
+SRCS += create_command.c
 SRCS += assignation_checker.c
-# SRCS += semantic_analyzer.c
+SRCS += semantic_analyzer.c
 SRCS += state_assignation.c
 SRCS += state_input_redirection.c
 SRCS += state_output_redirection.c
 SRCS += display_opening_errors.c
 SRCS += state_append_redirection.c
-# SRCS += state_heredoc.c
+SRCS += state_heredoc.c
 SRCS += state_command.c
-# SRCS += state_end_of_command.c
+SRCS += state_end_of_command.c
 
 # print_functions to use for debug and tests
 
 SRCS += print_env.c
 SRCS += print_token.c
 SRCS += print_token_list.c
+SRCS += print_argument.c
+SRCS += print_arguments_list.c
+SRCS += print_command.c
+SRCS += print_command_pipeline_list.c
 
 vpath %.c $(PATH_SRCS)
 
@@ -158,10 +163,9 @@ TESTS_SRCS += tests_state_assignation.c
 TESTS_SRCS += tests_state_input_redirection.c
 TESTS_SRCS += tests_state_output_redirection.c
 TESTS_SRCS += tests_state_append_redirection.c
-# TESTS_SRCS += tests_state_heredoc.c
+TESTS_SRCS += tests_state_heredoc.c
 TESTS_SRCS += tests_state_command.c
 
-TESTS_SRCS += print_argument.c
 # TESTS_SRCS += tests_multiple_redirections.c
 
 # Unity

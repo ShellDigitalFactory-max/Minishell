@@ -31,7 +31,9 @@ static int	main_process(t_minishell_context *minishell_context)
 	{
 		return (EXIT_FAILURE);
 	}
-	//semantic_analyzer(minishell_context);
+	minishell_context->command_session.command_pipeline
+		= semantic_analyzer(minishell_context->command_session.tokenized_user_input_line);
+	print_command_pipeline_list(minishell_context->command_session.command_pipeline);
 	return (EXIT_SUCCESS);
 }
 

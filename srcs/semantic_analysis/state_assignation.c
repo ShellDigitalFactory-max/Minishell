@@ -24,6 +24,8 @@ t_semantic_analysis_state_return state_assignation(
 									t_token *current_token,
 									t_command *current_command)
 {
+	if (current_token->token_type == TOKEN_LIST_START)
+		return (TOKEN_PROCESSED);
 	if (assignation_checker(current_token->token_lexem) == INVALID_ASSIGNATION)
 	{
 		*machine_state = STATE_COMMAND;

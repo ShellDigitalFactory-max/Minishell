@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unit_tests_semantic_analyzer.c                     :+:      :+:    :+:   */
+/*   print_argument.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 17:44:09 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/13 17:44:18 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/24 14:54:43 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/24 14:54:56 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tests.h"
+#include "minishell.h"
 
-void	unit_tests_semantic_analyzer(void)
+void	print_argument(void* to_print)
 {
-	printf("\n\nTesting semantic analyzer functions\n\n");
-	tests_assignation_checker();
-	tests_state_assignation();
-	tests_state_input_redirection();
-	tests_state_output_redirections();
-	tests_state_append_redirection();
-	// tests_multiple_redirections();
-	tests_state_heredoc();
-	tests_state_command();
-	printf("\n");
+	const t_command_argument	argument = (t_command_argument)to_print;
+
+	printf("%s\n", argument);
 }

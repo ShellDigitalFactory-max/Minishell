@@ -67,7 +67,6 @@ void	tests_state_append_redirection(void);
 void	tests_state_heredoc(void);
 void	tests_state_command(void);
 
-void	print_argument(void* to_print);
 void	tests_multiple_redirections(void);
 
 #endif

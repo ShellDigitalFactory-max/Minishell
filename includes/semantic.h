@@ -15,7 +15,6 @@
 
 // DEFINES
 
-# define MAX_REDIRECTIONS 100
 # define OPENING_ERROR -1
 
 // TYPEDEFS
@@ -79,11 +78,12 @@ typedef struct s_command
 }				t_command;
 
 typedef t_semantic_analysis_state_return (*t_semantic_state_function)(
-			t_machine_states *machine_state, t_token *current_token);
+			t_machine_states *machine_state, t_token *current_token, t_command *current_command);
 
 // PROTOTYPES
 
 void								display_opening_errors(const char *file_name);
+t_command							*create_command(void);
 t_assignation_status				assignation_checker(char *assignation);
 t_semantic_analysis_state_return	state_assignation(
 										t_machine_states *machine_state,
@@ -113,5 +113,10 @@ t_semantic_analysis_state_return	state_end_of_command(t_machine_states *machine_
 										t_command_pipeline *cmd_pipeline, 
 										t_command *current_command,
 										t_token *current_token);
+
+void								print_arguments_list(t_command_args arguments_list);
+void								print_argument(void* to_print);
+void								print_command_pipeline_list(t_command_pipeline	cmd_pipeline);
+void								print_command(void *to_print);
 
 #endif

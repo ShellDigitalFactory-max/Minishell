@@ -12,11 +12,6 @@
 
 #include "tests.h"
 
-static void	print_arguments_list(t_command_args arguments_list)
-{
-	ft_lstiter(arguments_list, print_argument);
-}
-
 void	tests_state_command(void)
 {
 	printf("\nTesting function \"state_command\"\n\n");
