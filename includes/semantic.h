@@ -89,9 +89,6 @@ typedef struct s_command
 typedef t_semantic_analysis_state_return (*t_semantic_state_function)(
 			t_machine_states *machine_state, t_token *current_token, t_command *current_command);
 
-// BUILTINS
-
-//const char*	builtins_dictionary
 
 // PROTOTYPES
 
@@ -126,6 +123,7 @@ t_semantic_analysis_state_return	state_end_of_command(t_machine_states *machine_
 										t_command_pipeline *cmd_pipeline, 
 										t_command *current_command,
 										t_token *current_token);
+bool								is_builtin(const char *command_name);
 
 void								print_arguments_list(t_command_args arguments_list);
 void								print_argument(void* to_print);

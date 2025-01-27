@@ -12,3 +12,26 @@
 
 #include "minishell.h"
 
+bool	is_builtin(const char *command_name)
+{
+	static const char*	builtins_dictionary[] = {
+		"echo",
+		"cd",
+		"pwd",
+		"export",
+		"unset",
+		"env",
+		"exit",
+		NULL,
+	};
+	size_t	i;
+
+	i = 0;
+	while (builtins_dictionary[i] != NULL)
+	{
+		if (ft_strcmp(builtins_dictionary[i], command_name) == 0)
+			return (true);
+		++i;
+	}
+	return (false);
+}

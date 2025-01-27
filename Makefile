@@ -85,6 +85,7 @@ SRCS += state_append_redirection.c
 SRCS += state_heredoc.c
 SRCS += state_command.c
 SRCS += state_end_of_command.c
+SRCS += is_builtin.c
 
 # print_functions to use for debug and tests
 

@@ -35,8 +35,8 @@ t_semantic_analysis_state_return	state_end_of_command(
 	t_command_pipeline	pipeline_segment;
 
 	get_command_name(current_command);
-	// if (is_builtin(current_command->command_name))
-	// 	current_command->command_nature = BUILTIN;
+	if (is_builtin(current_command->command_name))
+		current_command->command_nature = BUILTIN;
 	pipeline_segment = ft_lstnew(current_command);
 	if (pipeline_segment == NULL)
 	{
