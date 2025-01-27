@@ -55,6 +55,14 @@ typedef enum e_machine_states
 	SEMANTIC_PROCESS_END
 }			t_machine_states;
 
+typedef enum e_command_nature
+{
+	NO_ENTRY,
+	ONLY_ASSIGNATION,
+	POSSIBLE_BINARY,
+	BUILTIN
+}			t_command_nature;
+
 // STRUCTURES
 
 typedef struct	s_token_type_and_machine_state
@@ -75,6 +83,7 @@ typedef struct s_command
 	t_command_args			command_args;
 	t_variable_list			command_environment;
 	t_command_redirections	command_redirections;
+	t_command_nature		command_nature;
 }				t_command;
 
 typedef t_semantic_analysis_state_return (*t_semantic_state_function)(

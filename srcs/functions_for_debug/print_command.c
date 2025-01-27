@@ -12,11 +12,24 @@
 
 #include "minishell.h"
 
+static void	print_command_nature(t_command_nature command_nature)
+{
+	if (command_nature == NO_ENTRY)
+		printf("\nCommand nature: NO ENTRY\n\n");
+	else if (command_nature == ONLY_ASSIGNATION)
+		printf("\nCommand nature: ONLY ASSIGNATION\n\n");
+	else if (command_nature == POSSIBLE_BINARY)
+		printf("\nCommand nature: POSSIBLE BINARY\n\n");
+	else
+		printf("\nCommand nature: BUILTIN\n\n");
+}
+
 void	print_command(void *to_print)
 {
 	t_command	*command_struct = (t_command *)to_print;
 
 	printf("\nCOMMAND COMPOSITION:\n\n");
+	printf("Command_name: %s\n\n", command_struct->command_name);
 	printf("Command arguments:\n\n");
 	print_arguments_list((t_command_args)command_struct->command_args);
 
@@ -25,5 +38,6 @@ void	print_command(void *to_print)
 		printf("\nCommand environment:\n\n");
 		print_env((t_variable_list *)(&command_struct->command_environment));
 	}
+	print_command_nature(command_struct->command_nature);
 	printf("\n-----------------------------\n\n");
 }

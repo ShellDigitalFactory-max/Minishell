@@ -61,12 +61,13 @@ t_semantic_analysis_state_return	state_command(
 										t_token *current_token,
 										t_command *current_command)
 {
-	(void)current_command;
 	if (current_token->token_type != WORD)
 	{
 		return (update_machine_state(current_token->token_type, machine_state));
 	}
 	add_argument_to_command_args(current_token->token_lexem, &current_command->command_args);
+	if (current_command->command_nature == ONLY_ASSIGNATION)
+		current_command->command_nature = POSSIBLE_BINARY;
 	*machine_state = STATE_COMMAND;
 	return (TOKEN_PROCESSED);
 }
