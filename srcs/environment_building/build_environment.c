@@ -31,6 +31,7 @@ static t_status	update_shell_lvl(t_variable_list *env)
 	}
 	new_shell_level = ft_ltoa_base(shell_level, DECIMAL_BASE);
 	update_variable(SHLVL, new_shell_level, EXPORTABLE);
+	free(new_shell_level);
 	return (PROCESS_SUCCESS);
 }
 

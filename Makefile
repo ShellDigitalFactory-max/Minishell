@@ -86,6 +86,7 @@ SRCS += state_heredoc.c
 SRCS += state_command.c
 SRCS += state_end_of_command.c
 SRCS += is_builtin.c
+SRCS += delete_command_pipeline.c
 
 # print_functions to use for debug and tests
 

@@ -130,6 +130,7 @@ t_semantic_analysis_state_return	state_end_of_command(t_machine_states *machine_
 										t_command_pipeline *cmd_pipeline, 
 										t_command *current_command,
 										t_token *current_token);
+void								delete_command_pipeline(t_command_pipeline *cmd_pipeline);
 bool								is_builtin(const char *command_name);
 
 void								print_arguments_list(t_command_args arguments_list);
