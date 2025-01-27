@@ -19,20 +19,22 @@ t_semantic_analysis_state_return	state_input_redirection(
 {
 	int	infile_fd;
 
-	if (current_command->command_redirections.in_stream > STDIN_FILENO)
+	if (current_command->command_redirections.opening_status != OPENING_FAILURE)
 	{
-		if (close(current_command->command_redirections.in_stream) == -1)
-			perror("minishell: close");
+		if (current_command->command_redirections.in_stream > STDIN_FILENO)
+		{
+			if (close(current_command->command_redirections.in_stream) == -1)
+				perror("minishell: close");
+		}
+		infile_fd = open(current_token->token_lexem, O_RDONLY | __O_CLOEXEC);
+		if (infile_fd < 0)
+		{
+			save_opening_error(current_command, current_token->token_lexem);
+			current_command->command_redirections.in_stream = OPENING_ERROR;
+			current_command->command_redirections.opening_status = OPENING_FAILURE;
+		}
+		current_command->command_redirections.in_stream = infile_fd;
 	}
-	infile_fd = open(current_token->token_lexem, O_RDONLY | __O_CLOEXEC);
-	if (infile_fd < 0)
-	{
-		display_opening_errors(current_token->token_lexem);
-		current_command->command_redirections.in_stream = OPENING_ERROR;
-		*machine_state = STATE_OPENING_FAILURE;
-		return (OPENING_FAILURE);
-	}
-	current_command->command_redirections.in_stream = infile_fd;
 	if (current_command->command_name == NULL)
 		*machine_state = STATE_ASSIGNATION;
 	else

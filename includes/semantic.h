@@ -28,7 +28,6 @@ typedef char *		t_command_argument;
 
 typedef enum s_semantic_analysis_state_return
 {
-	OPENING_FAILURE = -1,
 	TOKEN_NOT_PROCESSED,
 	TOKEN_PROCESSED,
 	END_OF_TOKEN_LIST
@@ -42,7 +41,6 @@ typedef enum e_assignation_status
 
 typedef enum e_machine_states
 {
-	STATE_OPENING_FAILURE = -1,
 	STATE_ASSIGNATION,
 	STATE_INPUT_REDIRECT,
 	STATE_OUTPUT_REDIRECT,
@@ -54,6 +52,12 @@ typedef enum e_machine_states
 	SEMANTIC_PROCESS_START,
 	SEMANTIC_PROCESS_END
 }			t_machine_states;
+
+typedef enum e_opening_status
+{
+	OPENING_FAILURE = -1,
+	OPENING_SUCCESS,
+}			t_opening_status;
 
 typedef enum e_command_nature
 {
@@ -73,8 +77,9 @@ typedef struct	s_token_type_and_machine_state
 
 typedef struct s_command_redirections
 {
-	t_stream	in_stream;
-	t_stream	out_stream;
+	t_opening_status	opening_status;
+	t_stream			in_stream;
+	t_stream			out_stream;
 }				t_command_redirections;
 
 typedef struct s_command
@@ -84,6 +89,7 @@ typedef struct s_command
 	t_variable_list			command_environment;
 	t_command_redirections	command_redirections;
 	t_command_nature		command_nature;
+	char					*opening_failure_msg;
 }				t_command;
 
 typedef t_semantic_analysis_state_return (*t_semantic_state_function)(
@@ -92,7 +98,8 @@ typedef t_semantic_analysis_state_return (*t_semantic_state_function)(
 
 // PROTOTYPES
 
-void								display_opening_errors(const char *file_name);
+void								save_opening_error(t_command *current_command,
+										const char *file_name);
 t_command							*create_command(void);
 t_assignation_status				assignation_checker(char *assignation);
 t_semantic_analysis_state_return	state_assignation(

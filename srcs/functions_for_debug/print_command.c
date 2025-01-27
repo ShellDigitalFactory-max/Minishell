@@ -39,5 +39,9 @@ void	print_command(void *to_print)
 		print_env((t_variable_list *)(&command_struct->command_environment));
 	}
 	print_command_nature(command_struct->command_nature);
+	if (command_struct->opening_failure_msg == NULL)
+		printf("\nCommand opening failures: none\n\n");
+	else
+		printf("\nCommand opening failure: %s\n\n", command_struct->opening_failure_msg);
 	printf("\n-----------------------------\n\n");
 }

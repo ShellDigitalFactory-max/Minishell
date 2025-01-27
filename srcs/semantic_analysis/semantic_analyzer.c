@@ -37,7 +37,7 @@ static t_status	run_state_machine(t_token_list token_list, t_command_pipeline *c
 
 	machine_state = SEMANTIC_PROCESS_START;
 	current_command = NULL;
-	while (machine_state != SEMANTIC_PROCESS_END && machine_state != STATE_OPENING_FAILURE)
+	while (machine_state != SEMANTIC_PROCESS_END)
 	{
 		if (machine_state == SEMANTIC_PROCESS_START || machine_state == STATE_NEW_COMMAND)
 		{
@@ -51,8 +51,6 @@ static t_status	run_state_machine(t_token_list token_list, t_command_pipeline *c
 		if (state_return == TOKEN_PROCESSED)
 			token_list = token_list->next;
 	}
-	if (machine_state == STATE_OPENING_FAILURE)
-		return (PROCESS_FAILURE);
 	return (PROCESS_SUCCESS);
 }
 

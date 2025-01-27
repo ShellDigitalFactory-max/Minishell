@@ -14,7 +14,7 @@
 
 bool	is_builtin(const char *command_name)
 {
-	static const char*	builtins_dictionary[] = {
+	static const char *	builtins_dictionary[] = {
 		"echo",
 		"cd",
 		"pwd",
