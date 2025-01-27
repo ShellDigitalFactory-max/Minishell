@@ -27,6 +27,8 @@ bool	is_builtin(const char *command_name)
 	size_t	i;
 
 	i = 0;
+	if (command_name == NULL)
+		return (false);
 	while (builtins_dictionary[i] != NULL)
 	{
 		if (ft_strcmp(builtins_dictionary[i], command_name) == 0)
