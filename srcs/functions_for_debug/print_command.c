@@ -39,6 +39,12 @@ void	print_command(void *to_print)
 		print_env((t_variable_list *)(&command_struct->command_environment));
 	}
 	print_command_nature(command_struct->command_nature);
+	if (command_struct->command_redirections.in_stream != STDIN_FILENO
+			&& command_struct->command_redirections.in_stream > 0)
+		printf("\nCommand infile set.\n\n");
+	if (command_struct->command_redirections.out_stream != STDOUT_FILENO
+			&& command_struct->command_redirections.out_stream > 0)
+		printf("\nCommand outfile set.\n\n");
 	if (command_struct->opening_failure_msg == NULL)
 		printf("\nCommand opening failures: none\n\n");
 	else
