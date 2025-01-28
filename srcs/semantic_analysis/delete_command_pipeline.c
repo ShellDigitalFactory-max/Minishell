@@ -37,5 +37,4 @@ void	delete_command(void *command_to_delete)
 void	delete_command_pipeline(t_command_pipeline *cmd_pipeline)
 {
 	ft_lstclear(cmd_pipeline, delete_command);
-	free(*cmd_pipeline);
 }

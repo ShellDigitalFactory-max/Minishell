@@ -35,7 +35,7 @@ t_semantic_analysis_state_return	state_input_redirection(
 		}
 		current_command->command_redirections.in_stream = infile_fd;
 	}
-	if (current_command->command_name == NULL)
+	if (current_command->command_args == NULL)
 		*machine_state = STATE_ASSIGNATION;
 	else
 		*machine_state = STATE_COMMAND;

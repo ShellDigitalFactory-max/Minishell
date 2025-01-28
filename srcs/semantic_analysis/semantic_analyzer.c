@@ -56,19 +56,13 @@ static t_status	run_state_machine(t_token_list token_list, t_command_pipeline *c
 
 t_command_pipeline	semantic_analyzer(t_token_list token_list)
 {
-	t_command_pipeline	*cmd_pipeline;
+	t_command_pipeline	cmd_pipeline;
 
-	cmd_pipeline = (t_command_pipeline *)ft_calloc(1, sizeof(t_command_pipeline));
-	if (cmd_pipeline == NULL)
+	cmd_pipeline = NULL;
+	if (run_state_machine(token_list, &cmd_pipeline) == PROCESS_FAILURE)
 	{
-		ft_dprintf(STDERR_FILENO, "minishell: malloc error during command "
-		"pipeline building. Aborting\n");
-		exit(FAILURE);
-	}
-	if (run_state_machine(token_list, cmd_pipeline) == PROCESS_FAILURE)
-	{
-		delete_command_pipeline(cmd_pipeline);
+		//delete_command_pipeline(cmd_pipeline);
 		return (NULL);
 	}
-	return (*cmd_pipeline);
+	return (cmd_pipeline);
 }

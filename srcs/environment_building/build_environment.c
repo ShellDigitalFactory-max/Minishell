@@ -45,7 +45,7 @@ t_status	build_environment(char **variables)
 	size_t	i;
 
 	i = 0;
-	while (variables[i] != NULL)
+	while (variables && variables[i])
 	{
 		if (set_variable_from_keyvalue(variables[i], EXPORTABLE)
 			== PROCESS_FAILURE)

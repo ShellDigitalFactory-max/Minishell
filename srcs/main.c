@@ -49,7 +49,6 @@ static int	core_routine(t_minishell_context *minishell_context)
 		delete_token_list(
 			minishell_context->command_session.tokenized_user_input_line);
 		delete_command_pipeline(&minishell_context->command_session.command_pipeline);
-		free(minishell_context->command_session.command_pipeline);
 	}
 	return (EXIT_SUCCESS);
 }
