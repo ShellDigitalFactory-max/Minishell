@@ -12,32 +12,46 @@
 
 #include "minishell.h"
 
+static bool	is_delimiter(const char *delimiter, const char *line)
+{
+	const size_t	delimiter_size = ft_strlen(delimiter);
+	const size_t	line_size = ft_strlen(line);
+
+	return (delimiter_size == line_size && ft_strcmp(line, delimiter) == 0);
+}
+
 static char	*build_heredoc_content(const char *delimiter)
 {
 	char	*new_line;
-	char	*line;
+	char	*heredoc_content;
 	char	*temp_line;
 
-	line = ft_strdup("");
+	heredoc_content = ft_strdup("");
 	while(true)
 	{
-		temp_line = readline(">");
-		// if (temp_line[0] == '\0')
-		// {
-		// 	rl_replace_line("", 0);
-		// 	rl_redisplay();
-		// }
-		if (ft_strcmp(delimiter, temp_line) == 0)
+		temp_line = readline("captain'hirdock>");
+		if (is_delimiter(delimiter, temp_line))
 		{
 			free(temp_line);
 			break;
 		}
-		ft_asprintf(&new_line, "%s%s\n", line, temp_line);
-		free(line);
-		line = new_line;
+		ft_asprintf(&new_line, "%s%s\n", heredoc_content, temp_line);
 		free(temp_line);
+		free(heredoc_content);
+		heredoc_content = new_line;
 	}
-	return (line);
+	return (heredoc_content);
+}
+
+static void	save_heredoc_content(t_command *current_command, char *heredoc_content,
+									int pipefd[2])
+{
+	write(pipefd[1], heredoc_content, ft_strlen(heredoc_content));
+	free(heredoc_content);
+	close(pipefd[1]);
+	if (current_command->command_redirections.in_stream > STDIN_FILENO)
+		close(current_command->command_redirections.in_stream);
+	current_command->command_redirections.in_stream = pipefd[0];
 }
 
 t_semantic_analysis_state_return	state_heredoc(
@@ -46,7 +60,6 @@ t_semantic_analysis_state_return	state_heredoc(
 										t_command *current_command)
 {
 	int		pipefd[2];
-	(void)current_command;
 	char	*heredoc_content;
 
 	if (pipe(pipefd) == -1)
@@ -55,11 +68,10 @@ t_semantic_analysis_state_return	state_heredoc(
 		exit(FAILURE);
 	}
 	heredoc_content = build_heredoc_content(current_token->token_lexem);
-	write(pipefd[1], heredoc_content, ft_strlen(heredoc_content));
-	free(heredoc_content);
-	close(pipefd[1]);
-	close(pipefd[0]);
-	current_command->command_redirections.in_stream = pipefd[0];
-	*machine_state = STATE_COMMAND;
+	save_heredoc_content(current_command, heredoc_content, pipefd);
+	if (current_command->command_args == NULL)
+		*machine_state = STATE_ASSIGNATION;
+	else
+		*machine_state = STATE_COMMAND;
 	return (TOKEN_PROCESSED);
 }
