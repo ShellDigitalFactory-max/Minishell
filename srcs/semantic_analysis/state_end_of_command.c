@@ -20,7 +20,7 @@ static void	get_command_name(t_command	*command)
 		if (command->command_name == NULL)
 		{
 			ft_dprintf(STDERR_FILENO, "minishell: malloc error during command "
-			"pipeline building. Aborting.\n");
+				"pipeline building. Aborting.\n");
 			exit(FAILURE);
 		}
 	}
@@ -28,7 +28,7 @@ static void	get_command_name(t_command	*command)
 
 t_semantic_analysis_state_return	state_end_of_command(
 										t_machine_states *machine_state,
-										t_command_pipeline *cmd_pipeline, 
+										t_command_pipeline *cmd_pipeline,
 										t_command *current_command,
 										t_token *current_token)
 {

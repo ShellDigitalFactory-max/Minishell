@@ -16,17 +16,18 @@ void	save_opening_error(t_command *current_command, const char *file_name)
 {
 	if (errno == ENOENT)
 		ft_asprintf(&current_command->opening_failure_msg,
-		"minishell: %s: No such file or directory\n", file_name);
+			"minishell: %s: No such file or directory\n", file_name);
 	else if (errno == EACCES)
 		ft_asprintf(&current_command->opening_failure_msg,
-		"minishell: %s: Permission denied\n", file_name);
+			"minishell: %s: Permission denied\n", file_name);
 	else if (errno == EMFILE || errno == ENFILE)
 		ft_asprintf(&current_command->opening_failure_msg,
-		"minishell: %s: Too many open files\n", file_name);
+			"minishell: %s: Too many open files\n", file_name);
 	else if (errno == EISDIR)
 		ft_asprintf(&current_command->opening_failure_msg,
-		"minishell: %s: Is a directory\n", file_name);
+			"minishell: %s: Is a directory\n", file_name);
 	else
 		ft_asprintf(&current_command->opening_failure_msg,
-		"minishell: %s: failed to open %s: %s\n", file_name, strerror(errno));
+			"minishell: %s: failed to open %s: %s\n", file_name,
+			strerror(errno));
 }

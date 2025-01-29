@@ -50,16 +50,15 @@ void	print_command(void *to_print)
 	else
 		printf("\nCommand opening failure: %s\n\n", command_struct->opening_failure_msg);
 
+	// printf("\nTEST HEREDOC OUTPUT\n\n");
+	// char	buffer[200];
+	// ssize_t	bytes_read;
 
-	printf("\nTEST HEREDOC OUTPUT\n\n");
-	char	buffer[200];
-	ssize_t	bytes_read;
+	// bytes_read = read(command_struct->command_redirections.in_stream, buffer, 100);
+	// buffer[bytes_read] = '\0';
+	// printf("\nHEREDOC RESULT = \n%s\n\n", buffer);
 
-	bytes_read = read(command_struct->command_redirections.in_stream, buffer, 100);
-	buffer[bytes_read] = '\0';
-	printf("\nHEREDOC RESULT = \n%s\n\n", buffer);
-
-	close(command_struct->command_redirections.in_stream);
+	// close(command_struct->command_redirections.in_stream);
 
 	printf("\n-----------------------------\n\n");
 }

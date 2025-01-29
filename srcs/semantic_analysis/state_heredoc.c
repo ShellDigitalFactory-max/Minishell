@@ -27,13 +27,13 @@ static char	*build_heredoc_content(const char *delimiter)
 	char	*temp_line;
 
 	heredoc_content = ft_strdup("");
-	while(true)
+	while (HEREDOC_PROCESSING)
 	{
 		temp_line = readline("captain'hirdock>");
 		if (is_delimiter(delimiter, temp_line))
 		{
 			free(temp_line);
-			break;
+			break ;
 		}
 		ft_asprintf(&new_line, "%s%s\n", heredoc_content, temp_line);
 		free(temp_line);
@@ -43,8 +43,8 @@ static char	*build_heredoc_content(const char *delimiter)
 	return (heredoc_content);
 }
 
-static void	save_heredoc_content(t_command *current_command, char *heredoc_content,
-									int pipefd[2])
+static void	save_heredoc_content(t_command *current_command,
+									char *heredoc_content, int pipefd[2])
 {
 	write(pipefd[1], heredoc_content, ft_strlen(heredoc_content));
 	free(heredoc_content);

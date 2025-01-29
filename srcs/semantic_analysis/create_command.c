@@ -26,7 +26,7 @@ t_command	*create_command(void)
 	if (new_command == NULL)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: malloc error during "
-		"semantic analysis. Aborting\n");
+			"semantic analysis. Aborting\n");
 		exit(FAILURE);
 	}
 	setup_command_default_redirections(new_command);

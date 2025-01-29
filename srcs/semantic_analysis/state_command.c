@@ -47,7 +47,6 @@ static void	add_argument_to_command_args(const char *argument_lexem,
 	}
 	new_argument = ft_lstnew(argument_value);
 	if (new_argument == NULL)
-	if (argument_value == NULL)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: malloc error during "
 			"command pipeline builing. Aborting.\n");
@@ -65,7 +64,8 @@ t_semantic_analysis_state_return	state_command(
 	{
 		return (update_machine_state(current_token->token_type, machine_state));
 	}
-	add_argument_to_command_args(current_token->token_lexem, &current_command->command_args);
+	add_argument_to_command_args(current_token->token_lexem,
+		&current_command->command_args);
 	if (current_command->command_nature == ONLY_ASSIGNATION)
 		current_command->command_nature = POSSIBLE_BINARY;
 	*machine_state = STATE_COMMAND;

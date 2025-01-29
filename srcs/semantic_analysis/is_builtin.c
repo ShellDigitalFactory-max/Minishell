@@ -14,7 +14,7 @@
 
 bool	is_builtin(const char *command_name)
 {
-	static const char *	builtins_dictionary[] = {
+	static const char	*builtins_dictionary[] = {
 		"echo",
 		"cd",
 		"pwd",
@@ -24,7 +24,7 @@ bool	is_builtin(const char *command_name)
 		"exit",
 		NULL,
 	};
-	size_t	i;
+	size_t				i;
 
 	i = 0;
 	if (command_name == NULL)

@@ -16,6 +16,7 @@
 // DEFINES
 
 # define OPENING_ERROR -1
+# define HEREDOC_PROCESSING 1
 
 // TYPEDEFS
 

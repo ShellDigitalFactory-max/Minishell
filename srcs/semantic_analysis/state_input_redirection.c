@@ -31,7 +31,8 @@ t_semantic_analysis_state_return	state_input_redirection(
 		{
 			save_opening_error(current_command, current_token->token_lexem);
 			current_command->command_redirections.in_stream = OPENING_ERROR;
-			current_command->command_redirections.opening_status = OPENING_FAILURE;
+			current_command->command_redirections.opening_status
+				= OPENING_FAILURE;
 		}
 		current_command->command_redirections.in_stream = infile_fd;
 	}
