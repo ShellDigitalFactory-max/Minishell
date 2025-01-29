@@ -54,7 +54,7 @@ t_status		set_variable_from_keyvalue_to_environment(
 t_status		set_variable_from_keyvalue(const char *keyvalue,
 					bool make_it_exportable);
 t_status		set_variable_to_environment(const char *key, const char *value,
-				bool make_it_exportable, t_variable_list *environment);
+					bool make_it_exportable, t_variable_list *environment);
 t_status		set_variable(const char *key, const char *value,
 					bool make_it_exportable);
 t_variable		*create_variable(const char *key, const char *value,
@@ -62,7 +62,7 @@ t_variable		*create_variable(const char *key, const char *value,
 t_status		update_variable(t_variable *variable, const char *value,
 					const bool is_exportable);
 t_variable		*find_variable_in_environment_from_key(char *key,
-				const t_variable_list *environment);
+					const t_variable_list *environment);
 t_variable		*find_variable_from_key(const t_variable_list *environment,
 					char *key);
 bool			is_variable_key_equal(void *variable_as_content, void *key);

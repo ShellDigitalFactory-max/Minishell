@@ -20,10 +20,10 @@
 
 // TYPEDEFS
 
-typedef t_list *	t_command_pipeline;
-typedef t_list *	t_command_args;
-typedef int			t_stream;
-typedef char *		t_command_argument;
+typedef t_list *							t_command_pipeline;
+typedef t_list *							t_command_args;
+typedef int									t_stream;
+typedef char *								t_command_argument;
 
 // ENUMS
 
@@ -70,9 +70,9 @@ typedef enum e_command_nature
 
 // STRUCTURES
 
-typedef struct	s_token_type_and_machine_state
+typedef struct s_token_type_and_machine_state
 {
-	t_token_type 		token_type;
+	t_token_type		token_type;
 	t_machine_states	machine_state;
 }				t_token_type_and_machine_state;
 
@@ -93,13 +93,14 @@ typedef struct s_command
 	char					*opening_failure_msg;
 }				t_command;
 
-typedef t_semantic_analysis_state_return (*t_semantic_state_function)(
-			t_machine_states *machine_state, t_token *current_token, t_command *current_command);
-
+typedef t_semantic_analysis_state_return	(*t_semantic_state_function)(
+			t_machine_states *machine_state, t_token *current_token,
+			t_command *current_command);
 
 // PROTOTYPES
 
-void								save_opening_error(t_command *current_command,
+void								save_opening_error(
+										t_command *current_command,
 										const char *file_name);
 t_command							*create_command(void);
 t_assignation_status				assignation_checker(char *assignation);
@@ -127,16 +128,20 @@ t_semantic_analysis_state_return	state_command(
 										t_machine_states *machine_state,
 										t_token *current_token,
 										t_command *current_command);
-t_semantic_analysis_state_return	state_end_of_command(t_machine_states *machine_state,
-										t_command_pipeline *cmd_pipeline, 
+t_semantic_analysis_state_return	state_end_of_command(
+										t_machine_states *machine_state,
+										t_command_pipeline *cmd_pipeline,
 										t_command *current_command,
 										t_token *current_token);
-void								delete_command_pipeline(t_command_pipeline *cmd_pipeline);
+void								delete_command_pipeline(
+										t_command_pipeline *cmd_pipeline);
 bool								is_builtin(const char *command_name);
 
-void								print_arguments_list(t_command_args arguments_list);
-void								print_argument(void* to_print);
-void								print_command_pipeline_list(t_command_pipeline	cmd_pipeline);
+void								print_arguments_list(
+										t_command_args arguments_list);
+void								print_argument(void *to_print);
+void								print_command_pipeline_list(
+										t_command_pipeline	cmd_pipeline);
 void								print_command(void *to_print);
 
 #endif

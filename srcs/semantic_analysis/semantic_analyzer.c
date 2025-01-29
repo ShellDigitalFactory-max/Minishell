@@ -65,7 +65,7 @@ t_command_pipeline	semantic_analyzer(t_token_list token_list)
 	cmd_pipeline = NULL;
 	if (run_state_machine(token_list, &cmd_pipeline) == PROCESS_FAILURE)
 	{
-		delete_command_pipeline(cmd_pipeline);
+		delete_command_pipeline(&cmd_pipeline);
 		return (NULL);
 	}
 	return (cmd_pipeline);

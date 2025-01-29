@@ -16,5 +16,5 @@ t_status	set_variable(const char *key, const char *value,
 			bool make_it_exportable)
 {
 	return (set_variable_to_environment(key, value, make_it_exportable,
-				get_environment()));
+			get_environment()));
 }
