@@ -37,38 +37,37 @@ void	tests_state_append_redirection(void)
 	TEST_ASSERT_EQUAL(STATE_COMMAND, machine_state);
 	write(command.command_redirections.out_stream, write_for_test, ft_strlen(write_for_test));
 
-	// // ARRANGE 2
+	// ARRANGE 2
 
-	// ft_bzero(&token, sizeof(t_token));
-	// token.token_lexem = "./files_for_testing_redirections/outfile_to_create_append.txt";
-	// token.token_type = WORD;
+	ft_bzero(&token, sizeof(t_token));
+	token.token_lexem = "./files_for_testing_redirections/outfile_to_create_append.txt";
+	token.token_type = WORD;
 
-	// // ACT 2
+	// ACT 2
 
-	// function_return = state_append_redirection(&machine_state, &token, &command);
+	function_return = state_append_redirection(&machine_state, &token, &command);
 
-	// //ASSERT 2
+	//ASSERT 2
 
-	// TEST_ASSERT_EQUAL(TOKEN_PROCESSED, function_return);
-	// TEST_ASSERT_EQUAL(STATE_COMMAND, machine_state);
-	// write(command.command_redirections.out_stream, write_for_test, ft_strlen(write_for_test));
+	TEST_ASSERT_EQUAL(TOKEN_PROCESSED, function_return);
+	TEST_ASSERT_EQUAL(STATE_COMMAND, machine_state);
+	write(command.command_redirections.out_stream, write_for_test, ft_strlen(write_for_test));
 
-	// // ARRANGE 3
+	// ARRANGE 3
 
-	// ft_bzero(&token, sizeof(t_token));
-	// token.token_lexem = "./files_for_testing_redirections/outfile_no_rights.txt";
-	// token.token_type = WORD;
-	// const char	*expected_error_msg = "minishell: permission denied: ./files_for_testing_redirections/outfile_no_rights.txt";
+	ft_bzero(&token, sizeof(t_token));
+	token.token_lexem = "./files_for_testing_redirections/outfile_no_rights.txt";
+	token.token_type = WORD;
 
-	// // ACT 3
+	// ACT 3
 
-	// function_return = state_output_redirection(&machine_state, &token, &command);
+	function_return = state_output_redirection(&machine_state, &token, &command);
 
-	// //ASSERT 3
+	//ASSERT 3
 
-	// TEST_ASSERT_EQUAL(TOKEN_PROCESSED, function_return);
-	// TEST_ASSERT_EQUAL(STATE_COMMAND, machine_state);
-	// TEST_ASSERT_EQUAL(OPENING_ERROR, command.command_redirections.out_stream);
-	// TEST_ASSERT_EQUAL(OPENING_FAILURE, command.command_redirections.opening_status);
-	// TEST_ASSERT_EQUAL(0, ft_strcmp(expected_error_msg, command.opening_failure_msg));
+	TEST_ASSERT_EQUAL(TOKEN_PROCESSED, function_return);
+	TEST_ASSERT_EQUAL(STATE_COMMAND, machine_state);
+	TEST_ASSERT_EQUAL(OPENING_ERROR, command.command_redirections.out_stream);
+	TEST_ASSERT_EQUAL(OPENING_FAILURE, command.command_redirections.opening_status);
+	printf("%s\n", command.opening_failure_msg);
 }
