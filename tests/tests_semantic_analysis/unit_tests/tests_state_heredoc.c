@@ -14,7 +14,7 @@
 
 void	tests_state_heredoc(void)
 {
-	printf("\nTesting function \"state_heredoc\"\n\n");
+	printf("\nTesting function \"state_heredoc\" : A HEREDOC WITH THE WORD \"test\" AS A DELIMITER !!!\n\n");
 	// ARRANGE
 
 	t_command							command;
@@ -23,6 +23,7 @@ void	tests_state_heredoc(void)
 	t_token								token;
 
 	ft_bzero(&command, sizeof(t_command));
+	command.command_name = "ls";
 	token.token_lexem = "test";
 	token.token_type = WORD;
 
@@ -33,5 +34,5 @@ void	tests_state_heredoc(void)
 	// ASSERT
 
 	TEST_ASSERT_EQUAL(TOKEN_PROCESSED, output);
-	TEST_ASSERT_EQUAL(STATE_COMMAND, machine_state);
+	TEST_ASSERT_EQUAL(STATE_ASSIGNATION, machine_state);
 }

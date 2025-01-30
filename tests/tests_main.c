@@ -23,6 +23,16 @@ void tearDown(void)
 
 int	main(void)
 {
+	int fd;
+
+	fd = open("./files_for_testing_redirections/outfile_no_rights.txt", O_RDONLY);
+	if (fd > 0)
+	{
+		close (fd);
+		printf("\n\nBEFORE ANY TEST PLEASE RUN THE SCRIPT \"setup_files.sh\", LOCATED IN \"./files_for_testing_redirections\".\n\nDON'T FORGET TO RUN THE SCRIPT \"rest_files.sh\" ONCE ALL TEST ARE DONE.\n\n");
+		return (EXIT_FAILURE);
+	}
+
 	UNITY_BEGIN();
 
 	// LEXING

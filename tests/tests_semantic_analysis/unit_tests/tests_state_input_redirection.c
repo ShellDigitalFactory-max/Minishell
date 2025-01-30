@@ -53,7 +53,9 @@ void	tests_state_input_redirection(void)
 
 	// ASSERT 2
 
-	TEST_ASSERT_EQUAL(OPENING_FAILURE, function_return);
-	TEST_ASSERT_EQUAL(STATE_OPENING_FAILURE, machine_state);
+	TEST_ASSERT_EQUAL(TOKEN_PROCESSED, function_return);
+	TEST_ASSERT_EQUAL(STATE_ASSIGNATION, machine_state);
 	TEST_ASSERT_EQUAL(OPENING_ERROR, command.command_redirections.in_stream);
+	TEST_ASSERT_EQUAL(OPENING_FAILURE, command.command_redirections.opening_status);
+	printf("%s\n\n", command.opening_failure_msg);
 }

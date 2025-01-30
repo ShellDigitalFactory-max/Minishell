@@ -42,6 +42,7 @@ void	tests_state_output_redirections(void)
 	ft_bzero(&token, sizeof(t_token));
 	token.token_lexem = "./files_for_testing_redirections/outfile_to_create.txt";
 	token.token_type = WORD;
+	command.command_name = "ls";
 
 	// ACT 2
 
@@ -65,6 +66,9 @@ void	tests_state_output_redirections(void)
 
 	//ASSERT 3
 
-	TEST_ASSERT_EQUAL(OPENING_FAILURE, function_return);
-	TEST_ASSERT_EQUAL(STATE_OPENING_FAILURE, machine_state);
+	TEST_ASSERT_EQUAL(TOKEN_PROCESSED, function_return);
+	TEST_ASSERT_EQUAL(STATE_COMMAND, machine_state);
+	TEST_ASSERT_EQUAL(OPENING_ERROR, command.command_redirections.out_stream);
+	TEST_ASSERT_EQUAL(OPENING_FAILURE, command.command_redirections.opening_status);
+	printf("\n%s\n\n", command.opening_failure_msg);
 }
