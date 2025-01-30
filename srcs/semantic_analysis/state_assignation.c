@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static t_state	add_assignation_to_command_env(t_command *command,
+static t_status	add_assignation_to_command_env(t_command *command,
 					char *assignation)
 {
 	return (set_variable_from_keyvalue_to_environment(assignation,
