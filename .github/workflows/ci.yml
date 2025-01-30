@@ -71,6 +71,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install readline
+        run: sudo apt-get update && sudo apt-get install -y libreadline-dev
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
