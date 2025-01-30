@@ -30,6 +30,6 @@ t_command	*create_command(void)
 		exit(FAILURE);
 	}
 	setup_command_default_redirections(new_command);
-	new_command->command_nature = ONLY_ASSIGNATION;
+	new_command->command_nature = UNDEFINED;
 	return (new_command);
 }

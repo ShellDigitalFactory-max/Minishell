@@ -66,8 +66,6 @@ t_semantic_analysis_state_return	state_command(
 	}
 	add_argument_to_command_args(current_token->token_lexem,
 		&current_command->command_args);
-	if (current_command->command_nature == ONLY_ASSIGNATION)
-		current_command->command_nature = POSSIBLE_BINARY;
 	*machine_state = STATE_COMMAND;
 	return (TOKEN_PROCESSED);
 }

@@ -63,6 +63,7 @@ typedef enum e_opening_status
 typedef enum e_command_nature
 {
 	NO_ENTRY,
+	UNDEFINED,
 	ONLY_ASSIGNATION,
 	POSSIBLE_BINARY,
 	BUILTIN
@@ -135,6 +136,7 @@ t_semantic_analysis_state_return	state_end_of_command(
 										t_token *current_token);
 void								delete_command_pipeline(
 										t_command_pipeline *cmd_pipeline);
+void								get_command_name(t_command *command);
 bool								is_builtin(const char *command_name);
 
 void								print_arguments_list(

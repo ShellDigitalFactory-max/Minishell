@@ -20,8 +20,10 @@ static void	print_command_nature(t_command_nature command_nature)
 		printf("\nCommand nature: ONLY ASSIGNATION\n\n");
 	else if (command_nature == POSSIBLE_BINARY)
 		printf("\nCommand nature: POSSIBLE BINARY\n\n");
-	else
+	else if (command_nature == BUILTIN)
 		printf("\nCommand nature: BUILTIN\n\n");
+	else
+		printf("\nCommand nature: UNDEFINED\n\n");
 }
 
 void	print_command(void *to_print)

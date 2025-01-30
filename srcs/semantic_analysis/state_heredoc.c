@@ -50,7 +50,10 @@ static void	save_heredoc_content(t_command *current_command,
 	free(heredoc_content);
 	close(pipefd[1]);
 	if (current_command->command_redirections.in_stream > STDIN_FILENO)
-		close(current_command->command_redirections.in_stream);
+	{
+		if (close(current_command->command_redirections.in_stream) == -1)
+			perror("minishell: close");
+	}
 	current_command->command_redirections.in_stream = pipefd[0];
 }
 
