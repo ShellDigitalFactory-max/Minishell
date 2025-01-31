@@ -17,6 +17,7 @@ PATH_SRCS += srcs/syntax_analysis
 PATH_SRCS += srcs/environment_management
 PATH_SRCS += srcs/environment_building
 PATH_SRCS += srcs/semantic_analysis
+PATH_SRCS += srcs/command_interpretation
 
 PATH_SRCS += srcs/functions_for_debug
 
@@ -89,15 +90,20 @@ SRCS += get_command_name.c
 SRCS += is_builtin.c
 SRCS += delete_command_pipeline.c
 
+# srcs/command_interpretation
+
+SRCS += add_env_to_env.c
+SRCS += add_command_env_to_shell_env.c
+
 # print_functions to use for debug and tests
 
-# SRCS += print_env.c
-# SRCS += print_token.c
-# SRCS += print_token_list.c
-# SRCS += print_argument.c
-# SRCS += print_arguments_list.c
-# SRCS += print_command.c
-# SRCS += print_command_pipeline_list.c
+SRCS += print_env.c
+SRCS += print_token.c
+SRCS += print_token_list.c
+SRCS += print_argument.c
+SRCS += print_arguments_list.c
+SRCS += print_command.c
+SRCS += print_command_pipeline_list.c
 
 vpath %.c $(PATH_SRCS)
 
@@ -118,6 +124,8 @@ TESTS_SRCS_DIR += ./tests/tests_environment_building/unit_tests
 TESTS_SRCS_DIR += ./tests/tests_semantic_analysis
 TESTS_SRCS_DIR += ./tests/tests_semantic_analysis/unit_tests
 TESTS_SRCS_DIR += ./tests/tests_semantic_analysis/behavior_tests
+TESTS_SRCS_DIR += ./tests/tests_command_interpretation
+TESTS_SRCS_DIR += ./tests/tests_command_interpretation/unit_tests
 
 TESTS_SRCS += tests_main.c
 
@@ -169,7 +177,9 @@ TESTS_SRCS += tests_state_append_redirection.c
 TESTS_SRCS += tests_state_heredoc.c
 TESTS_SRCS += tests_state_command.c
 
-# TESTS_SRCS += tests_multiple_redirections.c
+# command_interpretation
+
+TESTS_SRCS += tests_add_env_to_env.c
 
 # Unity
 

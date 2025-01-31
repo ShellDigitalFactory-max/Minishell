@@ -22,6 +22,7 @@
 # include "parsing.h"
 # include "environment.h"
 # include "semantic.h"
+# include "command_interpretation.h"
 
 # include <stdio.h>
 # include <stdlib.h>
