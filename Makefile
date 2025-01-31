@@ -92,8 +92,11 @@ SRCS += delete_command_pipeline.c
 
 # srcs/command_interpretation
 
-SRCS += add_env_to_env.c
-SRCS += add_command_env_to_shell_env.c
+SRCS += command_interpreter.c
+SRCS += command_path_manager.c
+SRCS += build_complete_path.c
+SRCS += execute_command.c
+SRCS += list_to_array.c
 
 # print_functions to use for debug and tests
 
@@ -210,6 +213,11 @@ PATH_INCLUDES_UNITY := ./Unity/src
 HEADERS += $(PATH_INCLUDES)minishell.h
 HEADERS += $(PATH_INCLUDES)history.h
 HEADERS += $(PATH_INCLUDES)user_interface.h
+HEADERS += $(PATH_INCLUDES)environment.h
+HEADERS += $(PATH_INCLUDES)lexing.h
+HEADERS += $(PATH_INCLUDES)parsing.h
+HEADERS += $(PATH_INCLUDES)semantic.h
+HEADERS += $(PATH_INCLUDES)command_interpretation.h
 
 ### COMPILATION ################################################################
 

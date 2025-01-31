@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	*build_variable_str(t_variable *variable)
+static char	*build_variable_str(t_variable *variable)
 {
 	char	*variable_str;
 
@@ -37,8 +37,8 @@ void	env_list_to_env_array(t_variable_list env, char **array)
 			exit (FAILURE);
 		}
 		array[i] = current_variable;
-		ft_bzero(current_variable, ft_strlen(current_variable));
-		free(current_variable);
+		// ft_bzero(current_variable, ft_strlen(current_variable));
+		// free(current_variable);
 		env = env->next;
 		++i;
 	}

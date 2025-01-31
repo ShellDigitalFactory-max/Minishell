@@ -38,12 +38,14 @@ typedef enum e_command_status
 	VALID_COMMAND
 }				t_command_status;
 
-typedef t_command_status	(*t_path_manager_func)(t_command *command);
+typedef t_command_status	(*t_path_manager_func)(t_command *command, char **command_environment);
 
 // PROTOTYPES
 
-void	add_env_to_env(t_variable_list *dest, t_variable_list to_add);
-void	add_command_env_to_shell_env(t_variable_list command_environment);
-void	args_list_to_args_array(t_command_args args, char **array);
+// int		command_interpreter(t_minishell_context *minishell_context);
+// void	execute_command(t_command *command);
+// char	**list_to_strs_array(t_list *lst, void (conversion_funct)(t_list *, char **));
+// void	args_list_to_args_array(t_command_args args, char **array);
+// void	env_list_to_env_array(t_variable_list env, char **array);
 
 # endif

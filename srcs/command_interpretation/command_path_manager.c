@@ -21,34 +21,32 @@ t_command_status	check_complete_path(t_command *command)
 	return (INVALID_COMMAND);
 }
 
-static t_command_status	check_relative_path(t_command *command)
+static t_command_status	check_relative_path(t_command *command, char **command_env)
 {
+	(void)command_env;
 	return (check_complete_path(command));
 }
 
-static t_command_status	check_complete_absolute_path(t_command *command)
+static t_command_status	check_complete_absolute_path(t_command *command, char **command_env)
 {
+	(void)command_env;
 	return (check_complete_path(command));
 }
 
-static t_command_status	check_uncomplete_absolute_path(t_command *command)
+static t_command_status	check_uncomplete_absolute_path(t_command *command, char **command_env)
 {
-	if (add_absolute_prefix(command) == -1)
-	{
-		exit(EXIT_FAILURE);
-	}
-	return (build_complete_path(command));
+	return (build_complete_path(command, command_env));
 }
 
 t_command_status	command_path_manager(
-						t_command *command,
+						t_command *command, char **command_env,
 						const t_path_type command_path_type)
 {
 	const t_path_manager_func	path_manager_functions[] = {
 		check_relative_path,
 		check_complete_absolute_path,
-		check_uncomplete_absolute_path
+		check_uncomplete_absolute_path,
 	};
 
-	return (path_manager_functions[command_path_type](command));
+	return (path_manager_functions[command_path_type](command, command_env));
 }
