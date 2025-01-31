@@ -14,21 +14,11 @@
 
 static t_path_type	get_path_type(const char *command)
 {
-	t_path_type	path_type;
-
 	if (*command == RELATIVE_PREFIX)
-	{
-		path_type = RELATIVE_PATH;
-	}
-	else if (*command == *ABSOLUTE_PREFIX)
-	{
-		path_type = COMPLETE_ABSOLUTE_PATH;
-	}
-	else
-	{
-		path_type = UNCOMPLETE_ABSOLUTE_PATH;
-	}
-	return (path_type);
+		return (RELATIVE_PATH);
+	if (*command == *ABSOLUTE_PREFIX)
+		return (COMPLETE_ABSOLUTE_PATH);
+	return (UNCOMPLETE_ABSOLUTE_PATH);
 }
 
 static t_command_status	get_command_validity(t_command *command)
@@ -44,9 +34,9 @@ void	execute_command(t_command *command)
 {
 	char	**command_arguments;
 	char	**command_environment;
-	
-	command_arguments = list_to_array(command);
-	command_environment = list_to_array(command);
+
+	command_arguments = list_to_strs_array(command->command_args, args_list_to_args_array);
+	command_environment = list_to_strs_array(command->command_environment, env_list_to_env_array);
 	if (get_command_validity(command) == VALID_COMMAND)
 	{
 		execve(command->command_name,command_arguments, command_environment);
@@ -55,7 +45,3 @@ void	execute_command(t_command *command)
 	ft_dprintf(STDERR_FILENO, "minishell: command not found: %s\n",
 		command->command_args->content);
 }
-
-	// if (user_input == NULL || *user_input == '\0'
-	// 	|| is_full_of_spaces(user_input) == true)
-	// 	exit (EXIT_FAILURE);

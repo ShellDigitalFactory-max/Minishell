@@ -44,5 +44,6 @@ typedef t_command_status	(*t_path_manager_func)(t_command *command);
 
 void	add_env_to_env(t_variable_list *dest, t_variable_list to_add);
 void	add_command_env_to_shell_env(t_variable_list command_environment);
+void	args_list_to_args_array(t_command_args args, char **array);
 
 # endif
