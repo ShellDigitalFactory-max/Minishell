@@ -18,6 +18,7 @@ PATH_SRCS += srcs/environment_management
 PATH_SRCS += srcs/environment_building
 PATH_SRCS += srcs/semantic_analysis
 PATH_SRCS += srcs/command_interpretation
+PATH_SRCS += srcs/builtins
 
 PATH_SRCS += srcs/functions_for_debug
 
@@ -95,11 +96,16 @@ SRCS += delete_command_pipeline.c
 SRCS += add_env_to_env.c
 SRCS += add_command_env_to_shell_env.c
 SRCS += command_interpreter.c
+SRCS += launch_builtin.c
 SRCS += command_path_manager.c
 SRCS += build_complete_path.c
 SRCS += execute_command.c
 SRCS += list_to_array.c
 SRCS += check_complete_path.c
+
+# srcs/builtins
+
+SRCS += env.c
 
 # print_functions to use for debug and tests
 
@@ -185,7 +191,7 @@ TESTS_SRCS += tests_state_command.c
 
 # command_interpretation
 
-TESTS_SRCS += tests_add_env_to_env.c
+# TESTS_SRCS += tests_add_env_to_env.c
 
 # Unity
 

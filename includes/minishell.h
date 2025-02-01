@@ -53,13 +53,7 @@ typedef struct s_minishell_context
 
 typedef enum e_builtin_type
 {
-	ECHO,
-	CD,
-	PWD,
-	EXPORT,
-	UNSET,
 	ENV,
-	EXIT,
 }			t_builtin_type;
 
 typedef int	(*t_builtin)(t_command *current_command);
@@ -71,6 +65,8 @@ char				*prompt_gets_user_input(void);
 t_lexing_status		lexe_input(t_command_session *current_command);
 t_syntax_status		parse_input(t_token_list token_list);
 t_command_pipeline	semantic_analyzer(t_token_list token_list);
+
+// INTERPRETER
 
 int					command_interpreter(
 						t_minishell_context *minishell_context);
@@ -89,5 +85,10 @@ t_command_status	command_path_manager(
 t_command_status	check_complete_path(t_command *command);
 void				add_env_to_env(t_variable_list *dest, t_variable_list to_add);
 void				add_command_env_to_shell_env(t_variable_list command_env);
+
+// BUILTINS
+
+int					launch_builtin(t_command *command);
+int					env(t_command *current_command);
 
 #endif
