@@ -92,11 +92,14 @@ SRCS += delete_command_pipeline.c
 
 # srcs/command_interpretation
 
+SRCS += add_env_to_env.c
+SRCS += add_command_env_to_shell_env.c
 SRCS += command_interpreter.c
 SRCS += command_path_manager.c
 SRCS += build_complete_path.c
 SRCS += execute_command.c
 SRCS += list_to_array.c
+SRCS += check_complete_path.c
 
 # print_functions to use for debug and tests
 

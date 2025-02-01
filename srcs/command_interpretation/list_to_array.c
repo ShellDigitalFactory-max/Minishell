@@ -63,7 +63,7 @@ void	args_list_to_args_array(t_command_args args, char **array)
 	}
 }
 
-char	**list_to_strs_array(t_list *lst, void (conversion_funct)(t_list *, char **))
+char	**list_to_strs_array(t_list *lst, void (*conversion_funct)(t_list *, char **))
 {
 	const size_t	array_size = ft_lstsize(lst);
 	char			**array;

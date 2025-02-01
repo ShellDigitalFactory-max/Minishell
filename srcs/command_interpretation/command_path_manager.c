@@ -12,28 +12,22 @@
 
 #include "minishell.h"
 
-t_command_status	check_complete_path(t_command *command)
-{
-	if (access(command->command_name, F_OK | X_OK) == 0)
-	{
-		return (VALID_COMMAND);
-	}
-	return (INVALID_COMMAND);
-}
-
-static t_command_status	check_relative_path(t_command *command, char **command_env)
+static t_command_status	check_relative_path(t_command *command,
+							char **command_env)
 {
 	(void)command_env;
 	return (check_complete_path(command));
 }
 
-static t_command_status	check_complete_absolute_path(t_command *command, char **command_env)
+static t_command_status	check_complete_absolute_path(t_command *command,
+							char **command_env)
 {
 	(void)command_env;
 	return (check_complete_path(command));
 }
 
-static t_command_status	check_uncomplete_absolute_path(t_command *command, char **command_env)
+static t_command_status	check_uncomplete_absolute_path(t_command *command,
+							char **command_env)
 {
 	return (build_complete_path(command, command_env));
 }
