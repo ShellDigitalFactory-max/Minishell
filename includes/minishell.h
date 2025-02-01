@@ -49,6 +49,21 @@ typedef struct s_minishell_context
 	t_command_session	command_session;
 }				t_minishell_context;
 
+// ENUMS
+
+typedef enum e_builtin_type
+{
+	ECHO,
+	CD,
+	PWD,
+	EXPORT,
+	UNSET,
+	ENV,
+	EXIT,
+}			t_builtin_type;
+
+typedef int	(*t_builtin)(t_command *current_command);
+
 // PROTOTYPES
 
 int					exit_shell_routine(void);
@@ -61,7 +76,7 @@ int					command_interpreter(
 						t_minishell_context *minishell_context);
 void				execute_command(t_command *command);
 char				**list_to_strs_array(t_list *lst,
-						void (conversion_funct)(t_list *, char **));
+						void (*conversion_funct)(t_list *, char **));
 void				args_list_to_args_array(t_command_args args,
 						char **array);
 void				env_list_to_env_array(t_variable_list env,
