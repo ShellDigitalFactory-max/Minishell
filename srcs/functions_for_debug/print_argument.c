@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_env.c                                        :+:      :+:    :+:   */
+/*   print_argument.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 19:36:34 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/09 19:36:49 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/24 14:54:43 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/24 14:54:56 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_variable(void *content)
+void	print_argument(void* to_print)
 {
-	const t_variable	*variable = (t_variable *)content;
+	const t_command_argument	argument = (t_command_argument)to_print;
 
-	printf("%s", variable->key);
-	printf("=");
-	printf("%s\n", variable->value);
-}
-
-void	print_env(t_variable_list *env)
-{
-	ft_lstiter(*env, print_variable);
+	printf("%s\n", argument);
 }

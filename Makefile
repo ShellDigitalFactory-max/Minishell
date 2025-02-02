@@ -16,6 +16,7 @@ PATH_SRCS += srcs/lexical_analysis
 PATH_SRCS += srcs/syntax_analysis
 PATH_SRCS += srcs/environment_management
 PATH_SRCS += srcs/environment_building
+PATH_SRCS += srcs/semantic_analysis
 
 PATH_SRCS += srcs/functions_for_debug
 
@@ -62,20 +63,45 @@ SRCS += delete_variables_list.c
 SRCS += find_variable_from_key.c
 SRCS += get_variable_key.c
 SRCS += get_variable_value.c
+SRCS += delete_variables_list_in_environment.c
+SRCS += find_variable_in_environment_from_key.c
+SRCS += set_variable_from_keyvalue_to_environment.c
+SRCS += set_variable_to_environment.c
 
 # srcs/environment_building
 
 SRCS += build_environment.c
+
+# srcs/semantic_analysis
+
+SRCS += create_command.c
+SRCS += assignation_checker.c
+SRCS += semantic_analyzer.c
+SRCS += state_assignation.c
+SRCS += state_input_redirection.c
+SRCS += state_output_redirection.c
+SRCS += save_opening_error.c
+SRCS += state_append_redirection.c
+SRCS += state_heredoc.c
+SRCS += state_command.c
+SRCS += state_end_of_command.c
+SRCS += get_command_name.c
+SRCS += is_builtin.c
+SRCS += delete_command_pipeline.c
 
 # print_functions to use for debug and tests
 
 # SRCS += print_env.c
 # SRCS += print_token.c
 # SRCS += print_token_list.c
+# SRCS += print_argument.c
+# SRCS += print_arguments_list.c
+# SRCS += print_command.c
+# SRCS += print_command_pipeline_list.c
 
 vpath %.c $(PATH_SRCS)
 
-### TETS SRCS ################################################################
+### TESTS SRCS ################################################################
 
 TESTS_NAME := features_tests
 
@@ -89,6 +115,9 @@ TESTS_SRCS_DIR += ./tests/tests_environment_management
 TESTS_SRCS_DIR += ./tests/tests_environment_management/unit_tests
 TESTS_SRCS_DIR += ./tests/tests_environment_building
 TESTS_SRCS_DIR += ./tests/tests_environment_building/unit_tests
+TESTS_SRCS_DIR += ./tests/tests_semantic_analysis
+TESTS_SRCS_DIR += ./tests/tests_semantic_analysis/unit_tests
+TESTS_SRCS_DIR += ./tests/tests_semantic_analysis/behavior_tests
 
 TESTS_SRCS += tests_main.c
 
@@ -128,6 +157,19 @@ TESTS_SRCS += test_get_variable_value.c
 # environemt building
 
 TESTS_SRCS += unit_tests_environment_building.c
+
+# semantic analysis
+
+TESTS_SRCS += unit_tests_semantic_analyzer.c
+TESTS_SRCS += tests_assignation_checker.c
+TESTS_SRCS += tests_state_assignation.c
+TESTS_SRCS += tests_state_input_redirection.c
+TESTS_SRCS += tests_state_output_redirection.c
+TESTS_SRCS += tests_state_append_redirection.c
+TESTS_SRCS += tests_state_heredoc.c
+TESTS_SRCS += tests_state_command.c
+
+# TESTS_SRCS += tests_multiple_redirections.c
 
 # Unity
 

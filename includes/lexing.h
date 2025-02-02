@@ -80,7 +80,7 @@ t_token_list	tokenize_operator(const char *input,
 t_token_list	tokenize_word(const char *input,
 					t_token_list token_list);
 bool			is_input_end(const char *input);
-char			*is_separator(const char c);
+bool			is_separator(const char c);
 char			*is_operator(const char c);
 t_token_type	search_operator_in_lexer_dictionary(
 					const char operator);

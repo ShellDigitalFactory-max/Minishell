@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_env.c                                        :+:      :+:    :+:   */
+/*   find_variable_in_environment_from_key.c            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 19:36:34 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/09 19:36:49 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/17 16:34:13 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/17 16:34:25 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_variable(void *content)
+t_variable	*find_variable_in_environment_from_key(char *key,
+				const t_variable_list *environment)
 {
-	const t_variable	*variable = (t_variable *)content;
-
-	printf("%s", variable->key);
-	printf("=");
-	printf("%s\n", variable->value);
-}
-
-void	print_env(t_variable_list *env)
-{
-	ft_lstiter(*env, print_variable);
+	return (ft_list_find_first_content_match((t_variable_list)(*environment),
+		key, is_variable_key_equal));
 }

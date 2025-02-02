@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_env.c                                        :+:      :+:    :+:   */
+/*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 19:36:34 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/09 19:36:49 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/27 14:09:11 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/27 14:09:25 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_variable(void *content)
+bool	is_builtin(const char *command_name)
 {
-	const t_variable	*variable = (t_variable *)content;
+	static const char	*builtins_dictionary[] = {
+		"echo",
+		"cd",
+		"pwd",
+		"export",
+		"unset",
+		"env",
+		"exit",
+		NULL,
+	};
+	size_t				i;
 
-	printf("%s", variable->key);
-	printf("=");
-	printf("%s\n", variable->value);
-}
-
-void	print_env(t_variable_list *env)
-{
-	ft_lstiter(*env, print_variable);
+	i = 0;
+	if (command_name == NULL)
+		return (false);
+	while (builtins_dictionary[i] != NULL)
+	{
+		if (ft_strcmp(builtins_dictionary[i], command_name) == 0)
+			return (true);
+		++i;
+	}
+	return (false);
 }

@@ -17,9 +17,9 @@ bool	is_input_end(const char *input)
 	return (*input == '\0');
 }
 
-char	*is_separator(const char c)
+bool	is_separator(const char c)
 {
-	return (ft_strchr(SEPARATORS_DICTIONARY, c));
+	return (c == ' ' || c == '\t');
 }
 
 char	*is_operator(const char c)

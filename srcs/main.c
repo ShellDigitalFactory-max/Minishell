@@ -31,6 +31,8 @@ static int	main_process(t_minishell_context *minishell_context)
 	{
 		return (EXIT_FAILURE);
 	}
+	minishell_context->command_session.command_pipeline = semantic_analyzer
+		(minishell_context->command_session.tokenized_user_input_line);
 	return (EXIT_SUCCESS);
 }
 
@@ -45,6 +47,8 @@ static int	core_routine(t_minishell_context *minishell_context)
 		free(minishell_context->command_session.user_input_line);
 		delete_token_list(
 			minishell_context->command_session.tokenized_user_input_line);
+		delete_command_pipeline(
+			&minishell_context->command_session.command_pipeline);
 	}
 	return (EXIT_SUCCESS);
 }

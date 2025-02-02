@@ -14,8 +14,5 @@
 
 void	delete_variables_list(void)
 {
-	t_variable_list	*env;
-
-	env = get_environment();
-	ft_lstclear(env, delete_variable);
+	delete_variables_list_in_environment(get_environment());
 }

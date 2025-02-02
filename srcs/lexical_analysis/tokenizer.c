@@ -31,7 +31,7 @@ static t_token_list	build_token_list(const char *input,
 {
 	while (!is_input_end(input))
 	{
-		if (is_separator(*input) != NULL)
+		if (is_separator(*input) == true)
 			++input;
 		else if (is_operator(*input) != NULL)
 		{

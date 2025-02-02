@@ -33,10 +33,10 @@ t_token_list	tokenize_word(const char *input, t_token_list token_list)
 
 	i = 0;
 	while (is_input_end(input + i) == false
-		&& is_separator(input[i]) == NULL
+		&& is_separator(input[i]) == false
 		&& is_operator(input[i]) == NULL)
 	{
-		i += (skip_quotes(input) + 1);
+		i += skip_quotes(input + i) + 1;
 	}
 	lexem = ft_strndup(input, i);
 	if (lexem == NULL)

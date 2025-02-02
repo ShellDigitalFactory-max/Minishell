@@ -56,4 +56,17 @@ void	test_get_variable_value(void);
 
 // ENVIRONMENT BUILDING
 
+// SEMANTIC ANALYSIS
+
+void	unit_tests_semantic_analyzer(void);
+void	tests_assignation_checker(void);
+void	tests_state_assignation(void);
+void	tests_state_input_redirection(void);
+void	tests_state_output_redirections(void);
+void	tests_state_append_redirection(void);
+void	tests_state_heredoc(void);
+void	tests_state_command(void);
+
+void	tests_multiple_redirections(void);
+
 #endif

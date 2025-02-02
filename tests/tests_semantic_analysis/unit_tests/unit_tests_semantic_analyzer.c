@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_env.c                                        :+:      :+:    :+:   */
+/*   unit_tests_semantic_analyzer.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 19:36:34 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/09 19:36:49 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/13 17:44:09 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/13 17:44:18 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "tests.h"
 
-static void	print_variable(void *content)
+void	unit_tests_semantic_analyzer(void)
 {
-	const t_variable	*variable = (t_variable *)content;
-
-	printf("%s", variable->key);
-	printf("=");
-	printf("%s\n", variable->value);
-}
-
-void	print_env(t_variable_list *env)
-{
-	ft_lstiter(*env, print_variable);
+	printf("\n\nTesting semantic analyzer functions\n\n");
+	tests_assignation_checker();
+	tests_state_assignation();
+	tests_state_input_redirection();
+	tests_state_output_redirections();
+	tests_state_append_redirection();
+	tests_state_heredoc();
+	tests_state_command();
+	printf("\n");
 }
