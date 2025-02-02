@@ -40,7 +40,11 @@ static int	main_process(t_minishell_context *minishell_context)
 
 static int	core_routine(t_minishell_context *minishell_context)
 {
-	(void)minishell_context;
+	(void)minishell_context;free(minishell_context->command_session.user_input_line);
+		delete_token_list(
+			minishell_context->command_session.tokenized_user_input_line);
+		delete_command_pipeline(
+			&minishell_context->command_session.command_pipeline);
 	while (MSH_LOOP)
 	{
 		minishell_context->command_session.user_input_line

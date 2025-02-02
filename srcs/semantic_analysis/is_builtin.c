@@ -14,7 +14,7 @@
 
 bool	is_builtin(const char *command_name)
 {
-	const size_t		command_len = ft_strlen(command_name);
+	size_t		command_len;
 	static const char	*builtins_dictionary[] = {
 		"echo",
 		"cd",
@@ -30,6 +30,7 @@ bool	is_builtin(const char *command_name)
 	i = 0;
 	if (command_name == NULL)
 		return (false);
+	command_len = ft_strlen(command_name);
 	while (builtins_dictionary[i] != NULL)
 	{
 		if ((ft_strncmp(builtins_dictionary[i], command_name,

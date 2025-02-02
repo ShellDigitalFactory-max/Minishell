@@ -16,6 +16,7 @@ static t_command_status	check_relative_path(t_command *command,
 							char **command_env)
 {
 	(void)command_env;
+	command->command_binary_path = command->command_args->content;
 	return (check_complete_path(command));
 }
 
@@ -23,6 +24,7 @@ static t_command_status	check_complete_absolute_path(t_command *command,
 							char **command_env)
 {
 	(void)command_env;
+	command->command_binary_path = command->command_args->content;
 	return (check_complete_path(command));
 }
 
