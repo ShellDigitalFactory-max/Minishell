@@ -71,12 +71,6 @@ typedef enum e_command_nature
 
 // STRUCTURES
 
-typedef struct s_token_type_and_machine_state
-{
-	t_token_type		token_type;
-	t_machine_states	machine_state;
-}				t_token_type_and_machine_state;
-
 typedef struct s_command_redirections
 {
 	t_opening_status	opening_status;

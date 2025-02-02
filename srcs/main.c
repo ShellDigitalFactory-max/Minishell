@@ -14,6 +14,18 @@
 
 #ifndef TEST_MODE
 
+static bool	is_empty_input(t_token_list tokenized_input)
+{
+	const size_t	list_size = ft_lstsize(tokenized_input);
+
+	if (list_size > 2)
+		return (false);
+	if (((t_token *)tokenized_input->content)->token_type == TOKEN_LIST_START
+		&& list_size == 2)
+		return (true);
+	return (false);
+}
+
 static int	main_process(t_minishell_context *minishell_context)
 {
 	if (minishell_context->command_session.user_input_line == CTRL_D)
@@ -26,6 +38,8 @@ static int	main_process(t_minishell_context *minishell_context)
 		ft_dprintf(STDERR_FILENO, "Memory allocation failure during lexing.\n");
 		return (EXIT_FAILURE);
 	}
+	if (is_empty_input(minishell_context->command_session.tokenized_user_input_line) == true)
+		return (EXIT_SUCCESS);
 	if (parse_input(
 			minishell_context->command_session.tokenized_user_input_line)
 		== INVALID_SYNTAX)
@@ -78,6 +92,7 @@ static int	launch_shell(char **env)
 int	main(int ac, char **av, char **env)
 {
 	(void)ac;
+
 	(void)av;
 	return (launch_shell(env));
 }
