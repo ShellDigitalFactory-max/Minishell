@@ -36,7 +36,7 @@ char	**build_path_array(char **command_env)
 t_command_status	build_complete_path(t_command *command, char **command_env)
 {
 	size_t	i;
-	char	*old_path;
+	char	*command_suffix;
 	char	**path_array;
 
 	path_array = build_path_array(command_env);
@@ -47,13 +47,13 @@ t_command_status	build_complete_path(t_command *command, char **command_env)
 		exit(FAILURE);
 	}
 	i = 0;
-	old_path = command->command_name;
+	command_suffix = ft_strdup(command->command_name);
 	while (path_array[i] != NULL)
 	{
-		if (ft_asprintf(&command->command_name, "%s%s%s", path_array[i],
-				ABSOLUTE_PREFIX, old_path) == -1)
+		if (ft_asprintf(&command->command_binary_path, "%s%s%s", path_array[i],
+				ABSOLUTE_PREFIX, command_suffix) == -1)
 		{
-			if (command->command_name == NULL)
+			if (command->command_binary_path == NULL)
 			{
 				ft_dprintf(STDERR_FILENO, "minishell: malloc failure "
 				"during command binary searching.Aborting.\n");
@@ -61,8 +61,14 @@ t_command_status	build_complete_path(t_command *command, char **command_env)
 			}
 		}
 		if (check_complete_path(command) == VALID_COMMAND)
+		{
+			free(command_suffix);
 			return (VALID_COMMAND);
+		}
+		free(command->command_binary_path);
 		++i;
 	}
+	free(command_suffix);
+	ft_free_and_null(path_array);
 	return (INVALID_COMMAND);
 }

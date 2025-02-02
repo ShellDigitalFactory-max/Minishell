@@ -12,7 +12,15 @@
 
 #include "minishell.h"
 
-static int launch_command(t_command_pipeline cmd_pipeline)
+static void	clean_child_process(t_minishell_context *minishell_context)
+{
+	delete_variables_list();
+	delete_token_list(minishell_context->command_session.tokenized_user_input_line);
+	delete_command_pipeline(&minishell_context->command_session.command_pipeline);
+}
+
+static int launch_command(t_minishell_context *minishell_context,
+				t_command *command)
 {
 	pid_t	child_pid;
 
@@ -26,7 +34,11 @@ static int launch_command(t_command_pipeline cmd_pipeline)
 	}
 	if (child_pid == 0)
 	{
-		execute_command(cmd_pipeline->content);
+		if (execute_command(command) == INVALID_COMMAND)
+		{
+			clean_child_process(minishell_context);
+			exit (EXIT_FAILURE);
+		}
 	}
 	waitpid(child_pid, NULL, 0);
 	return (EXIT_SUCCESS);
@@ -47,5 +59,5 @@ int	command_interpreter(t_minishell_context *minishell_context)
 	{
 		return (launch_builtin(cmd_pipeline->content));
 	}
-	return (launch_command(cmd_pipeline));
+	return (launch_command(minishell_context, cmd_pipeline->content));
 }

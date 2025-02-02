@@ -70,7 +70,7 @@ t_command_pipeline	semantic_analyzer(t_token_list token_list);
 
 int					command_interpreter(
 						t_minishell_context *minishell_context);
-void				execute_command(t_command *command);
+t_command_status	execute_command(t_command *command);
 char				**list_to_strs_array(t_list *lst,
 						void (*conversion_funct)(t_list *, char **));
 void				args_list_to_args_array(t_command_args args,

@@ -87,6 +87,7 @@ typedef struct s_command_redirections
 typedef struct s_command
 {
 	char					*command_name;
+	char					*command_binary_path;
 	t_command_args			command_args;
 	t_variable_list			command_environment;
 	t_command_redirections	command_redirections;

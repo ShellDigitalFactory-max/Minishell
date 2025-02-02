@@ -12,6 +12,13 @@
 
 #include "minishell.h"
 
+static void	clean_command_attributes(char **command_arguments,
+				char **command_environment)
+{
+	ft_free_and_null(command_arguments);
+	ft_free_and_null(command_environment);
+}
+
 static t_path_type	get_path_type(const char *command)
 {
 	t_path_type	path_type;
@@ -39,7 +46,7 @@ static t_command_status	get_command_validity(t_command *command,
 	return (command_path_manager(command, command_env, command_path_type));
 }
 
-void	execute_command(t_command *command)
+t_command_status	execute_command(t_command *command)
 {
 	char	**command_arguments;
 	char	**command_environment;
@@ -50,9 +57,11 @@ void	execute_command(t_command *command)
 							*get_environment(), env_list_to_env_array);
 	if (get_command_validity(command, command_environment) == VALID_COMMAND)
 	{
-		execve(command->command_name,command_arguments, command_environment);
+		execve(command->command_binary_path,command_arguments,
+			command_environment);
 	}
 	ft_dprintf(STDERR_FILENO, "minishell: command not found: %s\n",
 		command->command_args->content);
-	exit(FAILURE);
+	clean_command_attributes(command_arguments, command_environment);
+	return (INVALID_COMMAND);
 }

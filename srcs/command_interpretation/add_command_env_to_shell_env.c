@@ -42,4 +42,5 @@ void	add_command_env_to_shell_env(t_variable_list command_env)
 		exit(FAILURE);
 	}
 	add_variables_to_shell_env(variables_to_add);
+	ft_free_and_null(variables_to_add);
 }

@@ -58,6 +58,8 @@ static t_status	run_state_machine(t_token_list token_list,
 	return (PROCESS_SUCCESS);
 }
 
+// stocker la prochaine entree (la sortie du pipe) ENCAPSULER L'ETAT DANS UNE STRUCTURE et dedans = COMMAND INPUT STREAM A 0 SAUF SI OVERRIDE PAR UN PIPE
+
 t_command_pipeline	semantic_analyzer(t_token_list token_list)
 {
 	t_command_pipeline	cmd_pipeline;

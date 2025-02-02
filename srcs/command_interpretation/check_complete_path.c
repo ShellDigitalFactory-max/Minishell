@@ -14,7 +14,7 @@
 
 t_command_status	check_complete_path(t_command *command)
 {
-	if (access(command->command_name, F_OK | X_OK) == 0)
+	if (access(command->command_binary_path, F_OK | X_OK) == 0)
 	{
 		return (VALID_COMMAND);
 	}
