@@ -9,7 +9,9 @@ LIBFT := $(PATH_LIBFT)libft.a
 ### SRCS ######################################################################
 
 PATH_SRCS += srcs/
-PATH_SRCS += srcs/user_interface/
+PATH_SRCS += srcs/minishell_main_routine
+PATH_SRCS += srcs/exit_routines
+PATH_SRCS += srcs/user_interface
 PATH_SRCS += srcs/history
 PATH_SRCS += srcs/syntax_analysis
 PATH_SRCS += srcs/lexical_analysis
@@ -22,7 +24,15 @@ PATH_SRCS += srcs/builtins
 
 PATH_SRCS += srcs/functions_for_debug
 
+# srcs/minishell_main_routine
+
 SRCS += main.c
+SRCS += core_routine.c
+SRCS += clean_current_loop_context.c
+SRCS += is_empty_input.c
+
+# srcs/exit_routines
+
 SRCS += exit_shell_routine.c
 
 # scrs/user_interface

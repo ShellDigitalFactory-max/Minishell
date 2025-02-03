@@ -29,7 +29,7 @@ static int launch_command(t_minishell_context *minishell_context,
 	if (child_pid < 0)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: error during process forking. "
-		"Abort.\n");
+		"Aborting.\n");
 		exit(FAILURE);
 	}
 	if (child_pid == 0)

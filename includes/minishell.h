@@ -44,6 +44,13 @@ typedef struct s_command_session
 	t_command_pipeline	command_pipeline;
 }				t_command_session;
 
+typedef enum e_command_line_analysis_status
+{
+	INVALID_COMMAND_LINE = -1,
+	COMMAND_PIPELINE_SET,
+	EMPTY_COMMAND_LINE
+}			t_command_line_analysis_status;
+
 typedef struct s_minishell_context
 {
 	t_command_session	command_session;
@@ -60,11 +67,14 @@ typedef int	(*t_builtin)(t_command *current_command);
 
 // PROTOTYPES
 
+int					core_routine(t_minishell_context *minishell_context);
 int					exit_shell_routine(void);
 char				*prompt_gets_user_input(void);
 t_lexing_status		lexe_input(t_command_session *current_command);
 t_syntax_status		parse_input(t_token_list token_list);
 t_command_pipeline	semantic_analyzer(t_token_list token_list);
+bool				is_empty_input(t_token_list tokenized_input);
+void				clean_current_loop_context(t_minishell_context *minishell_context);
 
 // INTERPRETER
 
