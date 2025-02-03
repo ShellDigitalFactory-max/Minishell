@@ -21,7 +21,7 @@ static t_status	add_assignation_to_command_env(t_command *command,
 }
 
 t_semantic_analysis_state_return	state_assignation(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_token *current_token,
 										t_command *current_command)
 {
@@ -29,7 +29,7 @@ t_semantic_analysis_state_return	state_assignation(
 		return (TOKEN_PROCESSED);
 	if (assignation_checker(current_token->token_lexem) == INVALID_ASSIGNATION)
 	{
-		*machine_state = STATE_COMMAND;
+		semantic_machine->machine_state = STATE_COMMAND;
 		return (TOKEN_NOT_PROCESSED);
 	}
 	else
@@ -41,7 +41,7 @@ t_semantic_analysis_state_return	state_assignation(
 				" temporary environment building. Aborting\n");
 			exit(FAILURE);
 		}
-		*machine_state = STATE_ASSIGNATION;
+		semantic_machine->machine_state = STATE_ASSIGNATION;
 		return (TOKEN_PROCESSED);
 	}
 }

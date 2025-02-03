@@ -89,8 +89,14 @@ typedef struct s_command
 	char					*opening_failure_msg;
 }				t_command;
 
+typedef struct s_semantic_machine
+{
+	t_machine_states	machine_state;
+	t_stream			next_command_input;
+}				t_semantic_machine;
+
 typedef t_semantic_analysis_state_return	(*t_semantic_state_function)(
-			t_machine_states *machine_state, t_token *current_token,
+			t_semantic_machine *semantic_machine, t_token *current_token,
 			t_command *current_command);
 
 // PROTOTYPES
@@ -101,31 +107,31 @@ void								save_opening_error(
 t_command							*create_command(void);
 t_assignation_status				assignation_checker(char *assignation);
 t_semantic_analysis_state_return	state_assignation(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_token *current_token,
 										t_command *current_command);
 t_semantic_analysis_state_return	state_input_redirection(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_token *current_token,
 										t_command *current_command);
 t_semantic_analysis_state_return	state_output_redirection(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_token *current_token,
 										t_command *current_command);
 t_semantic_analysis_state_return	state_append_redirection(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_token *current_token,
 										t_command *current_command);
 t_semantic_analysis_state_return	state_heredoc(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_token *current_token,
 										t_command *current_command);
 t_semantic_analysis_state_return	state_command(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_token *current_token,
 										t_command *current_command);
 t_semantic_analysis_state_return	state_end_of_command(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_command_pipeline *cmd_pipeline,
 										t_command *current_command,
 										t_token *current_token);
