@@ -19,32 +19,59 @@ static void	clean_child_process(t_minishell_context *minishell_context)
 	delete_command_pipeline(&minishell_context->command_session.command_pipeline);
 }
 
-static int launch_command(t_minishell_context *minishell_context,
+static int	setup_command_redirections(t_command *command)
+{
+	if (command->command_redirections.opening_status == OPENING_ERROR)
+	{
+		ft_dprintf(STDERR_FILENO, "%s\n", command->opening_failure_msg);
+		return (EXIT_FAILURE);
+	}
+	if (command->command_redirections.in_stream != STDIN_FILENO)
+	{
+		dup2(command->command_redirections.in_stream, STDIN_FILENO);
+		close(command->command_redirections.in_stream);
+	}
+	if (command->command_redirections.out_stream != STDOUT_FILENO)
+	{
+		dup2(command->command_redirections.out_stream, STDOUT_FILENO);
+		close(command->command_redirections.out_stream);
+	}
+	return (EXIT_SUCCESS);
+}
+
+static int	command_process(t_minishell_context *minishell_context, t_command *command)
+{
+	if (setup_command_redirections(command) == EXIT_FAILURE || execute_command(command) == INVALID_COMMAND)
+	{
+		clean_child_process(minishell_context);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
+static int	launch_command(t_minishell_context *minishell_context,
 				t_command *command)
 {
-	pid_t	child_pid;
+	pid_t	command_process_pid;
 
-	//setup_command();
-	child_pid = fork();
-	if (child_pid < 0)
+	command_process_pid = fork();
+	if (command_process_pid < 0)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: error during process forking. "
 		"Aborting.\n");
 		exit(FAILURE);
 	}
-	if (child_pid == 0)
+	if (command_process_pid == 0)
 	{
-		if (execute_command(command) == INVALID_COMMAND)
-		{
-			clean_child_process(minishell_context);
-			exit (EXIT_FAILURE);
-		}
+		if (command_process(minishell_context, command) == EXIT_FAILURE)
+			exit(FAILURE);
 	}
-	waitpid(child_pid, NULL, 0);
+	waitpid(command_process_pid, NULL, 0);
 	return (EXIT_SUCCESS);
 }
 
-static int	command_interpreter(t_minishell_context *minishell_context, t_command *command)
+static int	command_interpreter(t_minishell_context *minishell_context,
+				t_command *command)
 {
 	if (command->command_nature == ONLY_ASSIGNATION)
 	{
