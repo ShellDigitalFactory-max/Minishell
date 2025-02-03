@@ -40,7 +40,7 @@ static int	current_loop_process(t_minishell_context *minishell_context)
 {
 	if (command_line_analysis(minishell_context) == COMMAND_PIPELINE_SET)
 	{
-		command_interpreter(minishell_context);
+		command_pipeline_interpreter(minishell_context);
 	}
 	return (EXIT_SUCCESS);
 }

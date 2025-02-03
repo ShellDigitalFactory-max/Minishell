@@ -78,7 +78,7 @@ void				clean_current_loop_context(t_minishell_context *minishell_context);
 
 // INTERPRETER
 
-int					command_interpreter(
+int					command_pipeline_interpreter(
 						t_minishell_context *minishell_context);
 t_command_status	execute_command(t_command *command);
 char				**list_to_strs_array(t_list *lst,

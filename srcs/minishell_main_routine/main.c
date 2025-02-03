@@ -34,7 +34,7 @@ int	main(int ac, char **av, char **env)
 {
 	if (ac != 1 || av[1] != NULL)
 	{
-		ft_dprintf(STDERR_FILENO, "minishell: no arguments are accpeted\n.");
+		ft_dprintf(STDERR_FILENO, "minishell: no arguments are accepted.\n");
 		return (EXIT_FAILURE);
 	}
 	return (launch_shell(env));

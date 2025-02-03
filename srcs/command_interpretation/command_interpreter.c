@@ -44,20 +44,24 @@ static int launch_command(t_minishell_context *minishell_context,
 	return (EXIT_SUCCESS);
 }
 
-int	command_interpreter(t_minishell_context *minishell_context)
+static int	command_interpreter(t_minishell_context *minishell_context, t_command *command)
+{
+	if (command->command_nature == ONLY_ASSIGNATION)
+	{
+		add_command_env_to_shell_env(command->command_environment);
+		return (EXIT_SUCCESS);
+	}
+	if (command->command_nature == BUILTIN)
+	{
+		return (launch_builtin(command));
+	}
+	return (launch_command(minishell_context, command));
+}
+
+int	command_pipeline_interpreter(t_minishell_context *minishell_context)
 {
 	t_command_pipeline	cmd_pipeline;
 
 	cmd_pipeline = minishell_context->command_session.command_pipeline;
-	if (((t_command *)cmd_pipeline->content)->command_nature == ONLY_ASSIGNATION)
-	{
-		add_command_env_to_shell_env(
-			((t_command *)cmd_pipeline->content)->command_environment);
-		return (EXIT_SUCCESS);
-	}
-	if (((t_command *)cmd_pipeline->content)->command_nature == BUILTIN)
-	{
-		return (launch_builtin(cmd_pipeline->content));
-	}
-	return (launch_command(minishell_context, cmd_pipeline->content));
+	return (command_interpreter(minishell_context, cmd_pipeline->content));
 }
