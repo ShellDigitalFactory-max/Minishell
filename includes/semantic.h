@@ -87,6 +87,7 @@ typedef struct s_command
 	t_command_redirections	command_redirections;
 	t_command_nature		command_nature;
 	char					*opening_failure_msg;
+	pid_t					command_pid;
 }				t_command;
 
 typedef struct s_semantic_machine
@@ -104,7 +105,7 @@ typedef t_semantic_analysis_state_return	(*t_semantic_state_function)(
 void								save_opening_error(
 										t_command *current_command,
 										const char *file_name);
-t_command							*create_command(void);
+t_command							*create_command(t_semantic_machine *semantic_machine);
 t_assignation_status				assignation_checker(char *assignation);
 t_semantic_analysis_state_return	state_assignation(
 										t_semantic_machine *semantic_machine,

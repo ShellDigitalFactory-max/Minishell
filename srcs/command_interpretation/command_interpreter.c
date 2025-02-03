@@ -55,18 +55,26 @@ static int	launch_command(t_minishell_context *minishell_context,
 	pid_t	command_process_pid;
 
 	command_process_pid = fork();
+	if (command_process_pid > 0)
+	{
+		if (command->command_redirections.in_stream > STDIN_FILENO)
+			close(command->command_redirections.in_stream);
+		if (command->command_redirections.out_stream > STDOUT_FILENO)
+			close(command->command_redirections.out_stream);
+	}
+
 	if (command_process_pid < 0)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: error during process forking. "
 		"Aborting.\n");
 		exit(FAILURE);
 	}
+	command->command_pid = command_process_pid;
 	if (command_process_pid == 0)
 	{
 		if (command_process(minishell_context, command) == EXIT_FAILURE)
 			exit(FAILURE);
 	}
-	waitpid(command_process_pid, NULL, 0);
 	return (EXIT_SUCCESS);
 }
 
@@ -88,7 +96,19 @@ static int	command_interpreter(t_minishell_context *minishell_context,
 int	command_pipeline_interpreter(t_minishell_context *minishell_context)
 {
 	t_command_pipeline	cmd_pipeline;
+	t_command_pipeline	current_command;
 
 	cmd_pipeline = minishell_context->command_session.command_pipeline;
-	return (command_interpreter(minishell_context, cmd_pipeline->content));
+	current_command = cmd_pipeline;
+	while (current_command != NULL)
+	{
+		command_interpreter(minishell_context, current_command->content);
+		current_command = current_command->next;
+	}
+	while (cmd_pipeline != NULL)
+	{
+		waitpid(((t_command *)cmd_pipeline->content)->command_pid, NULL, 0);
+		cmd_pipeline = cmd_pipeline->next;
+	}
+	return (EXIT_SUCCESS);
 }

@@ -45,7 +45,7 @@ static t_status	run_state_machine(t_token_list token_list,
 		if (semantic_machine.machine_state == SEMANTIC_PROCESS_START
 			|| semantic_machine.machine_state == STATE_NEW_COMMAND)
 		{
-			current_command = create_command();
+			current_command = create_command(&semantic_machine);
 			semantic_machine.machine_state = STATE_ASSIGNATION;
 		}
 		state_return = run_state(&semantic_machine,

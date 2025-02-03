@@ -1,0 +1,17 @@
+drwxr-xr-x  5 tchobert 2024_paris   116 Jan  7 17:05 e2e
+drwxr-xr-x  3 tchobert 2024_paris  4096 Feb  1 18:43 files_for_testing_redirections
+drwxr-xr-x  2 tchobert 2024_paris   185 Jan 31 15:37 includes
+drwxr-xr-x  6 tchobert 2024_paris   136 Feb  3 20:02 libft
+-rw-r--r--  1 tchobert 2024_paris  9369 Feb  3 15:50 Makefile
+-rwxr-xr-x  1 tchobert 2024_paris 64688 Feb  3 20:09 minishell
+drwxr-xr-x  2 tchobert 2024_paris  4096 Feb  3 20:09 objs
+-rw-r--r--  1 tchobert 2024_paris    54 Feb  3 18:53 outfile
+-rw-r--r--  1 tchobert 2024_paris   228 Feb  2 17:02 readline.supp
+-rw-r--r--  1 tchobert 2024_paris    72 Jan  7 17:05 README.md
+drwxr-xr-x 14 tchobert 2024_paris   297 Feb  3 15:21 srcs
+-rw-r--r--  1 tchobert 2024_paris     0 Feb  3 16:44 tesssst
+-rw-r--r--  1 tchobert 2024_paris    10 Feb  3 16:45 TEST
+-rw-r--r--  1 tchobert 2024_paris     0 Feb  3 20:09 TESTFILE
+-rw-r--r--  1 tchobert 2024_paris   177 Jan 13 15:31 test_minishell.sh
+drwxr-xr-x  8 tchobert 2024_paris   239 Jan 31 15:37 tests
+drwxr-xr-x  9 tchobert 2024_paris  4096 Jan  8 16:02 Unity

@@ -22,10 +22,10 @@ static bool	is_environment(t_command *command)
 	return (command->command_environment != NULL);
 }
 
-// static bool	is_pipe(t_token_type token_type)
-// {
-// 	return (token_type == PIPE_OPERATOR);
-// }
+static bool	is_pipe(t_token_type token_type)
+{
+	return (token_type == PIPE_OPERATOR);
+}
 
 static t_command_nature	define_command_nature(t_command *command)
 {
@@ -38,6 +38,22 @@ static t_command_nature	define_command_nature(t_command *command)
 	return (UNDEFINED);
 }
 
+static void	setup_pipe(t_semantic_machine *semantic_machine, t_command *command)
+{
+	int	pipefd[2];
+
+	if (pipe(pipefd) == -1)
+	{
+		perror("pipe");
+		exit(FAILURE);
+	}
+	if (command->command_redirections.out_stream == STDOUT_FILENO)
+		command->command_redirections.out_stream = pipefd[1];
+	else
+		close(pipefd[1]);
+	semantic_machine->next_command_input = pipefd[0];
+}
+
 t_semantic_analysis_state_return	state_end_of_command(
 										t_semantic_machine *semantic_machine,
 										t_command_pipeline *cmd_pipeline,
@@ -48,6 +64,8 @@ t_semantic_analysis_state_return	state_end_of_command(
 
 	get_command_name(current_command);
 	current_command->command_nature = define_command_nature(current_command);
+	if (is_pipe(current_token->token_type) == true)
+		setup_pipe(semantic_machine, current_command);
 	pipeline_segment = ft_lstnew(current_command);
 	if (pipeline_segment == NULL)
 	{
