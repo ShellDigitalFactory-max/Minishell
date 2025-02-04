@@ -12,7 +12,8 @@
 
 #include "minishell.h"
 
-t_command_line_analysis_status	command_line_analysis(t_minishell_context *minishell_context)
+t_command_line_analysis_status	command_line_analysis(
+									t_minishell_context *minishell_context)
 {
 	if (minishell_context->command_session.user_input_line == CTRL_D)
 		exit_shell_routine();
@@ -23,7 +24,8 @@ t_command_line_analysis_status	command_line_analysis(t_minishell_context *minish
 		"Aborting.\n");
 		exit(FAILURE);
 	}
-	if (is_empty_input(minishell_context->command_session.tokenized_user_input_line) == true)
+	if (is_empty_input(
+			minishell_context->command_session.tokenized_user_input_line) == true)
 		return (EMPTY_COMMAND_LINE);
 	if (parse_input(
 			minishell_context->command_session.tokenized_user_input_line)

@@ -38,7 +38,8 @@ static t_command_nature	define_command_nature(t_command *command)
 	return (UNDEFINED);
 }
 
-static void	setup_pipe(t_semantic_machine *semantic_machine, t_command *command)
+static void	setup_pipe(t_semantic_machine *semantic_machine,
+				t_command *command)
 {
 	int	pipefd[2];
 

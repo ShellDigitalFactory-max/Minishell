@@ -112,6 +112,8 @@ SRCS += build_complete_path.c
 SRCS += execute_command.c
 SRCS += list_to_array.c
 SRCS += check_complete_path.c
+SRCS += command_process.c
+SRCS += clean_command_process.c
 
 # srcs/builtins
 

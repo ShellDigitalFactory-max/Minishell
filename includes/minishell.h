@@ -74,12 +74,16 @@ t_lexing_status		lexe_input(t_command_session *current_command);
 t_syntax_status		parse_input(t_token_list token_list);
 t_command_pipeline	semantic_analyzer(t_token_list token_list);
 bool				is_empty_input(t_token_list tokenized_input);
-void				clean_current_loop_context(t_minishell_context *minishell_context);
+void				clean_current_loop_context(
+						t_minishell_context *minishell_context);
 
 // INTERPRETER
 
 int					command_pipeline_interpreter(
 						t_minishell_context *minishell_context);
+int					command_process(t_minishell_context *minishell_context,
+						t_command *command);
+void				clean_command_process(t_minishell_context *minishell_context);
 t_command_status	execute_command(t_command *command);
 char				**list_to_strs_array(t_list *lst,
 						void (*conversion_funct)(t_list *, char **));
@@ -93,7 +97,8 @@ t_command_status	command_path_manager(
 						t_command *command, char **command_env,
 						const t_path_type command_path_type);
 t_command_status	check_complete_path(t_command *command);
-void				add_env_to_env(t_variable_list *dest, t_variable_list to_add);
+void				add_env_to_env(t_variable_list *dest,
+						t_variable_list to_add);
 void				add_command_env_to_shell_env(t_variable_list command_env);
 
 // BUILTINS

@@ -12,62 +12,26 @@
 
 #include "minishell.h"
 
-static void	clean_child_process(t_minishell_context *minishell_context)
-{
-	delete_variables_list();
-	delete_token_list(minishell_context->command_session.tokenized_user_input_line);
-	delete_command_pipeline(&minishell_context->command_session.command_pipeline);
-}
-
-static int	setup_command_redirections(t_command *command)
-{
-	if (command->command_redirections.opening_status == OPENING_ERROR)
-	{
-		ft_dprintf(STDERR_FILENO, "%s\n", command->opening_failure_msg);
-		return (EXIT_FAILURE);
-	}
-	if (command->command_redirections.in_stream != STDIN_FILENO)
-	{
-		dup2(command->command_redirections.in_stream, STDIN_FILENO);
-		close(command->command_redirections.in_stream);
-	}
-	if (command->command_redirections.out_stream != STDOUT_FILENO)
-	{
-		dup2(command->command_redirections.out_stream, STDOUT_FILENO);
-		close(command->command_redirections.out_stream);
-	}
-	return (EXIT_SUCCESS);
-}
-
-static int	command_process(t_minishell_context *minishell_context, t_command *command)
-{
-	if (setup_command_redirections(command) == EXIT_FAILURE || execute_command(command) == INVALID_COMMAND)
-	{
-		clean_child_process(minishell_context);
-		return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
-}
-
 static int	launch_command(t_minishell_context *minishell_context,
 				t_command *command)
 {
 	pid_t	command_process_pid;
 
 	command_process_pid = fork();
-	if (command_process_pid > 0)
-	{
-		if (command->command_redirections.in_stream > STDIN_FILENO)
-			close(command->command_redirections.in_stream);
-		if (command->command_redirections.out_stream > STDOUT_FILENO)
-			close(command->command_redirections.out_stream);
-	}
-
 	if (command_process_pid < 0)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: error during process forking. "
 		"Aborting.\n");
 		exit(FAILURE);
+	}
+	if (command_process_pid > 0)
+	{
+		if (command->command_redirections.in_stream > STDIN_FILENO)
+		{
+			close(command->command_redirections.in_stream);
+		}
+		if (command->command_redirections.out_stream > STDOUT_FILENO)
+			close(command->command_redirections.out_stream);
 	}
 	command->command_pid = command_process_pid;
 	if (command_process_pid == 0)
@@ -107,7 +71,8 @@ int	command_pipeline_interpreter(t_minishell_context *minishell_context)
 	}
 	while (cmd_pipeline != NULL)
 	{
-		waitpid(((t_command *)cmd_pipeline->content)->command_pid, NULL, 0);
+		waitpid(((t_command *)cmd_pipeline->content)->command_pid,
+			NULL, 0);
 		cmd_pipeline = cmd_pipeline->next;
 	}
 	return (EXIT_SUCCESS);
