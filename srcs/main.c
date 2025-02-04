@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchobert <tchobert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:11:39 by hucherea          #+#    #+#             */
-/*   Updated: 2024/12/14 16:25:29 by tchobert         ###   ########.fr       */
+/*   Updated: 2025/02/04 06:24:47 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,17 @@ static int	main_process(t_minishell_context *minishell_context)
 		ft_dprintf(STDERR_FILENO, "Memory allocation failure during lexing.\n");
 		return (EXIT_FAILURE);
 	}
+	expand_input(minishell_context->command_session.tokenized_user_input_line);
 	if (parse_input(
 			minishell_context->command_session.tokenized_user_input_line)
 		== INVALID_SYNTAX)
 	{
 		return (EXIT_FAILURE);
 	}
+	print_token_list(minishell_context->command_session.tokenized_user_input_line);
 	minishell_context->command_session.command_pipeline = semantic_analyzer
 		(minishell_context->command_session.tokenized_user_input_line);
+
 	return (EXIT_SUCCESS);
 }
 
