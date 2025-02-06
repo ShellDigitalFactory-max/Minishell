@@ -111,5 +111,6 @@ int					execute_builtin(t_minishell_context *minishell_context, t_command *comma
 int					env(t_command *current_command);
 int					export(t_command *command);
 char				**exportable_env_list_to_strs_array(void);
+void				close_command_process_unused_fds(t_minishell_context *minishell_context, t_command *command);
 
 #endif

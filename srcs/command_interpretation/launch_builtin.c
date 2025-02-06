@@ -47,8 +47,10 @@ int	execute_builtin(t_minishell_context *minishell_context, t_command *command, 
 	{	
 		clean_command_process(minishell_context);
 		delete_command_pipeline(&minishell_context->command_session.command_pipeline);
+		close_command_process_unused_fds(minishell_context, command);
 		exit(builtin_execution_return);
 	}
-	else
-		return (builtin_execution_return);
+	if (command->command_redirections.out_stream != STDOUT_FILENO)
+		close(command->command_redirections.out_stream);
+	return (builtin_execution_return);
 }

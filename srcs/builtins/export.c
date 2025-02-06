@@ -40,19 +40,19 @@ void bubble_sort_env(char **env, int count)
 	}
 }
 
-void display_variables(char **sorted_env, size_t count)
+void display_variables(t_command *command, char **sorted_env, size_t count)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < count)
 	{
-		printf("declare -x %s\n", sorted_env[i]);
+		ft_dprintf(command->command_redirections.out_stream, "declare -x %s\n", sorted_env[i]);
 		++i;
 	}
 }
 
-void display_sorted_exportables_variables(char **env)
+void display_sorted_exportables_variables(t_command *command, char **env)
 {
 	size_t	i;
 	size_t	count;
@@ -75,7 +75,7 @@ void display_sorted_exportables_variables(char **env)
 		i++;
 	}
 	bubble_sort_env(sorted_env, count);
-	display_variables(sorted_env, count);
+	display_variables(command, sorted_env, count);
 	free(sorted_env);
 }
 
@@ -87,7 +87,7 @@ int	export(t_command *command)
 	if (ft_lstsize(command->command_args) == 1)
 	{
 		exportable_env = exportable_env_list_to_strs_array();
-		display_sorted_exportables_variables(exportable_env);
+		display_sorted_exportables_variables(command, exportable_env);
 		ft_free_and_null(exportable_env);
 	}
 	return (EXIT_SUCCESS);

@@ -32,7 +32,7 @@ static int	setup_command_redirections(t_command *command)
 	return (EXIT_SUCCESS);
 }
 
-static void	close_command_process_unused_fds(t_minishell_context *minishell_context, t_command *command)
+void	close_command_process_unused_fds(t_minishell_context *minishell_context, t_command *command)
 {
 	t_command_pipeline	cmd_pipeline;
 
