@@ -118,6 +118,7 @@ SRCS += clean_command_process.c
 # srcs/builtins
 
 SRCS += env.c
+SRCS += export.c
 
 # print_functions to use for debug and tests
 

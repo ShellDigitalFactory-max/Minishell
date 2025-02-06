@@ -60,7 +60,16 @@ void	command_process(t_minishell_context *minishell_context, t_command *command)
 		exit(FAILURE);
 	}
 	if (command->command_nature == BUILTIN)
+	{
 		execute_builtin(minishell_context, command, BUILTIN_IN_PIPELINE);
+	}
+	if (command->command_nature == ONLY_ASSIGNATION)
+	{
+		add_command_env_to_shell_env(command->command_environment);
+		clean_command_process(minishell_context);
+		delete_command_pipeline(&minishell_context->command_session.command_pipeline);
+		exit(SUCCESS);
+	}
 	if (execute_command(command) == INVALID_COMMAND)
 	{
 		clean_command_process(minishell_context);

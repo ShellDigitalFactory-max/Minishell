@@ -64,6 +64,7 @@ typedef struct s_minishell_context
 typedef enum e_builtin_type
 {
 	ENV,
+	EXPORT,
 }			t_builtin_type;
 
 typedef int	(*t_builtin)(t_command *current_command);
@@ -108,5 +109,7 @@ void				add_command_env_to_shell_env(t_variable_list command_env);
 
 int					execute_builtin(t_minishell_context *minishell_context, t_command *command, bool is_in_pipeline);
 int					env(t_command *current_command);
+int					export(t_command *command);
+char				**exportable_env_list_to_strs_array(void);
 
 #endif
