@@ -34,24 +34,23 @@ static int	setup_command_redirections(t_command *command)
 
 int	command_process(t_minishell_context *minishell_context, t_command *command)
 {
-	t_command_pipeline	command_pipeline = minishell_context->command_session.command_pipeline;
+	t_command_pipeline	cmd_pipeline;
 
-	while (command_pipeline != NULL)
+	cmd_pipeline = minishell_context->command_session.command_pipeline;
+	while (cmd_pipeline)
 	{
-		if (command_pipeline->content != command)
+		if (cmd_pipeline->content != command)
 		{
-			if (((t_command *)command_pipeline->content)->command_redirections.in_stream != STDIN_FILENO)
-				close(((t_command *)command_pipeline->content)->command_redirections.in_stream);
-			if (((t_command *)command_pipeline->content)->command_redirections.out_stream != STDOUT_FILENO)
-				close(((t_command *)command_pipeline->content)->command_redirections.out_stream);
+			close(((t_command *)cmd_pipeline->content)->command_redirections.in_stream);
+			close(((t_command *)cmd_pipeline->content)->command_redirections.out_stream);
 		}
-		command_pipeline = command_pipeline->next;
+		cmd_pipeline = cmd_pipeline->next;
 	}
-	if (setup_command_redirections(command) == EXIT_FAILURE
-		|| execute_command(command) == INVALID_COMMAND)
+	setup_command_redirections(command);
+	if (execute_command(command) == INVALID_COMMAND)
 	{
 		clean_command_process(minishell_context);
-		return (EXIT_FAILURE);
+		exit(FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }

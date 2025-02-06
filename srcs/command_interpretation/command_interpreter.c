@@ -75,5 +75,6 @@ int	command_pipeline_interpreter(t_minishell_context *minishell_context)
 			NULL, 0);
 		cmd_pipeline = cmd_pipeline->next;
 	}
+
 	return (EXIT_SUCCESS);
 }
