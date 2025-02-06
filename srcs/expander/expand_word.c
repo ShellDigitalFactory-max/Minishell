@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 00:47:34 by linux             #+#    #+#             */
-/*   Updated: 2025/02/06 05:55:30 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/06 06:04:28 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ t_lexem	expand_word(t_lexem word, t_quote_state *quote_state)
 	expanded_word = NULL;
 	while (word[i] != '\0')
 	{
-		printf("word[%zu] = %c\n", i, word[i]);
 		if (is_quote(word[i], *quote_state))
 		{
 			change_quote_state(word[i], quote_state);

@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 06:09:59 by linux             #+#    #+#             */
-/*   Updated: 2025/02/06 05:59:14 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/06 06:03:29 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_lexem	no_expand(t_lexem word, size_t *i, t_lexem expanded_word, t_quote_state 
 	{
 		++i_nexp;
 	}
-	printf("i_nexp = %zu\n", i_nexp);
 	tmp = expanded_word;
 	tmp_no_expand = ft_substr(word, *i, i_nexp - *i);
 	expanded_word = ft_strjoin(expanded_word, tmp_no_expand);
