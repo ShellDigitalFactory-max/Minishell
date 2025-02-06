@@ -30,7 +30,7 @@ static t_builtin_type	get_builtin_type(const char *command_name)
 	return (type);
 }
 
-int	launch_builtin(t_command *command)
+int	execute_builtin(t_minishell_context *minishell_context, t_command *command, bool is_in_pipeline)
 {
 	const t_builtin_type	builtin_type
 								= get_builtin_type(command->command_name);
@@ -38,6 +38,15 @@ int	launch_builtin(t_command *command)
 	static t_builtin	builtins[] = {
 		env,
 	};
+	int					builtin_execution_return;
 
-	return (builtins[builtin_type](command));
+	builtin_execution_return = builtins[builtin_type](command);
+	if (is_in_pipeline == true)
+	{	
+		clean_command_process(minishell_context);
+		delete_command_pipeline(&minishell_context->command_session.command_pipeline);
+		exit(builtin_execution_return);
+	}
+	else
+		return (builtin_execution_return);
 }

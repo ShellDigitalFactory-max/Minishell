@@ -12,7 +12,24 @@
 
 #include "minishell.h"
 
-static int	launch_command(t_minishell_context *minishell_context,
+static bool	is_command_alone(t_command_pipeline	command_pipeline)
+{
+	return (ft_lstsize(command_pipeline) == 1);
+}
+
+static void	main_process_io_management(t_command *command)
+{
+	if (command->command_redirections.in_stream > STDIN_FILENO)
+	{
+		close(command->command_redirections.in_stream);
+	}
+	if (command->command_redirections.out_stream > STDOUT_FILENO)
+	{
+		close(command->command_redirections.out_stream);
+	}
+}
+
+static void	launch_command(t_minishell_context *minishell_context,
 				t_command *command)
 {
 	pid_t	command_process_pid;
@@ -24,37 +41,30 @@ static int	launch_command(t_minishell_context *minishell_context,
 		"Aborting.\n");
 		exit(FAILURE);
 	}
+	command->command_pid = command_process_pid;
 	if (command_process_pid > 0)
 	{
-		if (command->command_redirections.in_stream > STDIN_FILENO)
-		{
-			close(command->command_redirections.in_stream);
-		}
-		if (command->command_redirections.out_stream > STDOUT_FILENO)
-			close(command->command_redirections.out_stream);
+		main_process_io_management(command);
 	}
-	command->command_pid = command_process_pid;
 	if (command_process_pid == 0)
 	{
-		if (command_process(minishell_context, command) == EXIT_FAILURE)
-			exit(FAILURE);
+		command_process(minishell_context, command);
 	}
-	return (EXIT_SUCCESS);
 }
 
-static int	command_interpreter(t_minishell_context *minishell_context,
+static void	command_interpreter(t_minishell_context *minishell_context,
 				t_command *command)
 {
-	if (command->command_nature == ONLY_ASSIGNATION)
+	if (command->command_nature == ONLY_ASSIGNATION && is_command_alone(minishell_context->command_session.command_pipeline))
 	{
 		add_command_env_to_shell_env(command->command_environment);
-		return (EXIT_SUCCESS);
 	}
-	if (command->command_nature == BUILTIN)
+	else if (command->command_nature == BUILTIN && is_command_alone(minishell_context->command_session.command_pipeline))
 	{
-		return (launch_builtin(command));
+		execute_builtin(minishell_context, command, BUILTIN_ALONE);
 	}
-	return (launch_command(minishell_context, command));
+	else
+		launch_command(minishell_context, command);
 }
 
 int	command_pipeline_interpreter(t_minishell_context *minishell_context)
@@ -75,6 +85,5 @@ int	command_pipeline_interpreter(t_minishell_context *minishell_context)
 			NULL, 0);
 		cmd_pipeline = cmd_pipeline->next;
 	}
-
 	return (EXIT_SUCCESS);
 }

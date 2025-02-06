@@ -35,6 +35,9 @@
 
 # define MSH_LOOP 1
 
+# define BUILTIN_ALONE 0
+# define BUILTIN_IN_PIPELINE 1
+
 // STRUCTURES
 
 typedef struct s_command_session
@@ -81,7 +84,7 @@ void				clean_current_loop_context(
 
 int					command_pipeline_interpreter(
 						t_minishell_context *minishell_context);
-int					command_process(t_minishell_context *minishell_context,
+void				command_process(t_minishell_context *minishell_context,
 						t_command *command);
 void				clean_command_process(t_minishell_context *minishell_context);
 t_command_status	execute_command(t_command *command);
@@ -103,7 +106,7 @@ void				add_command_env_to_shell_env(t_variable_list command_env);
 
 // BUILTINS
 
-int					launch_builtin(t_command *command);
+int					execute_builtin(t_minishell_context *minishell_context, t_command *command, bool is_in_pipeline);
 int					env(t_command *current_command);
 
 #endif

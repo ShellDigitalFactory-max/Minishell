@@ -22,7 +22,6 @@ static void	clean_command_attributes(char **command_arguments,
 static t_path_type	get_path_type(const char *command)
 {
 	t_path_type	path_type;
-
 	if (*command == RELATIVE_PREFIX)
 	{
 		path_type = RELATIVE_PATH;
