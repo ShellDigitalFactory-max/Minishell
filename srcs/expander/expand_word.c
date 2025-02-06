@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 00:47:34 by linux             #+#    #+#             */
-/*   Updated: 2025/02/05 15:41:38 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/06 05:55:30 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,15 @@ static t_lexem	choose_expand(t_lexem word, size_t *i, t_lexem expanded_word,
 		expanded_word = expand_tilde(i, expanded_word);
 	}
 	else
-		expanded_word = no_expand(word, i, expanded_word);
+		expanded_word = no_expand(word, i, expanded_word, quote_state);
 
 	return (expanded_word);
 }
 
-t_lexem	expand_word(t_lexem word)
+t_lexem	expand_word(t_lexem word, t_quote_state *quote_state)
 {
 	t_lexem	expanded_word;
 	size_t	i;
-	static t_quote_state	quote_state = NO_QUOTE;
 
 	if (word == NULL)
 		return (NULL);
@@ -49,12 +48,13 @@ t_lexem	expand_word(t_lexem word)
 	expanded_word = NULL;
 	while (word[i] != '\0')
 	{
-		if (is_quote(word[i], quote_state))
+		printf("word[%zu] = %c\n", i, word[i]);
+		if (is_quote(word[i], *quote_state))
 		{
-			quote_state = change_quote_state(word[i], &quote_state);
+			change_quote_state(word[i], quote_state);
 			++i;
 		}
-		expanded_word = choose_expand(word, &i, expanded_word, quote_state);
+		expanded_word = choose_expand(word, &i, expanded_word, *quote_state);
 	}
 	return (expanded_word);
 }

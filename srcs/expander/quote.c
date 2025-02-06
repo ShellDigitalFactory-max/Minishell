@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:23:45 by linux             #+#    #+#             */
-/*   Updated: 2025/02/05 15:34:36 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/06 05:31:18 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ bool	is_quote(char c, t_quote_state quote_state)
 
 void	change_quote_state(char quote, t_quote_state *quote_state)
 {
-	if (quote_state == NO_QUOTE && quote == '\'')
+	if (*quote_state == NO_QUOTE && quote == '\'')
 		*quote_state = SINGLE_QUOTE;
-	else if (quote_state == NO_QUOTE && quote == '\"')
+	else if (*quote_state == NO_QUOTE && quote == '\"')
 		*quote_state = DOUBLE_QUOTE;
-	else if (quote_state == SINGLE_QUOTE && quote == '\'')
+	else if (*quote_state == SINGLE_QUOTE && quote == '\'')
 		*quote_state = NO_QUOTE;
-	else if (quote_state == DOUBLE_QUOTE && quote == '\"')
+	else if (*quote_state == DOUBLE_QUOTE && quote == '\"')
 		*quote_state = NO_QUOTE;
 }
