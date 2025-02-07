@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:11:39 by hucherea          #+#    #+#             */
-/*   Updated: 2025/02/04 06:24:47 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/07 16:59:53 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,8 @@ static int	main_process(t_minishell_context *minishell_context)
 	{
 		return (EXIT_FAILURE);
 	}
-	print_token_list(minishell_context->command_session.tokenized_user_input_line);
 	minishell_context->command_session.command_pipeline = semantic_analyzer
 		(minishell_context->command_session.tokenized_user_input_line);
-
 	return (EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 06:09:59 by linux             #+#    #+#             */
-/*   Updated: 2025/02/06 06:03:29 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/07 16:47:41 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,20 @@ static bool	is_no_expand(char c, t_quote_state quote_state)
 	{
 		return (true);
 	}
-	else if ((quote_state == DOUBLE_QUOTE && c == '\"') || (quote_state == SINGLE_QUOTE && c == '\''))
+	else if ((quote_state == DOUBLE_QUOTE && c == '\"')
+		|| (quote_state == SINGLE_QUOTE && c == '\''))
 		return (false);
 	else if (c != '$' && c != '~' && c != '\0')
 		return (true);
 	return (false);
 }
 
-t_lexem	no_expand(t_lexem word, size_t *i, t_lexem expanded_word, t_quote_state quote_state)
+t_lexem	no_expand(t_lexem word, size_t *i, t_lexem expanded_word,
+	t_quote_state quote_state)
 {
 	size_t	i_nexp;
 	t_lexem	tmp;
-	t_lexem tmp_no_expand;
+	t_lexem	tmp_no_expand;
 
 	i_nexp = *i;
 	while (is_no_expand(word[i_nexp], quote_state))

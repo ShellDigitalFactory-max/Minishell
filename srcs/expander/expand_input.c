@@ -6,13 +6,13 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 23:02:16 by linux             #+#    #+#             */
-/*   Updated: 2025/02/06 05:25:37 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/07 16:40:42 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void expand_input(t_token_list token_list)
+void	expand_input(t_token_list token_list)
 {
 	t_list			*current_token;
 	t_token			*token;
@@ -33,4 +33,3 @@ void expand_input(t_token_list token_list)
 		current_token = current_token->next;
 	}
 }
-
