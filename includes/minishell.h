@@ -30,6 +30,7 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <limits.h>
 
 // DEFINES
 
@@ -37,6 +38,7 @@
 
 # define BUILTIN_ALONE 0
 # define BUILTIN_IN_PIPELINE 1
+# define PATH_MAX 4096
 
 // STRUCTURES
 
@@ -65,6 +67,7 @@ typedef enum e_builtin_type
 {
 	ENV,
 	EXPORT,
+	PWD
 }			t_builtin_type;
 
 typedef int	(*t_builtin)(t_command *current_command);
@@ -111,6 +114,7 @@ void				add_command_env_to_shell_env(t_variable_list command_env);
 int					execute_builtin(t_minishell_context *minishell_context, t_command *command, bool is_in_pipeline);
 int					env(t_command *current_command);
 int					export(t_command *command);
+int					pwd(t_command *command);
 char				**exportable_env_list_to_strs_array(void);
 void				close_command_process_unused_fds(t_minishell_context *minishell_context, t_command *command);
 

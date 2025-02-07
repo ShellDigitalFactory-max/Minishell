@@ -120,6 +120,7 @@ SRCS += clean_command_process.c
 
 SRCS += env.c
 SRCS += export.c
+SRCS += pwd.c
 
 # print_functions to use for debug and tests
 

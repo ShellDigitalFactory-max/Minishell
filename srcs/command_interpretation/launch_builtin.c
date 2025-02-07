@@ -60,6 +60,7 @@ int	execute_builtin(t_minishell_context *minishell_context, t_command *command, 
 	static t_builtin		builtins[] = {
 		env,
 		export,
+		pwd
 	};
 	int						builtin_return;
 

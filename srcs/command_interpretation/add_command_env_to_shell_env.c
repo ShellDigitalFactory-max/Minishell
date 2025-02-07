@@ -14,18 +14,28 @@
 
 void	add_variables_to_shell_env(char **variables)
 {
-	size_t	i;
+	t_variable	*already_in_env;
+	char		*variable_key;
+	size_t		i;
+	bool		is_exportable;
 
 	i = 0;
 	while(variables[i] != NULL)
 	{
-		if (set_variable_from_keyvalue(variables[i], NOT_EXPORTABLE)
+		variable_key = get_variable_key(variables[i]);
+		already_in_env = find_variable_from_key(get_environment(), variable_key);
+		if (already_in_env != NULL)
+			is_exportable = already_in_env->is_exportable;
+		else
+			is_exportable = NOT_EXPORTABLE;
+		if (set_variable_from_keyvalue(variables[i], is_exportable)
 			== PROCESS_FAILURE)
 		{
 			ft_dprintf(STDERR_FILENO, "minishell: malloc failure during "
 			"environment_update. Aborting.\n");
 			exit(FAILURE);
 		}
+		free(variable_key);
 		++i;
 	}
 }
