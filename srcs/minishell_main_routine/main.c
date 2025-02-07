@@ -19,6 +19,7 @@ static int	launch_shell(char **env)
 	t_minishell_context	minishell_context;
 	struct sigaction	sa;
 
+	display_minishell_header();
 	ft_bzero(&minishell_context, sizeof(minishell_context));
 	if (build_environment(env) == PROCESS_FAILURE)
 	{

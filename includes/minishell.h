@@ -71,6 +71,7 @@ typedef int	(*t_builtin)(t_command *current_command);
 
 // PROTOTYPES
 
+void				display_minishell_header(void);
 int					core_routine(t_minishell_context *minishell_context);
 int					exit_shell_routine(void);
 char				*prompt_gets_user_input(void);

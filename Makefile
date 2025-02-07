@@ -30,6 +30,7 @@ SRCS += main.c
 SRCS += core_routine.c
 SRCS += clean_current_loop_context.c
 SRCS += is_empty_input.c
+SRCS += display_minishell_header.c
 
 # srcs/exit_routines
 

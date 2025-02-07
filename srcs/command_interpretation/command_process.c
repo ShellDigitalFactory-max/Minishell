@@ -56,8 +56,12 @@ void	command_process(t_minishell_context *minishell_context, t_command *command)
 	if (setup_command_redirections(command) == EXIT_FAILURE)
 	{
 		clean_command_process(minishell_context);
-		delete_command_pipeline(&minishell_context->command_session.command_pipeline);
 		exit(FAILURE);
+	}
+	if (command->command_nature == UNDEFINED)
+	{
+		clean_command_process(minishell_context);
+		exit(SUCCESS);
 	}
 	if (command->command_nature == BUILTIN)
 	{
@@ -67,13 +71,11 @@ void	command_process(t_minishell_context *minishell_context, t_command *command)
 	{
 		add_command_env_to_shell_env(command->command_environment);
 		clean_command_process(minishell_context);
-		delete_command_pipeline(&minishell_context->command_session.command_pipeline);
 		exit(SUCCESS);
 	}
 	if (execute_command(command) == INVALID_COMMAND)
 	{
 		clean_command_process(minishell_context);
-		delete_command_pipeline(&minishell_context->command_session.command_pipeline);
 		exit(FAILURE);
 	}
 }
