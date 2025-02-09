@@ -70,7 +70,7 @@ int	execute_builtin(t_minishell_context *minishell_context,
 		return (execute_alone_builtin(command, builtins[builtin_type]));
 	}
 	if (is_in_pipeline == true)
-	{	
+	{
 		builtin_return = builtins[builtin_type](command);
 		clean_command_process(minishell_context);
 		delete_command_pipeline(
