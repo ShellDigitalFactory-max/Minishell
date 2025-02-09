@@ -69,7 +69,7 @@ void	tests_state_command(void);
 
 // COMMAND_INTERPRETATION
 
-void unit_tests_command_interpretation(void);
+void	unit_tests_command_interpretation(void);
 void	tests_add_env_to_env(void);
 
 #endif

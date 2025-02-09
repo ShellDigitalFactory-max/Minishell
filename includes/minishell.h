@@ -91,7 +91,8 @@ int					command_pipeline_interpreter(
 						t_minishell_context *minishell_context);
 void				command_process(t_minishell_context *minishell_context,
 						t_command *command);
-void				clean_command_process(t_minishell_context *minishell_context);
+void				clean_command_process(
+						t_minishell_context *minishell_context);
 t_command_status	execute_command(t_command *command);
 char				**list_to_strs_array(t_list *lst,
 						void (*conversion_funct)(t_list *, char **));
@@ -112,11 +113,14 @@ void				add_command_env_to_shell_env(t_variable_list command_env);
 
 // BUILTINS
 
-int					execute_builtin(t_minishell_context *minishell_context, t_command *command, bool is_in_pipeline);
+int					execute_builtin(t_minishell_context *minishell_context,
+						t_command *command, bool is_in_pipeline);
 int					env(t_command *current_command);
 int					export(t_command *command);
 int					pwd(t_command *command);
 char				**exportable_env_list_to_strs_array(void);
-void				close_command_process_unused_fds(t_minishell_context *minishell_context, t_command *command);
+void				close_command_process_unused_fds(
+						t_minishell_context *minishell_context,
+						t_command *command);
 
 #endif

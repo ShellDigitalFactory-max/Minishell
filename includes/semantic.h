@@ -105,7 +105,8 @@ typedef t_semantic_analysis_state_return	(*t_semantic_state_function)(
 void								save_opening_error(
 										t_command *current_command,
 										const char *file_name);
-t_command							*create_command(t_semantic_machine *machine);
+t_command							*create_command(
+										t_semantic_machine *machine);
 t_assignation_status				assignation_checker(char *assignation);
 t_semantic_analysis_state_return	state_assignation(
 										t_semantic_machine *semantic_machine,
@@ -136,7 +137,8 @@ t_semantic_analysis_state_return	state_end_of_command(
 										t_command_pipeline *cmd_pipeline,
 										t_command *current_command,
 										t_token *current_token);
-void								setup_pipe(t_semantic_machine *semantic_machine,
+void								setup_pipe(
+										t_semantic_machine *semantic_machine,
 										t_command *command);
 void								delete_command_pipeline(
 										t_command_pipeline *cmd_pipeline);
