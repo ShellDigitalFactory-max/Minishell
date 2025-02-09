@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_complete_path.c                              :+:      :+:    :+:   */
+/*   args_list_to_args_array.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/01 15:54:56 by tchobert          #+#    #+#             */
-/*   Updated: 2025/02/01 15:55:06 by tchobert         ###   ########.fr       */
+/*   Created: 2025/02/09 18:19:44 by tchobert          #+#    #+#             */
+/*   Updated: 2025/02/09 18:19:57 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_command_status	check_complete_path(t_command *command)
+void	args_list_to_args_array(t_command_args args, char **array)
 {
-	if (access(command->command_binary_path, F_OK | X_OK) == 0)
+	size_t	i;
+
+	i = 0;
+	while (args != NULL)
 	{
-		return (VALID_COMMAND);
+		array[i] = ft_strdup(args->content);
+		if (array[i] == NULL)
+		{
+			ft_dprintf(STDERR_FILENO, "minishell: malloc error "
+				"during command execution stting. Aborting.\n");
+			exit (FAILURE);
+		}
+		args = args->next;
+		++i;
 	}
-	return (INVALID_COMMAND);
 }

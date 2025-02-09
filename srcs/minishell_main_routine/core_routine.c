@@ -20,12 +20,13 @@ t_command_line_analysis_status	command_line_analysis(
 	if (lexe_input(&minishell_context->command_session)
 		== LEXING_FAILURE)
 	{
-		ft_dprintf(STDERR_FILENO, "minishell: memory allocation failure during lexing."
-		"Aborting.\n");
+		ft_dprintf(STDERR_FILENO, "minishell: memory allocation failure "
+			"during lexing. Aborting.\n");
 		exit(FAILURE);
 	}
 	if (is_empty_input(
-			minishell_context->command_session.tokenized_user_input_line) == true)
+			minishell_context->command_session.tokenized_user_input_line)
+		== true)
 		return (EMPTY_COMMAND_LINE);
 	if (parse_input(
 			minishell_context->command_session.tokenized_user_input_line)

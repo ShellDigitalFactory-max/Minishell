@@ -38,23 +38,6 @@ static t_command_nature	define_command_nature(t_command *command)
 	return (UNDEFINED);
 }
 
-static void	setup_pipe(t_semantic_machine *semantic_machine,
-				t_command *command)
-{
-	int	pipefd[2];
-
-	if (pipe(pipefd) == -1)
-	{
-		perror("pipe");
-		exit(FAILURE);
-	}
-	if (command->command_redirections.out_stream == STDOUT_FILENO)
-		command->command_redirections.out_stream = pipefd[1];
-	else
-		close(pipefd[1]);
-	semantic_machine->next_command_input = pipefd[0];
-}
-
 t_semantic_analysis_state_return	state_end_of_command(
 										t_semantic_machine *semantic_machine,
 										t_command_pipeline *cmd_pipeline,

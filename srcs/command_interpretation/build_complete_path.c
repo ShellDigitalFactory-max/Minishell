@@ -12,6 +12,19 @@
 
 #include "minishell.h"
 
+static void	exit_failure_routine(void)
+{
+	ft_dprintf(STDERR_FILENO, "minishell: malloc failure "
+		"during command binary searching.Aborting.\n");
+	exit(FAILURE);
+}
+
+static void	free_routine(char *command_suffix, char **path_array)
+{
+	free(command_suffix);
+	ft_free_and_null(path_array);
+}
+
 static char	**split_path_variable(char *path_variable)
 {
 	char	**splitted_path_variable;
@@ -41,25 +54,14 @@ t_command_status	build_complete_path(t_command *command, char **command_env)
 
 	path_array = build_path_array(command_env);
 	if (path_array == NULL)
-	{
-		ft_dprintf(STDERR_FILENO, "minishell: malloc failure during "
-		"command binary searching.Aborting.\n");
-		exit(FAILURE);
-	}
+		exit_failure_routine();
 	i = 0;
 	command_suffix = ft_strdup(command->command_name);
 	while (path_array[i] != NULL)
 	{
 		if (ft_asprintf(&command->command_binary_path, "%s%s%s", path_array[i],
 				ABSOLUTE_PREFIX, command_suffix) == -1)
-		{
-			if (command->command_binary_path == NULL)
-			{
-				ft_dprintf(STDERR_FILENO, "minishell: malloc failure "
-				"during command binary searching.Aborting.\n");
-				exit(FAILURE);
-			}
-		}
+			exit_failure_routine();
 		if (check_complete_path(command) == VALID_COMMAND)
 		{
 			free(command_suffix);
@@ -68,7 +70,6 @@ t_command_status	build_complete_path(t_command *command, char **command_env)
 		free(command->command_binary_path);
 		++i;
 	}
-	free(command_suffix);
-	ft_free_and_null(path_array);
+	free_routine(command_suffix, path_array);
 	return (INVALID_COMMAND);
 }

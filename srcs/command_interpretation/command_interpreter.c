@@ -38,7 +38,7 @@ static void	launch_command(t_minishell_context *minishell_context,
 	if (command_process_pid < 0)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: error during process forking. "
-		"Aborting.\n");
+			"Aborting.\n");
 		exit(FAILURE);
 	}
 	command->command_pid = command_process_pid;
@@ -55,11 +55,15 @@ static void	launch_command(t_minishell_context *minishell_context,
 static void	command_interpreter(t_minishell_context *minishell_context,
 				t_command *command)
 {
-	if (command->command_nature == ONLY_ASSIGNATION && is_command_alone(minishell_context->command_session.command_pipeline))
+	if (command->command_nature == ONLY_ASSIGNATION
+		&& is_command_alone(
+			minishell_context->command_session.command_pipeline))
 	{
 		add_command_env_to_shell_env(command->command_environment);
 	}
-	else if (command->command_nature == BUILTIN && is_command_alone(minishell_context->command_session.command_pipeline))
+	else if (command->command_nature == BUILTIN
+		&& is_command_alone(
+			minishell_context->command_session.command_pipeline))
 	{
 		execute_builtin(minishell_context, command, BUILTIN_ALONE);
 	}

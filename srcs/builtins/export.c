@@ -12,14 +12,16 @@
 
 #include "minishell.h"
 
-void swap_variables(char **first_variable, char **second_variable)
+static void	swap_variables(char **first_variable, char **second_variable)
 {
-	char *temp = *first_variable;
+	char	*temp;
+
+	temp = *first_variable;
 	*first_variable = *second_variable;
 	*second_variable = temp;
 }
 
-void bubble_sort_env(char **env, int count)
+static void	bubble_sort_env(char **env, int count)
 {
 	int	sorted;
 	int	i;
@@ -31,7 +33,8 @@ void bubble_sort_env(char **env, int count)
 		i = 0;
 		while (i < count - 1)
 		{
-			if (ft_strcmp(env[i], env[i + 1]) > 0) {
+			if (ft_strcmp(env[i], env[i + 1]) > 0)
+			{
 				swap_variables(&env[i], &env[i + 1]);
 				sorted = 0;
 			}
@@ -40,7 +43,7 @@ void bubble_sort_env(char **env, int count)
 	}
 }
 
-void display_variables(char **sorted_env, size_t count)
+static void	display_variables(char **sorted_env, size_t count)
 {
 	size_t	i;
 
@@ -52,18 +55,19 @@ void display_variables(char **sorted_env, size_t count)
 	}
 }
 
-void display_sorted_exportables_variables(char **env)
+static void	display_sorted_exportables_variables(char **env)
 {
+	char	**sorted_env;
 	size_t	i;
 	size_t	count;
 
 	i = 0;
 	count = 0;
-	while (env[count]) 
+	while (env[count])
 	{
 		count++;
 	}
-	char **sorted_env = malloc(count * sizeof(char *));
+	sorted_env = malloc(count * sizeof(char *));
 	if (!sorted_env)
 	{
 		perror("malloc");

@@ -19,10 +19,10 @@ int	pwd(t_command *command)
 	if (ft_lstsize(command->command_args) > 1)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: pwd: no arguments or options "
-		"are accepted.\n");
+			"are accepted.\n");
 		return (EXIT_FAILURE);
 	}
-	if (getcwd(current_directory,sizeof(current_directory)) == NULL)
+	if (getcwd(current_directory, sizeof(current_directory)) == NULL)
 	{
 		perror("getcwd:");
 		return (EXIT_FAILURE);

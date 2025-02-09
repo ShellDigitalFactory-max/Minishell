@@ -16,14 +16,15 @@ void	add_variables_to_shell_env(char **variables)
 {
 	t_variable	*already_in_env;
 	char		*variable_key;
-	size_t		i;
 	bool		is_exportable;
+	size_t		i;
 
 	i = 0;
-	while(variables[i] != NULL)
+	while (variables[i] != NULL)
 	{
 		variable_key = get_variable_key(variables[i]);
-		already_in_env = find_variable_from_key(get_environment(), variable_key);
+		already_in_env = find_variable_from_key(get_environment(),
+				variable_key);
 		if (already_in_env != NULL)
 			is_exportable = already_in_env->is_exportable;
 		else
@@ -32,7 +33,7 @@ void	add_variables_to_shell_env(char **variables)
 			== PROCESS_FAILURE)
 		{
 			ft_dprintf(STDERR_FILENO, "minishell: malloc failure during "
-			"environment_update. Aborting.\n");
+				"environment_update. Aborting.\n");
 			exit(FAILURE);
 		}
 		free(variable_key);
@@ -48,7 +49,7 @@ void	add_command_env_to_shell_env(t_variable_list command_env)
 	if (variables_to_add == NULL)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: malloc failure during "
-		"environment_update. Aborting.\n");
+			"environment_update. Aborting.\n");
 		exit(FAILURE);
 	}
 	add_variables_to_shell_env(variables_to_add);

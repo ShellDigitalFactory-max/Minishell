@@ -101,6 +101,7 @@ SRCS += state_end_of_command.c
 SRCS += get_command_name.c
 SRCS += is_builtin.c
 SRCS += delete_command_pipeline.c
+SRCS += setup_pipe.c
 
 # srcs/command_interpretation
 
@@ -111,7 +112,10 @@ SRCS += launch_builtin.c
 SRCS += command_path_manager.c
 SRCS += build_complete_path.c
 SRCS += execute_command.c
-SRCS += list_to_array.c
+SRCS += list_to_strs_array.c
+SRCS += args_list_to_args_array.c
+SRCS += env_list_to_env_array.c
+SRCS += exportable_env_list_to_strs_array.c
 SRCS += check_complete_path.c
 SRCS += command_process.c
 SRCS += clean_command_process.c

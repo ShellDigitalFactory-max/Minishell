@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-static void	remove_variable_from_env(t_variable *variable)
-{
+// static void	remove_variable_from_env(t_variable *variable)
+// {
 
-}
+// }
 
-int	unset(t_command *command)
-{
-	// recherche avec ft_list_find_first, puis remove
-}
+// int	unset(t_command *command)
+// {
+// 	// recherche avec ft_list_find_first, puis remove
+// }

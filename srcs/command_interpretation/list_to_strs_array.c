@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_complete_path.c                              :+:      :+:    :+:   */
+/*   list_to_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/01 15:54:56 by tchobert          #+#    #+#             */
-/*   Updated: 2025/02/01 15:55:06 by tchobert         ###   ########.fr       */
+/*   Created: 2025/01/31 16:25:17 by tchobert          #+#    #+#             */
+/*   Updated: 2025/01/31 16:25:35 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_command_status	check_complete_path(t_command *command)
+char	**list_to_strs_array(t_list *lst,
+				void (*conversion_funct)(t_list *, char **))
 {
-	if (access(command->command_binary_path, F_OK | X_OK) == 0)
+	const size_t	array_size = ft_lstsize(lst);
+	char			**array;
+
+	array = (char **)malloc(sizeof(char *) * (array_size + 1));
+	if (array != NULL)
 	{
-		return (VALID_COMMAND);
+		array[array_size] = NULL;
+		conversion_funct(lst, array);
 	}
-	return (INVALID_COMMAND);
+	return (array);
 }

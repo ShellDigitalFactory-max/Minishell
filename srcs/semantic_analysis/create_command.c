@@ -15,7 +15,8 @@
 void	setup_command_default_redirections(t_command *command,
 			t_semantic_machine *semantic_machine)
 {
-	command->command_redirections.in_stream = semantic_machine->next_command_input;
+	command->command_redirections.in_stream
+		= semantic_machine->next_command_input;
 	command->command_redirections.out_stream = STDOUT_FILENO;
 }
 

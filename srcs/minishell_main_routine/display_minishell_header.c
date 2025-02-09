@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-void display_minishell_header(void)
+void	display_minishell_header(void)
 {
-	const char *RED_BRIGHT = "\x1b[91m";
-	const char *RESET = "\x1b[0m";
+	const char	*red_bright = "\x1b[91m";
+	const char	*reset = "\x1b[0m";
 
-	printf("%s", RED_BRIGHT);
+	printf("%s", red_bright);
 	printf("\n");
 	printf("----------------------------------------\n");
 	printf("  ___  ____       _     _          _ _   \n");
@@ -28,5 +28,5 @@ void display_minishell_header(void)
 	printf(" \\_|  |_/_|_| |_|_|___/_| |_|\\___|_|_|  \n");
 	printf("                                        \n");
 	printf("-----Alloue plus vite que la CAF.-------\n\n");
-	printf("%s", RESET);
+	printf("%s", reset);
 }

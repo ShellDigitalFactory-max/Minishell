@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_to_array.c                                    :+:      :+:    :+:   */
+/*   exportable_env_list_to_strs_array.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 16:25:17 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/31 16:25:35 by tchobert         ###   ########.fr       */
+/*   Created: 2025/02/09 18:32:30 by tchobert          #+#    #+#             */
+/*   Updated: 2025/02/09 18:32:42 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static char	*build_variable_str(t_variable *variable)
 	return (variable_str);
 }
 
-
-void	exportables_variables_to_strs_array(t_variable_list env, char **array)
+static void	exportables_variables_to_strs_array(t_variable_list env,
+			char **array)
 {
 	char	*current_variable;
 	size_t	i;
@@ -36,7 +36,7 @@ void	exportables_variables_to_strs_array(t_variable_list env, char **array)
 			if (current_variable == NULL)
 			{
 				ft_dprintf(STDERR_FILENO, "minishell: malloc error "
-				"during command execution stting. Aborting.\n");
+					"during command execution stting. Aborting.\n");
 				exit (FAILURE);
 			}
 			array[i] = current_variable;
@@ -44,61 +44,6 @@ void	exportables_variables_to_strs_array(t_variable_list env, char **array)
 			++i;
 		}
 	}
-}
-
-void	env_list_to_env_array(t_variable_list env, char **array)
-{
-	char	*current_variable;
-	size_t	i;
-
-	i = 0;
-	current_variable = NULL;
-	while (env != NULL)
-	{
-		current_variable = build_variable_str(env->content);
-		if (current_variable == NULL)
-		{
-			ft_dprintf(STDERR_FILENO, "minishell: malloc error "
-			"during command execution stting. Aborting.\n");
-			exit (FAILURE);
-		}
-		array[i] = current_variable;
-		env = env->next;
-		++i;
-	}
-}
-
-void	args_list_to_args_array(t_command_args args, char **array)
-{
-	size_t	i;
-
-	i = 0;
-	while (args != NULL)
-	{
-		array[i] = ft_strdup(args->content);
-		if (array[i] == NULL)
-		{
-			ft_dprintf(STDERR_FILENO, "minishell: malloc error "
-			"during command execution stting. Aborting.\n");
-			exit (FAILURE);
-		}
-		args = args->next;
-		++i;
-	}
-}
-
-char	**list_to_strs_array(t_list *lst, void (*conversion_funct)(t_list *, char **))
-{
-	const size_t	array_size = ft_lstsize(lst);
-	char			**array;
-
-	array = (char **)malloc(sizeof(char *) * (array_size + 1));
-	if (array != NULL)
-	{
-		array[array_size] = NULL;
-		conversion_funct(lst, array);
-	}
-	return (array);
 }
 
 char	**exportable_env_list_to_strs_array(void)
@@ -121,7 +66,8 @@ char	**exportable_env_list_to_strs_array(void)
 	if (env_array != NULL)
 	{
 		env_array[env_size] = NULL;
-		exportables_variables_to_strs_array(*get_environment(), env_array);
+		exportables_variables_to_strs_array(*get_environment(),
+			env_array);
 	}
 	return (env_array);
 }

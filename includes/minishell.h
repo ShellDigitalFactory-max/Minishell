@@ -99,6 +99,7 @@ void				args_list_to_args_array(t_command_args args,
 						char **array);
 void				env_list_to_env_array(t_variable_list env,
 						char **array);
+char				**exportable_env_list_to_strs_array(void);
 t_command_status	build_complete_path(t_command *command,
 						char **command_env);
 t_command_status	command_path_manager(

@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_complete_path.c                              :+:      :+:    :+:   */
+/*   setup_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/01 15:54:56 by tchobert          #+#    #+#             */
-/*   Updated: 2025/02/01 15:55:06 by tchobert         ###   ########.fr       */
+/*   Created: 2025/02/09 19:49:37 by tchobert          #+#    #+#             */
+/*   Updated: 2025/02/09 19:49:56 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_command_status	check_complete_path(t_command *command)
+void	setup_pipe(t_semantic_machine *semantic_machine,
+				t_command *command)
 {
-	if (access(command->command_binary_path, F_OK | X_OK) == 0)
+	int	pipefd[2];
+
+	if (pipe(pipefd) == -1)
 	{
-		return (VALID_COMMAND);
+		perror("pipe");
+		exit(FAILURE);
 	}
-	return (INVALID_COMMAND);
+	if (command->command_redirections.out_stream == STDOUT_FILENO)
+		command->command_redirections.out_stream = pipefd[1];
+	else
+		close(pipefd[1]);
+	semantic_machine->next_command_input = pipefd[0];
 }

@@ -28,7 +28,8 @@ int	env(t_command *current_command)
 {
 	if (ft_lstsize(current_command->command_args) != 1)
 	{
-		ft_dprintf(STDERR_FILENO, "env: no options or arguments are accepted.\n");
+		ft_dprintf(STDERR_FILENO, "env: no options or arguments "
+			"are accepted.\n");
 		return (EXIT_FAILURE);
 	}
 	ft_lstiter(*get_environment(), print_exportable_variable);

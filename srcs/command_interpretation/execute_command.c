@@ -22,6 +22,7 @@ static void	clean_command_attributes(char **command_arguments,
 static t_path_type	get_path_type(const char *command)
 {
 	t_path_type	path_type;
+
 	if (*command == RELATIVE_PREFIX)
 	{
 		path_type = RELATIVE_PATH;
@@ -40,7 +41,8 @@ static t_path_type	get_path_type(const char *command)
 static t_command_status	get_command_validity(t_command *command,
 							char **command_env)
 {
-	const t_path_type	command_path_type = get_path_type(command->command_name);
+	const t_path_type	command_path_type = get_path_type(
+			command->command_name);
 
 	return (command_path_manager(command, command_env, command_path_type));
 }
@@ -51,12 +53,12 @@ t_command_status	execute_command(t_command *command)
 	char	**command_environment;
 
 	command_arguments = list_to_strs_array(
-							command->command_args, args_list_to_args_array);
+			command->command_args, args_list_to_args_array);
 	command_environment = list_to_strs_array(
-							*get_environment(), env_list_to_env_array);
+			*get_environment(), env_list_to_env_array);
 	if (get_command_validity(command, command_environment) == VALID_COMMAND)
 	{
-		execve(command->command_binary_path,command_arguments,
+		execve(command->command_binary_path, command_arguments,
 			command_environment);
 	}
 	ft_dprintf(STDERR_FILENO, "minishell: command not found: %s\n",

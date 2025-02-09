@@ -19,7 +19,7 @@ static t_builtin_type	get_builtin_type(const char *command_name)
 		"export",
 		NULL,
 	};
-	t_builtin_type	type;
+	t_builtin_type		type;
 
 	type = 0;
 	while (builtins_dictionary[type] != NULL)
@@ -52,11 +52,11 @@ static int	execute_alone_builtin(t_command *command, t_builtin builtin)
 	return (builtin_return);
 }
 
-int	execute_builtin(t_minishell_context *minishell_context, t_command *command, bool is_in_pipeline)
+int	execute_builtin(t_minishell_context *minishell_context,
+		t_command *command, bool is_in_pipeline)
 {
 	const t_builtin_type	builtin_type
-								= get_builtin_type(command->command_name);
-
+		= get_builtin_type(command->command_name);
 	static t_builtin		builtins[] = {
 		env,
 		export,
@@ -73,7 +73,8 @@ int	execute_builtin(t_minishell_context *minishell_context, t_command *command, 
 	{	
 		builtin_return = builtins[builtin_type](command);
 		clean_command_process(minishell_context);
-		delete_command_pipeline(&minishell_context->command_session.command_pipeline);
+		delete_command_pipeline(
+			&minishell_context->command_session.command_pipeline);
 		close_command_process_unused_fds(minishell_context, command);
 		exit(builtin_return);
 	}
