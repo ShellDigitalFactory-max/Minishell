@@ -110,6 +110,9 @@ t_command_status	check_complete_path(t_command *command);
 void				add_env_to_env(t_variable_list *dest,
 						t_variable_list to_add);
 void				add_command_env_to_shell_env(t_variable_list command_env);
+void				close_command_process_unused_fds(
+						t_minishell_context *minishell_context,
+						t_command *command);
 
 // BUILTINS
 
@@ -118,9 +121,5 @@ int					execute_builtin(t_minishell_context *minishell_context,
 int					env(t_command *current_command);
 int					export(t_command *command);
 int					pwd(t_command *command);
-char				**exportable_env_list_to_strs_array(void);
-void				close_command_process_unused_fds(
-						t_minishell_context *minishell_context,
-						t_command *command);
 
 #endif
