@@ -21,6 +21,7 @@ PATH_SRCS += srcs/environment_building
 PATH_SRCS += srcs/semantic_analysis
 PATH_SRCS += srcs/command_interpretation
 PATH_SRCS += srcs/builtins
+PATH_SRCS += srcs/execution_status
 
 PATH_SRCS += srcs/functions_for_debug
 
@@ -126,15 +127,19 @@ SRCS += env.c
 SRCS += export.c
 SRCS += pwd.c
 
+# srcs/exit_status
+
+SRCS += set_exit_status.c
+
 # print_functions to use for debug and tests
 
-# SRCS += print_env.c
-# SRCS += print_token.c
-# SRCS += print_token_list.c
-# SRCS += print_argument.c
-# SRCS += print_arguments_list.c
-# SRCS += print_command.c
-# SRCS += print_command_pipeline_list.c
+SRCS += print_env.c
+SRCS += print_token.c
+SRCS += print_token_list.c
+SRCS += print_argument.c
+SRCS += print_arguments_list.c
+SRCS += print_command.c
+SRCS += print_command_pipeline_list.c
 
 vpath %.c $(PATH_SRCS)
 

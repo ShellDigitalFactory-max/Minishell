@@ -71,23 +71,42 @@ static void	command_interpreter(t_minishell_context *minishell_context,
 		launch_command(minishell_context, command);
 }
 
+int	close_command_pipeline(t_command_pipeline cmd_pipeline, pid_t last_command_pid)
+{
+	pid_t	current_command_pid;
+	int		last_command_status;
+	int		exit_status;
+
+	while (cmd_pipeline != NULL)
+	{
+		current_command_pid = waitpid(((t_command *)cmd_pipeline->content)->command_pid,
+			&last_command_status, 0);
+		if (current_command_pid == last_command_pid)
+		{
+			if (WIFEXITED(last_command_status))
+				exit_status = WEXITSTATUS(last_command_status);
+			else
+				exit_status = -1;
+		}
+		cmd_pipeline = cmd_pipeline->next;
+	}
+	set_exit_status(exit_status);
+	return (exit_status);
+}
+
 int	command_pipeline_interpreter(t_minishell_context *minishell_context)
 {
 	t_command_pipeline	cmd_pipeline;
 	t_command_pipeline	current_command;
+	pid_t				last_command_pid;
 
 	cmd_pipeline = minishell_context->command_session.command_pipeline;
 	current_command = cmd_pipeline;
 	while (current_command != NULL)
 	{
 		command_interpreter(minishell_context, current_command->content);
+		last_command_pid = ((t_command *)current_command->content)->command_pid;
 		current_command = current_command->next;
 	}
-	while (cmd_pipeline != NULL)
-	{
-		waitpid(((t_command *)cmd_pipeline->content)->command_pid,
-			NULL, 0);
-		cmd_pipeline = cmd_pipeline->next;
-	}
-	return (EXIT_SUCCESS);
+	return (close_command_pipeline(cmd_pipeline, last_command_pid));
 }

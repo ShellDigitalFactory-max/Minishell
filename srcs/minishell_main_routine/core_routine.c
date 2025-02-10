@@ -39,13 +39,12 @@ t_command_line_analysis_status	command_line_analysis(
 	return (COMMAND_PIPELINE_SET);
 }
 
-static int	current_loop_process(t_minishell_context *minishell_context)
+static void	current_loop_process(t_minishell_context *minishell_context)
 {
 	if (command_line_analysis(minishell_context) == COMMAND_PIPELINE_SET)
 	{
 		command_pipeline_interpreter(minishell_context);
 	}
-	return (EXIT_SUCCESS);
 }
 
 int	core_routine(t_minishell_context *minishell_context)
@@ -56,6 +55,7 @@ int	core_routine(t_minishell_context *minishell_context)
 			= prompt_gets_user_input();
 		current_loop_process(minishell_context);
 		clean_current_loop_context(minishell_context);
+		print_env(get_environment());
 	}
 	return (EXIT_SUCCESS);
 }

@@ -40,9 +40,9 @@ static void	exportables_variables_to_strs_array(t_variable_list env,
 				exit (FAILURE);
 			}
 			array[i] = current_variable;
-			env = env->next;
-			++i;
 		}
+		env = env->next;
+		++i;
 	}
 }
 

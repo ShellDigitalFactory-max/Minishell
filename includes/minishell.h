@@ -39,6 +39,7 @@
 # define BUILTIN_ALONE 0
 # define BUILTIN_IN_PIPELINE 1
 # define PATH_MAX 4096
+# define COMMAND_NOT_FOUND_EXIT_STATUS 127
 
 // STRUCTURES
 
@@ -121,5 +122,9 @@ int					execute_builtin(t_minishell_context *minishell_context,
 int					env(t_command *current_command);
 int					export(t_command *command);
 int					pwd(t_command *command);
+
+// EXIT STATUS
+
+void				set_exit_status(int exit_status);
 
 #endif
