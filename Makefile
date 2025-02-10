@@ -136,6 +136,7 @@ SRCS += expand_word.c
 SRCS += no_expand.c
 SRCS += get_variable_from_env.c
 SRCS += quote.c
+SRCS += expander_exit.c
 
 # print_functions to use for debug and tests
 
