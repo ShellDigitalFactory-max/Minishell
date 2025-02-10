@@ -15,7 +15,6 @@
 static void	print_variable(void *content)
 {
 	const t_variable	*variable = (t_variable *)content;
-
 	printf("%s", variable->key);
 	printf("=");
 	printf("%s\n", variable->value);

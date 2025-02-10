@@ -31,7 +31,10 @@ bool	is_builtin(const char *command_name)
 		return (false);
 	while (builtins_dictionary[i] != NULL)
 	{
-		if (ft_strcmp(builtins_dictionary[i], command_name) == 0)
+		if ((ft_strncmp(builtins_dictionary[i], command_name,
+					ft_strlen(builtins_dictionary[i])) == 0)
+			&& ft_strlen(command_name)
+			== ft_strlen(builtins_dictionary[i]))
 			return (true);
 		++i;
 	}

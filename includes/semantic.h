@@ -71,12 +71,6 @@ typedef enum e_command_nature
 
 // STRUCTURES
 
-typedef struct s_token_type_and_machine_state
-{
-	t_token_type		token_type;
-	t_machine_states	machine_state;
-}				t_token_type_and_machine_state;
-
 typedef struct s_command_redirections
 {
 	t_opening_status	opening_status;
@@ -87,15 +81,23 @@ typedef struct s_command_redirections
 typedef struct s_command
 {
 	char					*command_name;
+	char					*command_binary_path;
 	t_command_args			command_args;
 	t_variable_list			command_environment;
 	t_command_redirections	command_redirections;
 	t_command_nature		command_nature;
 	char					*opening_failure_msg;
+	pid_t					command_pid;
 }				t_command;
 
+typedef struct s_semantic_machine
+{
+	t_machine_states	machine_state;
+	t_stream			next_command_input;
+}				t_semantic_machine;
+
 typedef t_semantic_analysis_state_return	(*t_semantic_state_function)(
-			t_machine_states *machine_state, t_token *current_token,
+			t_semantic_machine *semantic_machine, t_token *current_token,
 			t_command *current_command);
 
 // PROTOTYPES
@@ -103,37 +105,41 @@ typedef t_semantic_analysis_state_return	(*t_semantic_state_function)(
 void								save_opening_error(
 										t_command *current_command,
 										const char *file_name);
-t_command							*create_command(void);
+t_command							*create_command(
+										t_semantic_machine *machine);
 t_assignation_status				assignation_checker(char *assignation);
 t_semantic_analysis_state_return	state_assignation(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_token *current_token,
 										t_command *current_command);
 t_semantic_analysis_state_return	state_input_redirection(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_token *current_token,
 										t_command *current_command);
 t_semantic_analysis_state_return	state_output_redirection(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_token *current_token,
 										t_command *current_command);
 t_semantic_analysis_state_return	state_append_redirection(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_token *current_token,
 										t_command *current_command);
 t_semantic_analysis_state_return	state_heredoc(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_token *current_token,
 										t_command *current_command);
 t_semantic_analysis_state_return	state_command(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_token *current_token,
 										t_command *current_command);
 t_semantic_analysis_state_return	state_end_of_command(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_command_pipeline *cmd_pipeline,
 										t_command *current_command,
 										t_token *current_token);
+void								setup_pipe(
+										t_semantic_machine *semantic_machine,
+										t_command *command);
 void								delete_command_pipeline(
 										t_command_pipeline *cmd_pipeline);
 void								get_command_name(t_command *command);

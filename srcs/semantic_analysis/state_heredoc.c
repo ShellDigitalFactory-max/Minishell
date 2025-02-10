@@ -58,7 +58,7 @@ static void	save_heredoc_content(t_command *current_command,
 }
 
 t_semantic_analysis_state_return	state_heredoc(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_token *current_token,
 										t_command *current_command)
 {
@@ -73,8 +73,8 @@ t_semantic_analysis_state_return	state_heredoc(
 	heredoc_content = build_heredoc_content(current_token->token_lexem);
 	save_heredoc_content(current_command, heredoc_content, pipefd);
 	if (current_command->command_args == NULL)
-		*machine_state = STATE_ASSIGNATION;
+		semantic_machine->machine_state = STATE_ASSIGNATION;
 	else
-		*machine_state = STATE_COMMAND;
+		semantic_machine->machine_state = STATE_COMMAND;
 	return (TOKEN_PROCESSED);
 }

@@ -9,7 +9,9 @@ LIBFT := $(PATH_LIBFT)libft.a
 ### SRCS ######################################################################
 
 PATH_SRCS += srcs/
-PATH_SRCS += srcs/user_interface/
+PATH_SRCS += srcs/minishell_main_routine
+PATH_SRCS += srcs/exit_routines
+PATH_SRCS += srcs/user_interface
 PATH_SRCS += srcs/history
 PATH_SRCS += srcs/syntax_analysis
 PATH_SRCS += srcs/lexical_analysis
@@ -18,10 +20,21 @@ PATH_SRCS += srcs/environment_management
 PATH_SRCS += srcs/environment_building
 PATH_SRCS += srcs/semantic_analysis
 PATH_SRCS += srcs/expander
+PATH_SRCS += srcs/command_interpretation
+PATH_SRCS += srcs/builtins
 
 PATH_SRCS += srcs/functions_for_debug
 
+# srcs/minishell_main_routine
+
 SRCS += main.c
+SRCS += core_routine.c
+SRCS += clean_current_loop_context.c
+SRCS += is_empty_input.c
+SRCS += display_minishell_header.c
+
+# srcs/exit_routines
+
 SRCS += exit_shell_routine.c
 
 # scrs/user_interface
@@ -89,6 +102,30 @@ SRCS += state_end_of_command.c
 SRCS += get_command_name.c
 SRCS += is_builtin.c
 SRCS += delete_command_pipeline.c
+SRCS += setup_pipe.c
+
+# srcs/command_interpretation
+
+SRCS += add_env_to_env.c
+SRCS += add_command_env_to_shell_env.c
+SRCS += command_interpreter.c
+SRCS += launch_builtin.c
+SRCS += command_path_manager.c
+SRCS += build_complete_path.c
+SRCS += execute_command.c
+SRCS += list_to_strs_array.c
+SRCS += args_list_to_args_array.c
+SRCS += env_list_to_env_array.c
+SRCS += exportable_env_list_to_strs_array.c
+SRCS += check_complete_path.c
+SRCS += command_process.c
+SRCS += clean_command_process.c
+
+# srcs/builtins
+
+SRCS += env.c
+SRCS += export.c
+SRCS += pwd.c
 
 # srcs/expander/
 
@@ -129,6 +166,8 @@ TESTS_SRCS_DIR += ./tests/tests_environment_building/unit_tests
 TESTS_SRCS_DIR += ./tests/tests_semantic_analysis
 TESTS_SRCS_DIR += ./tests/tests_semantic_analysis/unit_tests
 TESTS_SRCS_DIR += ./tests/tests_semantic_analysis/behavior_tests
+TESTS_SRCS_DIR += ./tests/tests_command_interpretation
+TESTS_SRCS_DIR += ./tests/tests_command_interpretation/unit_tests
 
 TESTS_SRCS += tests_main.c
 
@@ -180,7 +219,9 @@ TESTS_SRCS += tests_state_append_redirection.c
 TESTS_SRCS += tests_state_heredoc.c
 TESTS_SRCS += tests_state_command.c
 
-# TESTS_SRCS += tests_multiple_redirections.c
+# command_interpretation
+
+# TESTS_SRCS += tests_add_env_to_env.c
 
 # Unity
 
@@ -211,6 +252,11 @@ PATH_INCLUDES_UNITY := ./Unity/src
 HEADERS += $(PATH_INCLUDES)minishell.h
 HEADERS += $(PATH_INCLUDES)history.h
 HEADERS += $(PATH_INCLUDES)user_interface.h
+HEADERS += $(PATH_INCLUDES)environment.h
+HEADERS += $(PATH_INCLUDES)lexing.h
+HEADERS += $(PATH_INCLUDES)parsing.h
+HEADERS += $(PATH_INCLUDES)semantic.h
+HEADERS += $(PATH_INCLUDES)command_interpretation.h
 
 ### COMPILATION ################################################################
 
