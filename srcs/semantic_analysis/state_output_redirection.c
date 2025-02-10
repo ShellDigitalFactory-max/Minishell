@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 t_semantic_analysis_state_return	state_output_redirection(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_token *current_token,
 										t_command *current_command)
 {
@@ -37,6 +37,6 @@ t_semantic_analysis_state_return	state_output_redirection(
 		}
 		current_command->command_redirections.out_stream = outfile_fd;
 	}
-	*machine_state = STATE_COMMAND;
+	semantic_machine->machine_state = STATE_COMMAND;
 	return (TOKEN_PROCESSED);
 }

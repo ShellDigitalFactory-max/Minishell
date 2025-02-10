@@ -12,13 +12,15 @@
 
 #include "minishell.h"
 
-void	setup_command_default_redirections(t_command *command)
+void	setup_command_default_redirections(t_command *command,
+			t_semantic_machine *semantic_machine)
 {
-	command->command_redirections.in_stream = STDIN_FILENO;
+	command->command_redirections.in_stream
+		= semantic_machine->next_command_input;
 	command->command_redirections.out_stream = STDOUT_FILENO;
 }
 
-t_command	*create_command(void)
+t_command	*create_command(t_semantic_machine *semantic_machine)
 {
 	t_command	*new_command;
 
@@ -29,7 +31,8 @@ t_command	*create_command(void)
 			"semantic analysis. Aborting\n");
 		exit(FAILURE);
 	}
-	setup_command_default_redirections(new_command);
+	setup_command_default_redirections(new_command, semantic_machine);
+	semantic_machine->next_command_input = STDIN_FILENO;
 	new_command->command_nature = UNDEFINED;
 	return (new_command);
 }

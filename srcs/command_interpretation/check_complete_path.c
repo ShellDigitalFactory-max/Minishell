@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_env.c                                        :+:      :+:    :+:   */
+/*   check_complete_path.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 19:36:34 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/09 19:36:49 by tchobert         ###   ########.fr       */
+/*   Created: 2025/02/01 15:54:56 by tchobert          #+#    #+#             */
+/*   Updated: 2025/02/01 15:55:06 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_variable(void *content)
+t_command_status	check_complete_path(t_command *command)
 {
-	const t_variable	*variable = (t_variable *)content;
-	printf("%s", variable->key);
-	printf("=");
-	printf("%s\n", variable->value);
-}
-
-void	print_env(t_variable_list *env)
-{
-	ft_lstiter(*env, print_variable);
+	if (access(command->command_binary_path, F_OK | X_OK) == 0)
+	{
+		return (VALID_COMMAND);
+	}
+	return (INVALID_COMMAND);
 }

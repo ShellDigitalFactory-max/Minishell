@@ -1,42 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_builtin.c                                       :+:      :+:    :+:   */
+/*   is_empty_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 14:09:11 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/27 14:09:25 by tchobert         ###   ########.fr       */
+/*   Created: 2025/02/03 15:45:28 by tchobert          #+#    #+#             */
+/*   Updated: 2025/02/03 15:45:51 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	is_builtin(const char *command_name)
+bool	is_empty_input(t_token_list tokenized_input)
 {
-	static const char	*builtins_dictionary[] = {
-		"echo",
-		"cd",
-		"pwd",
-		"export",
-		"unset",
-		"env",
-		"exit",
-		NULL,
-	};
-	size_t				i;
+	const size_t	list_size = ft_lstsize(tokenized_input);
 
-	i = 0;
-	if (command_name == NULL)
+	if (list_size > 2)
 		return (false);
-	while (builtins_dictionary[i] != NULL)
-	{
-		if ((ft_strncmp(builtins_dictionary[i], command_name,
-					ft_strlen(builtins_dictionary[i])) == 0)
-			&& ft_strlen(command_name)
-			== ft_strlen(builtins_dictionary[i]))
-			return (true);
-		++i;
-	}
+	if (((t_token *)tokenized_input->content)->token_type == TOKEN_LIST_START
+		&& list_size == 2)
+		return (true);
 	return (false);
 }

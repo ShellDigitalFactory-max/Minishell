@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_env.c                                        :+:      :+:    :+:   */
+/*   clean_current_loop_context.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 19:36:34 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/09 19:36:49 by tchobert         ###   ########.fr       */
+/*   Created: 2025/02/03 15:43:13 by tchobert          #+#    #+#             */
+/*   Updated: 2025/02/03 15:43:29 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_variable(void *content)
+void	clean_current_loop_context(t_minishell_context *minishell_context)
 {
-	const t_variable	*variable = (t_variable *)content;
-	printf("%s", variable->key);
-	printf("=");
-	printf("%s\n", variable->value);
-}
-
-void	print_env(t_variable_list *env)
-{
-	ft_lstiter(*env, print_variable);
+	free(minishell_context->command_session.user_input_line);
+	delete_token_list(
+		minishell_context->command_session.tokenized_user_input_line);
+	delete_command_pipeline(
+		&minishell_context->command_session.command_pipeline);
 }

@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_env.c                                        :+:      :+:    :+:   */
+/*   args_list_to_args_array.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 19:36:34 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/09 19:36:49 by tchobert         ###   ########.fr       */
+/*   Created: 2025/02/09 18:19:44 by tchobert          #+#    #+#             */
+/*   Updated: 2025/02/09 18:19:57 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_variable(void *content)
+void	args_list_to_args_array(t_command_args args, char **array)
 {
-	const t_variable	*variable = (t_variable *)content;
-	printf("%s", variable->key);
-	printf("=");
-	printf("%s\n", variable->value);
-}
+	size_t	i;
 
-void	print_env(t_variable_list *env)
-{
-	ft_lstiter(*env, print_variable);
+	i = 0;
+	while (args != NULL)
+	{
+		array[i] = ft_strdup(args->content);
+		if (array[i] == NULL)
+		{
+			ft_dprintf(STDERR_FILENO, "minishell: malloc error "
+				"during command execution stting. Aborting.\n");
+			exit (FAILURE);
+		}
+		args = args->next;
+		++i;
+	}
 }

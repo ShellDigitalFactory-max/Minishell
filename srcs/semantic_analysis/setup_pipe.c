@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_env.c                                        :+:      :+:    :+:   */
+/*   setup_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 19:36:34 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/09 19:36:49 by tchobert         ###   ########.fr       */
+/*   Created: 2025/02/09 19:49:37 by tchobert          #+#    #+#             */
+/*   Updated: 2025/02/09 19:49:56 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_variable(void *content)
+void	setup_pipe(t_semantic_machine *semantic_machine,
+				t_command *command)
 {
-	const t_variable	*variable = (t_variable *)content;
-	printf("%s", variable->key);
-	printf("=");
-	printf("%s\n", variable->value);
-}
+	int	pipefd[2];
 
-void	print_env(t_variable_list *env)
-{
-	ft_lstiter(*env, print_variable);
+	if (pipe(pipefd) == -1)
+	{
+		perror("pipe");
+		exit(FAILURE);
+	}
+	if (command->command_redirections.out_stream == STDOUT_FILENO)
+		command->command_redirections.out_stream = pipefd[1];
+	else
+		close(pipefd[1]);
+	semantic_machine->next_command_input = pipefd[0];
 }

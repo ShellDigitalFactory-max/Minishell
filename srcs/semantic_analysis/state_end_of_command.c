@@ -22,6 +22,11 @@ static bool	is_environment(t_command *command)
 	return (command->command_environment != NULL);
 }
 
+static bool	is_pipe(t_token_type token_type)
+{
+	return (token_type == PIPE_OPERATOR);
+}
+
 static t_command_nature	define_command_nature(t_command *command)
 {
 	if (is_command(command) == false && is_environment(command))
@@ -34,7 +39,7 @@ static t_command_nature	define_command_nature(t_command *command)
 }
 
 t_semantic_analysis_state_return	state_end_of_command(
-										t_machine_states *machine_state,
+										t_semantic_machine *semantic_machine,
 										t_command_pipeline *cmd_pipeline,
 										t_command *current_command,
 										t_token *current_token)
@@ -43,6 +48,8 @@ t_semantic_analysis_state_return	state_end_of_command(
 
 	get_command_name(current_command);
 	current_command->command_nature = define_command_nature(current_command);
+	if (is_pipe(current_token->token_type) == true)
+		setup_pipe(semantic_machine, current_command);
 	pipeline_segment = ft_lstnew(current_command);
 	if (pipeline_segment == NULL)
 	{
@@ -53,12 +60,12 @@ t_semantic_analysis_state_return	state_end_of_command(
 	ft_lstadd_back(cmd_pipeline, pipeline_segment);
 	if (current_token->token_type == TOKEN_LIST_END)
 	{
-		*machine_state = SEMANTIC_PROCESS_END;
+		semantic_machine->machine_state = SEMANTIC_PROCESS_END;
 		return (END_OF_TOKEN_LIST);
 	}
 	else
 	{
-		*machine_state = STATE_NEW_COMMAND;
+		semantic_machine->machine_state = STATE_NEW_COMMAND;
 		return (TOKEN_PROCESSED);
 	}
 }

@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_env.c                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 19:36:34 by tchobert          #+#    #+#             */
-/*   Updated: 2025/01/09 19:36:49 by tchobert         ###   ########.fr       */
+/*   Created: 2025/02/07 15:58:00 by tchobert          #+#    #+#             */
+/*   Updated: 2025/02/07 15:58:09 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_variable(void *content)
+int	pwd(t_command *command)
 {
-	const t_variable	*variable = (t_variable *)content;
-	printf("%s", variable->key);
-	printf("=");
-	printf("%s\n", variable->value);
-}
+	char	current_directory[PATH_MAX];
 
-void	print_env(t_variable_list *env)
-{
-	ft_lstiter(*env, print_variable);
+	if (ft_lstsize(command->command_args) > 1)
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: pwd: no arguments or options "
+			"are accepted.\n");
+		return (EXIT_FAILURE);
+	}
+	if (getcwd(current_directory, sizeof(current_directory)) == NULL)
+	{
+		perror("getcwd:");
+		return (EXIT_FAILURE);
+	}
+	printf("%s\n", current_directory);
+	return (EXIT_SUCCESS);
 }

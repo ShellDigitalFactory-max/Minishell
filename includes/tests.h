@@ -67,6 +67,9 @@ void	tests_state_append_redirection(void);
 void	tests_state_heredoc(void);
 void	tests_state_command(void);
 
-void	tests_multiple_redirections(void);
+// COMMAND_INTERPRETATION
+
+void	unit_tests_command_interpretation(void);
+void	tests_add_env_to_env(void);
 
 #endif

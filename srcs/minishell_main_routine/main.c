@@ -11,53 +11,15 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 #ifndef TEST_MODE
-
-static int	main_process(t_minishell_context *minishell_context)
-{
-	if (minishell_context->command_session.user_input_line == CTRL_D)
-	{
-		exit_shell_routine();
-	}
-	if (lexe_input(&minishell_context->command_session)
-		== LEXING_FAILURE)
-	{
-		ft_dprintf(STDERR_FILENO, "Memory allocation failure during lexing.\n");
-		return (EXIT_FAILURE);
-	}
-	if (parse_input(
-			minishell_context->command_session.tokenized_user_input_line)
-		== INVALID_SYNTAX)
-	{
-		return (EXIT_FAILURE);
-	}
-	minishell_context->command_session.command_pipeline = semantic_analyzer
-		(minishell_context->command_session.tokenized_user_input_line);
-	return (EXIT_SUCCESS);
-}
-
-static int	core_routine(t_minishell_context *minishell_context)
-{
-	(void)minishell_context;
-	while (MSH_LOOP)
-	{
-		minishell_context->command_session.user_input_line
-			= prompt_gets_user_input();
-		main_process(minishell_context);
-		free(minishell_context->command_session.user_input_line);
-		delete_token_list(
-			minishell_context->command_session.tokenized_user_input_line);
-		delete_command_pipeline(
-			&minishell_context->command_session.command_pipeline);
-	}
-	return (EXIT_SUCCESS);
-}
 
 static int	launch_shell(char **env)
 {
 	t_minishell_context	minishell_context;
 	struct sigaction	sa;
 
+	display_minishell_header();
 	ft_bzero(&minishell_context, sizeof(minishell_context));
 	if (build_environment(env) == PROCESS_FAILURE)
 	{
@@ -71,8 +33,11 @@ static int	launch_shell(char **env)
 
 int	main(int ac, char **av, char **env)
 {
-	(void)ac;
-	(void)av;
+	if (ac != 1 || av[1] != NULL)
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: no arguments are accepted.\n");
+		return (EXIT_FAILURE);
+	}
 	return (launch_shell(env));
 }
 #endif
