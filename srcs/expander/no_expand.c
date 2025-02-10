@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 06:09:59 by linux             #+#    #+#             */
-/*   Updated: 2025/02/07 16:47:41 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/10 15:52:41 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@ static bool	is_no_expand(char c, t_quote_state quote_state)
 	if (quote_state == SINGLE_QUOTE && (c == '$' || c == '~'))
 		return (true);
 	else if (quote_state == DOUBLE_QUOTE && c == '~')
-	{
 		return (true);
-	}
-	else if ((quote_state == DOUBLE_QUOTE && c == '\"')
-		|| (quote_state == SINGLE_QUOTE && c == '\''))
-		return (false);
-	else if (c != '$' && c != '~' && c != '\0')
+	else if ((quote_state == SINGLE_QUOTE && c == '\"')
+		|| (quote_state == DOUBLE_QUOTE && c == '\''))
+		return (true);
+	else if (c != '$' && c != '~' && c != '\0' && c != '\'' && c != '\"')
 		return (true);
 	return (false);
 }

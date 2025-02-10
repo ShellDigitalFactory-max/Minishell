@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 03:34:13 by linux             #+#    #+#             */
-/*   Updated: 2025/02/07 16:58:24 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/10 15:49:20 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 typedef enum e_quote_state
 {
+	ERROR_QUOTE = -1,
 	NO_QUOTE,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE,
