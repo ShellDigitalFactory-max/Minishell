@@ -29,7 +29,6 @@ static int	launch_shell(char **env)
 	}
 	set_exit_status(0);
 	setup_signals(&sa);
-	print_env(get_environment());
 	return (core_routine(&minishell_context));
 }
 

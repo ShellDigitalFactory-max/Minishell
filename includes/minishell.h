@@ -39,6 +39,7 @@
 # define BUILTIN_ALONE 0
 # define BUILTIN_IN_PIPELINE 1
 # define PATH_MAX 4096
+# define INVALID_ARGUMENT 125
 # define COMMAND_NOT_FOUND_EXIT_STATUS 127
 
 // STRUCTURES
@@ -114,6 +115,8 @@ void				add_command_env_to_shell_env(t_variable_list command_env);
 void				close_command_process_unused_fds(
 						t_minishell_context *minishell_context,
 						t_command *command);
+int					close_command_pipeline(t_command_pipeline cmd_pipeline,
+						pid_t last_command_pid);
 
 // BUILTINS
 
@@ -126,5 +129,6 @@ int					pwd(t_command *command);
 // EXIT STATUS
 
 void				set_exit_status(int exit_status);
+int					get_exit_status_value(void);
 
 #endif

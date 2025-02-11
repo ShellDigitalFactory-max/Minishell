@@ -55,7 +55,6 @@ int	core_routine(t_minishell_context *minishell_context)
 			= prompt_gets_user_input();
 		current_loop_process(minishell_context);
 		clean_current_loop_context(minishell_context);
-		print_env(get_environment());
 	}
 	return (EXIT_SUCCESS);
 }

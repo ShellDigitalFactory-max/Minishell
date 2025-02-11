@@ -120,6 +120,7 @@ SRCS += exportable_env_list_to_strs_array.c
 SRCS += check_complete_path.c
 SRCS += command_process.c
 SRCS += clean_command_process.c
+SRCS += close_command_pipeline.c
 
 # srcs/builtins
 
@@ -130,16 +131,17 @@ SRCS += pwd.c
 # srcs/exit_status
 
 SRCS += set_exit_status.c
+SRCS += get_exit_status_value.c
 
 # print_functions to use for debug and tests
 
-SRCS += print_env.c
-SRCS += print_token.c
-SRCS += print_token_list.c
-SRCS += print_argument.c
-SRCS += print_arguments_list.c
-SRCS += print_command.c
-SRCS += print_command_pipeline_list.c
+# SRCS += print_env.c
+# SRCS += print_token.c
+# SRCS += print_token_list.c
+# SRCS += print_argument.c
+# SRCS += print_arguments_list.c
+# SRCS += print_command.c
+# SRCS += print_command_pipeline_list.c
 
 vpath %.c $(PATH_SRCS)
 
