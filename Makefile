@@ -126,6 +126,7 @@ SRCS += close_command_pipeline.c
 
 SRCS += env.c
 SRCS += export.c
+SRCS += display_sorted_exportables_variables.c
 SRCS += pwd.c
 
 # srcs/exit_status

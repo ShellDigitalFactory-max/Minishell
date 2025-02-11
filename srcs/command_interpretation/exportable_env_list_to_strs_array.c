@@ -30,6 +30,8 @@ static void	exportables_variables_to_strs_array(t_variable_list env,
 	current_variable = NULL;
 	while (env != NULL && i < env_size)
 	{
+		if (((t_variable *)env->content)->is_exportable == false)
+			env = env->next;
 		if (((t_variable *)env->content)->is_exportable == true)
 		{
 			current_variable = build_variable_str(env->content);
@@ -55,7 +57,7 @@ char	**exportable_env_list_to_strs_array(void)
 
 	env = *get_environment();
 	env_size = 0;
-	while (env->next)
+	while (env)
 	{
 		if (((t_variable *)env->content)->is_exportable == true)
 		{
