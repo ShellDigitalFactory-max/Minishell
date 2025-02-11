@@ -84,8 +84,29 @@ static void	display_sorted_exportables_variables(char **env)
 	ft_free_and_null(env);
 }
 
+static int	export_variables(char **variables)
+{
+	size_t	i;
+
+	i = 0;
+	while (variables[i] != NULL)
+	{
+		if (assignation_checker(variables[i]) == INVALID_ASSIGNATION)
+		{
+			ft_dprintf(STDERR_FILENO, "minishell: export: `%s': not a valid identifier\n", variables[i]);
+		}
+		else
+			set_variable_from_keyvalue(variables[i], EXPORTABLE);
+		++i;
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	export(t_command *command)
 {
+	char	**variables;
+
+	variables = NULL;
 	if (ft_lstsize(command->command_args) == 1)
 	{
 		exportable_env_list_to_strs_array();
@@ -93,5 +114,8 @@ int	export(t_command *command)
 			exportable_env_list_to_strs_array());
 		return (EXIT_SUCCESS);
 	}
+	variables = list_to_strs_array(command->command_args, args_list_to_args_array);
+	export_variables(variables + 1);
+	ft_free_and_null(variables);
 	return (EXIT_SUCCESS);
 }

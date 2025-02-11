@@ -17,7 +17,7 @@ static bool	is_first_letter_valid(const char c)
 	return (ft_isalpha(c) || c == '_');
 }
 
-static bool	is_assignation(const char *assignation)
+bool	is_assignation(const char *assignation)
 {
 	const char	*is_equal_operator = ft_strchr(assignation, EQUAL_OPERATOR);
 
