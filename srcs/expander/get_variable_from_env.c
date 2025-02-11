@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 05:52:27 by linux             #+#    #+#             */
-/*   Updated: 2025/02/10 19:47:33 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/11 17:48:59 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_lexem	get_variable_from_env(const char *key)
 	t_list			*current_variable;
 	t_variable		*variable;
 
+	// if (key == "$")
+	// 	return (ft_strdup("$"));
 	environment = get_environment();
 	current_variable = *environment;
 	while (current_variable != NULL)
@@ -27,7 +29,7 @@ t_lexem	get_variable_from_env(const char *key)
 			return (ft_strdup(variable->value));
 		current_variable = current_variable->next;
 	}
-	if (current_variable == NULL)
+	if (current_variable == NULL )
 		return (ft_strdup(""));
 	return (NULL);
 }
