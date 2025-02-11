@@ -21,14 +21,14 @@ static char	*build_variable_str(t_variable *variable)
 }
 
 static void	exportables_variables_to_strs_array(t_variable_list env,
-			char **array)
+			char **array, size_t env_size)
 {
 	char	*current_variable;
 	size_t	i;
 
 	i = 0;
 	current_variable = NULL;
-	while (env != NULL)
+	while (env != NULL && i < env_size)
 	{
 		if (((t_variable *)env->content)->is_exportable == true)
 		{
@@ -44,6 +44,7 @@ static void	exportables_variables_to_strs_array(t_variable_list env,
 		env = env->next;
 		++i;
 	}
+	array[i] = NULL;
 }
 
 char	**exportable_env_list_to_strs_array(void)
@@ -54,7 +55,7 @@ char	**exportable_env_list_to_strs_array(void)
 
 	env = *get_environment();
 	env_size = 0;
-	while (env != NULL)
+	while (env->next)
 	{
 		if (((t_variable *)env->content)->is_exportable == true)
 		{
@@ -67,7 +68,7 @@ char	**exportable_env_list_to_strs_array(void)
 	{
 		env_array[env_size] = NULL;
 		exportables_variables_to_strs_array(*get_environment(),
-			env_array);
+			env_array, env_size);
 	}
 	return (env_array);
 }

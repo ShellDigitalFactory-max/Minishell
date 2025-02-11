@@ -15,7 +15,8 @@
 int	get_exit_status_value(void)
 {
 	const t_variable	*exit_status_variable
-		= find_variable_in_environment_from_key("?", get_environment());
+		= find_variable_in_environment_from_key(EXIT_STATUS_KEY,
+			get_environment());
 	int					exit_status;
 
 	exit_status = ft_atoi(exit_status_variable->value);

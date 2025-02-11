@@ -63,12 +63,12 @@ static void	display_sorted_exportables_variables(char **env)
 
 	i = 0;
 	count = 0;
-	while (env[count])
+	while (env[count] != NULL)
 	{
 		count++;
 	}
 	sorted_env = malloc(count * sizeof(char *));
-	if (!sorted_env)
+	if (sorted_env == NULL)
 	{
 		perror("malloc");
 		exit(FAILURE);
@@ -104,18 +104,17 @@ static int	export_variables(char **variables)
 
 int	export(t_command *command)
 {
-	char	**variables;
+	char	**variables_to_export;
 
-	variables = NULL;
+	variables_to_export = NULL;
 	if (ft_lstsize(command->command_args) == 1)
 	{
-		exportable_env_list_to_strs_array();
 		display_sorted_exportables_variables(
 			exportable_env_list_to_strs_array());
 		return (EXIT_SUCCESS);
 	}
-	variables = list_to_strs_array(command->command_args, args_list_to_args_array);
-	export_variables(variables + 1);
-	ft_free_and_null(variables);
+	variables_to_export = list_to_strs_array(command->command_args, args_list_to_args_array);
+	export_variables(variables_to_export + 1);
+	ft_free_and_null(variables_to_export);
 	return (EXIT_SUCCESS);
 }

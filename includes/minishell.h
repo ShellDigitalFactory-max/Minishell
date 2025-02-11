@@ -36,6 +36,7 @@
 
 # define MSH_LOOP 1
 
+# define EXIT_STATUS_KEY "?"
 # define BUILTIN_ALONE 0
 # define BUILTIN_IN_PIPELINE 1
 # define PATH_MAX 4096
