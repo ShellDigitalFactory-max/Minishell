@@ -89,6 +89,10 @@ int	command_pipeline_interpreter(t_minishell_context *minishell_context)
 	if (ft_lstsize(cmd_pipeline) == 1
 		&& ((t_command *)cmd_pipeline->content)->command_nature == BUILTIN)
 		return (get_exit_status_value());
+	if (ft_lstsize(cmd_pipeline) == 1
+		&& ((t_command *)cmd_pipeline->content)->command_nature
+		== ONLY_ASSIGNATION)
+		return (get_exit_status_value());
 	else
 		return (close_command_pipeline(cmd_pipeline, last_command_pid));
 }

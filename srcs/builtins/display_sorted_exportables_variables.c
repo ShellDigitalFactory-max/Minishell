@@ -50,7 +50,7 @@ static void	display_variables(char **sorted_env, size_t count)
 	i = 0;
 	while (i < count)
 	{
-		printf("declare -x %s\n", sorted_env[i]);
+		printf("export %s\n", sorted_env[i]);
 		++i;
 	}
 }
