@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 00:47:34 by linux             #+#    #+#             */
-/*   Updated: 2025/02/11 15:06:13 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/12 02:28:18 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ static void	init_expanded_word(t_lexem *expanded_word)
 static t_lexem	choose_expand(t_lexem word, size_t *i, t_lexem expanded_word,
 	t_quote_state quote_state)
 {
-	if (word[*i] == '$' && quote_state != SINGLE_QUOTE && word[*i + 1] != '\0')
+	if (word[*i] == '$' && quote_state != SINGLE_QUOTE)
 	{
+		printf("word: %s\n", word);
 		expanded_word = expand_variable(word, i, expanded_word);
 	}
 	if (word[*i] == '~' && quote_state == NO_QUOTE)
@@ -59,10 +60,8 @@ t_lexem	expand_word(t_lexem word, t_quote_state *quote_state)
 			++i;
 		}
 		else
-		{
 			expanded_word = choose_expand(word, &i, expanded_word,
 					*quote_state);
-		}
 	}
 	return (expanded_word);
 }

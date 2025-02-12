@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 06:09:59 by linux             #+#    #+#             */
-/*   Updated: 2025/02/11 17:34:58 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/12 02:28:36 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@ t_lexem	no_expand(t_lexem word, size_t *i, t_lexem expanded_word,
 	t_lexem	tmp;
 	t_lexem	tmp_no_expand;
 
-	if (word[0] == '$' && (word[1] == '\0' || word[1] == ' ' || word[1]== '\t' || word[1] == '\n'))
-	{
-		expanded_word = ft_strdup("$");
-		++(*i);
-	}
 	i_nexp = *i;
 	while (is_no_expand(word[i_nexp], quote_state))
 	{
