@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 03:33:56 by linux             #+#    #+#             */
-/*   Updated: 2025/02/12 16:41:47 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/12 17:06:06 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,19 @@ static t_lexem	manage_specific_case(t_lexem word, t_lexem expanded_word,
 	{
 		expanded_word = ft_strjoin(temp_expanded,
 				ft_itoa(get_exit_status_value()));
-		// ++(*i);
+		++(*i);
 		free(temp_expanded);
 	}
-	else if (quote_state != NO_QUOTE || word[*i + 1] == '\0' || word[*i + 1] == ' ')
+	else if (quote_state == NO_QUOTE && ft_isalnum(word[*i + 1]) == 0
+		&& word[*i + 1] != '_' && word[*i + 1] != '\'' && word[*i + 1] != '\"')
 	{
-		if (word[*i + 1] == ' ')
-			expanded_word = ft_strjoin(temp_expanded, "$ ");
-		else
-			expanded_word = ft_strjoin(temp_expanded, "$");
+		expanded_word = ft_strjoin(temp_expanded, "$");
+		free(temp_expanded);
+	}
+	else if (quote_state != NO_QUOTE || word[*i + 1] == '\0'
+		|| word[*i + 1] == ' ')
+	{
+		expanded_word = ft_strjoin(temp_expanded, "$");
 		free(temp_expanded);
 	}
 	++(*i);
@@ -87,7 +91,8 @@ static bool	is_not_valid_variable_name(char *variable_name, size_t *i)
 	return (false);
 }
 
-t_lexem	expand_variable(t_lexem word, size_t *i, t_lexem expanded_word, t_quote_state quote_state)
+t_lexem	expand_variable(t_lexem word, size_t *i, t_lexem expanded_word,
+		t_quote_state quote_state)
 {
 	t_lexem		variable_name;
 	t_lexem		variable_value;
@@ -95,8 +100,8 @@ t_lexem	expand_variable(t_lexem word, size_t *i, t_lexem expanded_word, t_quote_
 
 	if (is_not_valid_variable_name(word, i) == true)
 	{
-		expanded_word = manage_specific_case(word, expanded_word, i, quote_state);
-		++(*i);
+		expanded_word = manage_specific_case(word, expanded_word,
+				i, quote_state);
 		return (expanded_word);
 	}
 	++(*i);
