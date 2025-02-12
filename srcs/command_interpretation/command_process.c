@@ -86,6 +86,6 @@ void	command_process(t_minishell_context *minishell_context,
 	if (execute_command(command) == INVALID_COMMAND)
 	{
 		clean_command_process(minishell_context);
-		exit(FAILURE);
+		exit(COMMAND_NOT_FOUND_EXIT_STATUS);
 	}
 }

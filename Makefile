@@ -22,6 +22,7 @@ PATH_SRCS += srcs/semantic_analysis
 PATH_SRCS += srcs/expander
 PATH_SRCS += srcs/command_interpretation
 PATH_SRCS += srcs/builtins
+PATH_SRCS += srcs/execution_status
 
 PATH_SRCS += srcs/functions_for_debug
 
@@ -120,11 +121,13 @@ SRCS += exportable_env_list_to_strs_array.c
 SRCS += check_complete_path.c
 SRCS += command_process.c
 SRCS += clean_command_process.c
+SRCS += close_command_pipeline.c
 
 # srcs/builtins
 
 SRCS += env.c
 SRCS += export.c
+SRCS += display_sorted_exportables_variables.c
 SRCS += pwd.c
 
 # srcs/expander/
@@ -137,6 +140,11 @@ SRCS += no_expand.c
 SRCS += get_variable_from_env.c
 SRCS += quote.c
 SRCS += expander_exit.c
+
+# srcs/exit_status
+
+SRCS += set_exit_status.c
+SRCS += get_exit_status_value.c
 
 # print_functions to use for debug and tests
 

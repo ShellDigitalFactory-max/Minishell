@@ -6,11 +6,30 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 03:33:56 by linux             #+#    #+#             */
-/*   Updated: 2025/02/12 02:37:42 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/12 02:56:42 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static t_lexem	manage_specific_case(t_lexem word, t_lexem expanded_word,
+		size_t *i)
+{
+	t_lexem	temp_expanded;
+
+	temp_expanded = expanded_word;
+	if (word[*i + 1] == '?')
+	{
+		expanded_word = ft_strjoin(temp_expanded,
+			ft_itoa(get_exit_status_value()));
+		++(*i);
+	}
+	else
+		expanded_word = ft_strjoin(temp_expanded, "$");
+	++(*i);
+	free(temp_expanded);
+	return (expanded_word);
+}
 
 static t_lexem	init_variable_from_env(t_lexem expanded_word,
 	t_lexem variable_name)
@@ -70,7 +89,7 @@ t_lexem	expand_variable(t_lexem word, size_t *i, t_lexem expanded_word)
 
 	if (is_not_valid_variable_name(word, i) == true)
 	{
-		expanded_word = ft_strjoin(expanded_word, "$");
+		expanded_word = manage_specific_case(word, expanded_word, i);
 		++(*i);
 		return (expanded_word);
 	}
