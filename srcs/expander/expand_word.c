@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 00:47:34 by linux             #+#    #+#             */
-/*   Updated: 2025/02/12 02:40:29 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/12 03:09:11 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,7 @@ t_lexem	expand_word(t_lexem word, t_quote_state *quote_state)
 	if (word == NULL)
 		return (NULL);
 	init_expanded_word(&expanded_word);
-	if (expanded_word == NULL)
-		return (NULL);
 	i = 0;
-	expanded_word = ft_strdup("");
-	if (expanded_word == NULL)
-		expander_exit();
 	while (word[i] != '\0')
 	{
 		if (is_quote(word[i], *quote_state))

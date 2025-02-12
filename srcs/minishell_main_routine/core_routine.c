@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:23:41 by tchobert          #+#    #+#             */
-/*   Updated: 2025/02/11 15:01:31 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/12 03:10:42 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ t_command_line_analysis_status	command_line_analysis(
 	{
 		return (INVALID_COMMAND_LINE);
 	}
-	print_token_list(
-		minishell_context->command_session.tokenized_user_input_line);
 	minishell_context->command_session.command_pipeline = semantic_analyzer
 		(minishell_context->command_session.tokenized_user_input_line);
 	return (COMMAND_PIPELINE_SET);
