@@ -6,11 +6,18 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 05:52:27 by linux             #+#    #+#             */
-/*   Updated: 2025/02/12 02:26:57 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/12 15:32:11 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static size_t	ft_get_max_size(const char *a,const char *b)
+{
+	if (ft_strlen(a) > ft_strlen(b))
+		return (ft_strlen(a));
+	return (ft_strlen(b));
+}
 
 t_lexem	get_variable_from_env(const char *key)
 {
@@ -23,8 +30,8 @@ t_lexem	get_variable_from_env(const char *key)
 	while (current_variable != NULL)
 	{
 		variable = current_variable->content;
-		if (ft_strcmp(variable->key, key) == 0)
-			return (ft_strdup(variable->value));
+		if (ft_strncmp(variable->key, key, ft_get_max_size(variable->key, key)) == 0)
+		return (ft_strdup(variable->value));
 		current_variable = current_variable->next;
 	}
 	if (current_variable == NULL )

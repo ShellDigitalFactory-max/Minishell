@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 03:33:56 by linux             #+#    #+#             */
-/*   Updated: 2025/02/12 03:01:59 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/12 15:27:30 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,21 @@ static t_lexem	manage_specific_case(t_lexem word, t_lexem expanded_word,
 {
 	t_lexem	temp_expanded;
 
+	printf("manage_specific_case\n");
 	temp_expanded = expanded_word;
 	if (word[*i + 1] == '?')
 	{
 		expanded_word = ft_strjoin(temp_expanded,
 				ft_itoa(get_exit_status_value()));
 		++(*i);
+		free(temp_expanded);
 	}
-	else
+	else if (word[*i + 1] != '\"' && word[*i + 1] != '\'')
+	{
 		expanded_word = ft_strjoin(temp_expanded, "$");
+		free(temp_expanded);
+	}
 	++(*i);
-	free(temp_expanded);
 	return (expanded_word);
 }
 
