@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "user_interface.h"
+#include "minishell.h"
 
 static void	init_signals(const struct sigaction *sa)
 {
@@ -31,6 +31,7 @@ void	setup_signals(struct sigaction *sa)
 
 void	sigint_routine(void)
 {
+	set_exit_status(128 + SIGINT);
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);

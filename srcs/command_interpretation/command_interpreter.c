@@ -65,7 +65,8 @@ static void	command_interpreter(t_minishell_context *minishell_context,
 		&& is_command_alone(
 			minishell_context->command_session.command_pipeline))
 	{
-		execute_builtin(minishell_context, command, BUILTIN_ALONE);
+		set_exit_status(execute_builtin(minishell_context, command,
+				BUILTIN_ALONE));
 	}
 	else
 		launch_command(minishell_context, command);
@@ -75,19 +76,19 @@ int	command_pipeline_interpreter(t_minishell_context *minishell_context)
 {
 	t_command_pipeline	cmd_pipeline;
 	t_command_pipeline	current_command;
+	pid_t				last_command_pid;
 
 	cmd_pipeline = minishell_context->command_session.command_pipeline;
 	current_command = cmd_pipeline;
 	while (current_command != NULL)
 	{
 		command_interpreter(minishell_context, current_command->content);
+		last_command_pid = ((t_command *)current_command->content)->command_pid;
 		current_command = current_command->next;
 	}
-	while (cmd_pipeline != NULL)
-	{
-		waitpid(((t_command *)cmd_pipeline->content)->command_pid,
-			NULL, 0);
-		cmd_pipeline = cmd_pipeline->next;
-	}
-	return (EXIT_SUCCESS);
+	if (ft_lstsize(cmd_pipeline) == 1
+		&& ((t_command *)cmd_pipeline->content)->command_nature == BUILTIN)
+		return (get_exit_status_value());
+	else
+		return (close_command_pipeline(cmd_pipeline, last_command_pid));
 }

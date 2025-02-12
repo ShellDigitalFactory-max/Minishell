@@ -30,7 +30,7 @@ int	env(t_command *current_command)
 	{
 		ft_dprintf(STDERR_FILENO, "env: no options or arguments "
 			"are accepted.\n");
-		return (EXIT_FAILURE);
+		return (INVALID_ARGUMENT);
 	}
 	ft_lstiter(*get_environment(), print_exportable_variable);
 	return (EXIT_SUCCESS);
