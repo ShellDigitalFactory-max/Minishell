@@ -27,7 +27,7 @@ static int	update_variable_status(char *variable_key)
 	t_variable	*variable;
 
 	variable = find_variable_in_environment_from_key(variable_key,
-					get_environment());
+			get_environment());
 	if (variable == NULL)
 		return (EXIT_SUCCESS);
 	variable->is_exportable = EXPORTABLE;
