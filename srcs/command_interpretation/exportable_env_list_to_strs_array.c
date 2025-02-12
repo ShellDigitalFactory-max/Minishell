@@ -16,7 +16,7 @@ static char	*build_variable_str(t_variable *variable)
 {
 	char	*variable_str;
 
-	ft_asprintf(&variable_str, "%s=%s", variable->key, variable->value);
+	ft_asprintf(&variable_str, "%s=\"%s\"", variable->key, variable->value);
 	return (variable_str);
 }
 

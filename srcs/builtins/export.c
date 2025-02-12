@@ -12,6 +12,28 @@
 
 #include "minishell.h"
 
+static bool	is_first_letter_valid(const char c)
+{
+	return (ft_isalpha(c) || c == '_');
+}
+
+static bool	is_only_variable_name(const char *variable_name)
+{
+	return (ft_strchr(variable_name, EQUAL_OPERATOR) == NULL);
+}
+
+static int	update_variable_status(char *variable_key)
+{
+	t_variable	*variable;
+
+	variable = find_variable_in_environment_from_key(variable_key,
+			get_environment());
+	if (variable == NULL)
+		return (EXIT_SUCCESS);
+	variable->is_exportable = EXPORTABLE;
+	return (EXIT_SUCCESS);
+}
+
 static int	export_variables(char **variables)
 {
 	size_t	i;
@@ -19,10 +41,14 @@ static int	export_variables(char **variables)
 	i = 0;
 	while (variables[i] != NULL)
 	{
-		if (assignation_checker(variables[i]) == INVALID_ASSIGNATION)
+		if (is_first_letter_valid(*(variables[i])) == false)
 		{
 			ft_dprintf(STDERR_FILENO, "minishell: export: "
 				"`%s': not a valid identifier\n", variables[i]);
+		}
+		else if (is_only_variable_name(variables[i]))
+		{
+			update_variable_status(variables[i]);
 		}
 		else
 			set_variable_from_keyvalue(variables[i], EXPORTABLE);
