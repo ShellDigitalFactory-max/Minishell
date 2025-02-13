@@ -45,10 +45,20 @@ int	cd(t_command *command)
 
 	args = list_to_strs_array(command->command_args, args_list_to_args_array);
 	if (set_variables(old_pwd, &target, args))
+	{
+		ft_free_and_null(args);
 		return (EXIT_FAILURE);
+	}
 	if (change_directory(target))
+	{
+		ft_free_and_null(args);
 		return (EXIT_FAILURE);
+	}
 	if (update_env_variables(old_pwd))
+	{
+		ft_free_and_null(args);
 		return (EXIT_FAILURE);
+	}
+	ft_free_and_null(args);
 	return (EXIT_SUCCESS);
 }
