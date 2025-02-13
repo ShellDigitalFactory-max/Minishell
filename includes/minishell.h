@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:11:56 by hucherea          #+#    #+#             */
-/*   Updated: 2025/02/13 04:23:05 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/13 14:09:36 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ typedef enum e_builtin_type
 {
 	ENV,
 	EXPORT,
-	PWD
+	PWD,
+	CD
 }			t_builtin_type;
 
 typedef int	(*t_builtin)(t_command *current_command);
