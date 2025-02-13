@@ -26,11 +26,14 @@
 # define MSH_PROMPT "SDF$> "
 # define CTRL_D 0
 # define FAILURE -1
+# define MAIN_PROMPT 0
+# define SUBPROMPT 1
 
 // PROTOTYPES
 
 void	signal_handler(int signum);
 void	received_signal(void);
+char	*prompt_gets_user_input(bool is_subprompt);
 void	setup_signals(struct sigaction *sa);
 
 #endif

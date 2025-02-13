@@ -13,6 +13,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+extern int	stop;
+
 // INCLUDES
 
 # include "history.h"
@@ -81,7 +83,6 @@ typedef int	(*t_builtin)(t_command *current_command);
 void				display_minishell_header(void);
 int					core_routine(t_minishell_context *minishell_context);
 int					exit_shell_routine(void);
-char				*prompt_gets_user_input(void);
 t_lexing_status		lexe_input(t_command_session *current_command);
 t_syntax_status		parse_input(t_token_list token_list);
 t_command_pipeline	semantic_analyzer(t_token_list token_list);
@@ -133,5 +134,9 @@ int					pwd(t_command *command);
 
 void				set_exit_status(int exit_status);
 int					get_exit_status_value(void);
+
+// SIGNALS HANDLING
+
+void				setup_default_signals_handling(void);
 
 #endif

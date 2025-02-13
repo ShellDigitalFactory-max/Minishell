@@ -29,8 +29,12 @@ static char	*build_heredoc_content(const char *delimiter)
 	heredoc_content = ft_strdup("");
 	while (HEREDOC_PROCESSING)
 	{
-		temp_line = readline("captain'hirdock>");
-		if (is_delimiter(delimiter, temp_line))
+		if (stop == 1)
+			break;
+		temp_line = prompt_gets_user_input(SUBPROMPT);
+		if (stop == 1)
+			break;
+		if (temp_line == CTRL_D || is_delimiter(delimiter, temp_line))
 		{
 			free(temp_line);
 			break ;
@@ -70,6 +74,7 @@ t_semantic_analysis_state_return	state_heredoc(
 		perror("pipe");
 		exit(FAILURE);
 	}
+	stop = 0;
 	heredoc_content = build_heredoc_content(current_token->token_lexem);
 	save_heredoc_content(current_command, heredoc_content, pipefd);
 	if (current_command->command_args == NULL)

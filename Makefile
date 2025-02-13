@@ -10,6 +10,7 @@ LIBFT := $(PATH_LIBFT)libft.a
 
 PATH_SRCS += srcs/
 PATH_SRCS += srcs/minishell_main_routine
+PATH_SRCS += srcs/signals_handling
 PATH_SRCS += srcs/exit_routines
 PATH_SRCS += srcs/user_interface
 PATH_SRCS += srcs/history
@@ -140,6 +141,10 @@ SRCS += no_expand.c
 SRCS += get_variable_from_env.c
 SRCS += quote.c
 SRCS += expander_exit.c
+
+# srcs/signals_handling
+
+SRCS += default_signals_handling.c
 
 # srcs/exit_status
 

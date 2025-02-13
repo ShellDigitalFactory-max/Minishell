@@ -14,10 +14,11 @@
 
 #ifndef TEST_MODE
 
+int	stop;
+
 static int	launch_shell(char **env)
 {
 	t_minishell_context	minishell_context;
-	struct sigaction	sa;
 
 	display_minishell_header();
 	ft_bzero(&minishell_context, sizeof(minishell_context));
@@ -28,7 +29,6 @@ static int	launch_shell(char **env)
 		exit(EXIT_FAILURE);
 	}
 	set_exit_status(0);
-	setup_signals(&sa);
 	return (core_routine(&minishell_context));
 }
 

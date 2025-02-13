@@ -29,6 +29,18 @@ static void	main_process_io_management(t_command *command)
 	}
 }
 
+static void	setup_command_signals(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGTERM, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGTSTP, SIG_DFL);
+	signal(SIGCONT, SIG_DFL);
+	signal(SIGTTIN, SIG_DFL);
+	signal(SIGTTOU, SIG_DFL);
+	signal(SIGPIPE, SIG_DFL);
+}
+
 static void	launch_command(t_minishell_context *minishell_context,
 				t_command *command)
 {
@@ -48,6 +60,7 @@ static void	launch_command(t_minishell_context *minishell_context,
 	}
 	if (command_process_pid == 0)
 	{
+		setup_command_signals();
 		command_process(minishell_context, command);
 	}
 }
@@ -78,6 +91,7 @@ int	command_pipeline_interpreter(t_minishell_context *minishell_context)
 	t_command_pipeline	current_command;
 	pid_t				last_command_pid;
 
+	setup_default_signals_handling();
 	cmd_pipeline = minishell_context->command_session.command_pipeline;
 	current_command = cmd_pipeline;
 	while (current_command != NULL)

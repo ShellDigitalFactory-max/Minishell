@@ -17,11 +17,33 @@ static void	prompt_asks_next_history_entry(const char *user_input_line)
 	add_user_input_line_to_history(user_input_line);
 }
 
-char	*prompt_gets_user_input(void)
+void	sigint_for_heredoc(int signum)
 {
-	char	*user_input_line;
+	(void)signum;
+	stop = 1;
+	write(STDOUT_FILENO, "\n", 1);
+	set_exit_status(128 + SIGINT);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_done = 1;
+}
 
-	user_input_line = readline(MSH_PROMPT);
-	prompt_asks_next_history_entry(user_input_line);
+char	*prompt_gets_user_input(bool is_subprompt)
+{
+	static struct	sigaction	sa;
+	char						*user_input_line;
+
+	if (is_subprompt == false)
+	{
+		setup_signals(&sa);
+		user_input_line = readline(MSH_PROMPT);
+		prompt_asks_next_history_entry(user_input_line);
+	}
+	else
+	{
+		setup_signals(&sa);
+		signal(SIGINT, sigint_for_heredoc);
+		user_input_line = readline("captain'hirdock>");
+	}
 	return (user_input_line);
 }
