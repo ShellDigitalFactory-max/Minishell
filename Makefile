@@ -145,6 +145,7 @@ SRCS += expander_exit.c
 # srcs/signals_handling
 
 SRCS += default_signals_handling.c
+SRCS += setup_command_mode_signals.c
 
 # srcs/exit_status
 

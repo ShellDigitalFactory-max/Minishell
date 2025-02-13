@@ -20,6 +20,17 @@ static bool	is_delimiter(const char *delimiter, const char *line)
 	return (delimiter_size == line_size && ft_strcmp(line, delimiter) == 0);
 }
 
+static void ensure_stdin_is_open(void)
+{
+	const int tty_fd = open("/dev/tty", O_RDONLY);
+
+	if (tty_fd != -1)
+	{
+		dup2(tty_fd, STDIN_FILENO);
+		close(tty_fd);
+	}
+}
+
 static char	*build_heredoc_content(const char *delimiter)
 {
 	char	*new_line;
@@ -44,6 +55,7 @@ static char	*build_heredoc_content(const char *delimiter)
 		free(heredoc_content);
 		heredoc_content = new_line;
 	}
+	ensure_stdin_is_open();
 	return (heredoc_content);
 }
 

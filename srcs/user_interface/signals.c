@@ -32,7 +32,7 @@ void	setup_signals(struct sigaction *sa)
 void	sigint_routine(void)
 {
 	set_exit_status(128 + SIGINT);
-	printf("\n");
+	write(STDIN_FILENO, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
