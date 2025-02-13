@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:21:50 by tchobert          #+#    #+#             */
-/*   Updated: 2025/02/01 18:22:01 by tchobert         ###   ########.fr       */
+/*   Updated: 2025/02/13 04:21:59 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static t_builtin_type	get_builtin_type(const char *command_name)
 	static const char	*builtins_dictionary[] = {
 		"env",
 		"export",
+		"cd",
 		NULL,
 	};
 	t_builtin_type		type;
@@ -60,7 +61,8 @@ int	execute_builtin(t_minishell_context *minishell_context,
 	static t_builtin		builtins[] = {
 		env,
 		export,
-		pwd
+		pwd,
+		cd
 	};
 	int						builtin_return;
 
