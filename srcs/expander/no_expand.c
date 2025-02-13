@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 06:09:59 by linux             #+#    #+#             */
-/*   Updated: 2025/02/12 16:40:33 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/13 15:16:42 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ static bool	is_no_expand(char c, t_quote_state quote_state)
 		return (true);
 	else if (quote_state == DOUBLE_QUOTE && c == '~')
 		return (true);
-	else if ((quote_state == SINGLE_QUOTE && c == '\"')
-		|| (quote_state == DOUBLE_QUOTE && c == '\''))
-		return (true);
-	else if (c != '~' && c != '\0' && c != '\'' && c != '\"' && c != '$')
+	else if (c != '~' && c != '\0' && c != '$')
 		return (true);
 	return (false);
 }
@@ -34,6 +31,7 @@ t_lexem	no_expand(t_lexem word, size_t *i, t_lexem expanded_word,
 	t_lexem	tmp_no_expand;
 
 	i_nexp = *i;
+	change_quote_state(word[i_nexp], &quote_state);
 	while (is_no_expand(word[i_nexp], quote_state))
 	{
 		++i_nexp;
