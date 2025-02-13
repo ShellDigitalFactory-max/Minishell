@@ -149,13 +149,13 @@ SRCS += get_exit_status_value.c
 
 # print_functions to use for debug and tests
 
-SRCS += print_env.c
-SRCS += print_token.c
-SRCS += print_token_list.c
-SRCS += print_argument.c
-SRCS += print_arguments_list.c
-SRCS += print_command.c
-SRCS += print_command_pipeline_list.c
+# SRCS += print_env.c
+# SRCS += print_token.c
+# SRCS += print_token_list.c
+# SRCS += print_argument.c
+# SRCS += print_arguments_list.c
+# SRCS += print_command.c
+# SRCS += print_command_pipeline_list.c
 
 vpath %.c $(PATH_SRCS)
 
