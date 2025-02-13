@@ -25,25 +25,25 @@ static	char	*get_target_with_no_arg(void)
 	return (target);
 }
 
-static	char	*get_target_with_args(t_command_args current_arg)
+static	char	*get_target_with_args(char *current_arg)
 {
 	char	*target;
 
-	target = ft_strdup(current_arg->content);
+	target = ft_strdup(current_arg);
 	if (target == NULL)
 	{
-		fprintf(stderr, "cd: OLDPWD nont set\n");
+		fprintf(stderr, "cd: OLDPWD not set\n");
 		return (NULL);
 	}
 	return (target);
 }
 
-char	*get_target_from_args(t_command_args *args)
+char	*get_target_from_args(char	**args)
 {
-	t_list	*current_arg;
+	char	*current_arg;
 	char	*target;
 
-	current_arg = *args;
+	current_arg = args[1];
 	if (current_arg == NULL)
 	{
 		target = get_target_with_no_arg();

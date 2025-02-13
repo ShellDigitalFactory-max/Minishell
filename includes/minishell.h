@@ -129,7 +129,7 @@ int					env(t_command *current_command);
 int					export(t_command *command);
 void				display_sorted_exportables_variables(char **env);
 int					pwd(t_command *command);
-char				*get_target_from_args(t_command_args *args);
+char				*get_target_from_args(char **args);
 int					update_env_variables(char *old_pwd);
 int					cd(t_command *command);
 

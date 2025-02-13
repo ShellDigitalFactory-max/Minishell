@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static	int	set_variables(char *old_pwd, char **target, t_command_args *args)
+static	int	set_variables(char *old_pwd, char **target, char **args)
 {
 	if (getcwd(old_pwd, PATH_MAX) == NULL)
 	{
@@ -41,11 +41,10 @@ int	cd(t_command *command)
 {
 	char			*target;
 	char			old_pwd[PATH_MAX];
-	t_command_args	args;
+	char			**args;
 
-
-	args = command->command_args;
-	if (set_variables(old_pwd, &target, &args))
+	args = list_to_strs_array(command->command_args, args_list_to_args_array);
+	if (set_variables(old_pwd, &target, args))
 		return (EXIT_FAILURE);
 	if (change_directory(target))
 		return (EXIT_FAILURE);

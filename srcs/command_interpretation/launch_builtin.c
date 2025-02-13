@@ -17,6 +17,7 @@ static t_builtin_type	get_builtin_type(const char *command_name)
 	static const char	*builtins_dictionary[] = {
 		"env",
 		"export",
+		"pwd",
 		"cd",
 		NULL,
 	};
