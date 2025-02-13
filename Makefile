@@ -19,6 +19,7 @@ PATH_SRCS += srcs/syntax_analysis
 PATH_SRCS += srcs/environment_management
 PATH_SRCS += srcs/environment_building
 PATH_SRCS += srcs/semantic_analysis
+PATH_SRCS += srcs/expander
 PATH_SRCS += srcs/command_interpretation
 PATH_SRCS += srcs/builtins
 PATH_SRCS += srcs/execution_status
@@ -128,6 +129,17 @@ SRCS += env.c
 SRCS += export.c
 SRCS += display_sorted_exportables_variables.c
 SRCS += pwd.c
+
+# srcs/expander/
+
+SRCS += expand_input.c
+SRCS += expand_tilde.c
+SRCS += expand_variable.c
+SRCS += expand_word.c
+SRCS += no_expand.c
+SRCS += get_variable_from_env.c
+SRCS += quote.c
+SRCS += expander_exit.c
 
 # srcs/exit_status
 

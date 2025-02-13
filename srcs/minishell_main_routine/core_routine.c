@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core_routine.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:23:41 by tchobert          #+#    #+#             */
-/*   Updated: 2025/02/03 15:24:01 by tchobert         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:01:19 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_command_line_analysis_status	command_line_analysis(
 			minishell_context->command_session.tokenized_user_input_line)
 		== true)
 		return (EMPTY_COMMAND_LINE);
+	expand_input(minishell_context->command_session.tokenized_user_input_line);
 	if (parse_input(
 			minishell_context->command_session.tokenized_user_input_line)
 		== INVALID_SYNTAX)
