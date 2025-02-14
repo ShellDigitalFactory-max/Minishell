@@ -24,6 +24,7 @@ PATH_SRCS += srcs/expander
 PATH_SRCS += srcs/command_interpretation
 PATH_SRCS += srcs/builtins
 PATH_SRCS += srcs/execution_status
+PATH_SRCS += srcs/builtins/cd
 
 PATH_SRCS += srcs/functions_for_debug
 
@@ -132,6 +133,12 @@ SRCS += env.c
 SRCS += export.c
 SRCS += display_sorted_exportables_variables.c
 SRCS += pwd.c
+
+# srcs/builtins/cd/
+
+SRCS += cd.c
+SRCS += get_target_from_args.c
+SRCS += update_env_variables.c
 
 # srcs/expander/
 
