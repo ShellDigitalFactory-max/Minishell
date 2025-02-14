@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:11:56 by hucherea          #+#    #+#             */
-/*   Updated: 2025/02/10 11:38:27 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/14 17:33:46 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,16 @@ typedef enum e_builtin_type
 	EXPORT,
 	PWD
 }			t_builtin_type;
+
+typedef enum e_new_line_status
+{
+	NEW_LINE,
+	NO_NEW_LINE
+}			t_new_line_status;
+{
+	COMMAND_SUCCESS,
+	COMMAND_FAILURE
+}			t_command_status;
 
 typedef int	(*t_builtin)(t_command *current_command);
 
