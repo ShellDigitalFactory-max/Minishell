@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:11:56 by hucherea          #+#    #+#             */
-/*   Updated: 2025/02/10 11:38:27 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/13 14:09:36 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ typedef enum e_builtin_type
 {
 	ENV,
 	EXPORT,
-	PWD
+	PWD,
+	CD
 }			t_builtin_type;
 
 typedef int	(*t_builtin)(t_command *current_command);
@@ -128,6 +129,9 @@ int					env(t_command *current_command);
 int					export(t_command *command);
 void				display_sorted_exportables_variables(char **env);
 int					pwd(t_command *command);
+char				*get_target_from_args(char **args);
+int					update_env_variables(char *old_pwd);
+int					cd(t_command *command);
 
 // EXIT STATUS
 
