@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-static void simulate_eof(void)
+static void	simulate_eof(void)
 {
-	const int devnull = open("/dev/null", O_RDONLY);
+	const int	devnull = open("/dev/null", O_RDONLY);
 
 	if (devnull != -1)
 	{

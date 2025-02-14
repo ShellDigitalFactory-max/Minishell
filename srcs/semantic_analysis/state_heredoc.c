@@ -46,13 +46,13 @@ static char	*build_heredoc_content(const char *delimiter)
 	{
 		temp_line = prompt_gets_user_input(SUBPROMPT);
 		if (g_received_signal == SIGINT)
-			break;
+			break ;
 		if (temp_line == CTRL_D)
 		{
 			heredoc_interruption_routine(delimiter, lines);
 			break ;
 		}
-			if (is_delimiter(delimiter, temp_line))
+		if (is_delimiter(delimiter, temp_line))
 		{
 			break ;
 		}

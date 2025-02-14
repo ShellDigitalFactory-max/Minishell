@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-void ensure_stdin_is_open(void)
+void	ensure_stdin_is_open(void)
 {
-	const int tty_fd = open("/dev/tty", O_RDONLY);
+	const int	tty_fd = open("/dev/tty", O_RDONLY);
 
 	if (tty_fd != -1)
 	{

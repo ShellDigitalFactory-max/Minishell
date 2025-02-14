@@ -79,7 +79,7 @@ typedef enum e_builtin_type
 	PWD
 }			t_builtin_type;
 
-typedef int	(*t_builtin)(t_command *current_command);
+typedef int						(*t_builtin)(t_command *current_command);
 
 // PROTOTYPES
 

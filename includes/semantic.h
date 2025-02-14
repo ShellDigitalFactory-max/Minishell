@@ -148,7 +148,8 @@ bool								is_delimiter(const char *delimiter,
 										const char *line);
 void								ensure_stdin_is_open(void);
 void								heredoc_interruption_routine(
-										const char *delimiter, int heredoc_lines);
+										const char *delimiter,
+										int heredoc_lines);
 
 void								print_arguments_list(
 										t_command_args arguments_list);

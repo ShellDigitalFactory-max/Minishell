@@ -18,5 +18,5 @@ void	heredoc_interruption_routine(const char *delimiter, int heredoc_lines)
 		heredoc_lines = 1;
 	ft_dprintf(STDERR_FILENO, "minishell: warning: here-document "
 		"at line %d delimited by end-of-file (wanted `%s')\n",
-	heredoc_lines, delimiter);
+		heredoc_lines, delimiter);
 }
