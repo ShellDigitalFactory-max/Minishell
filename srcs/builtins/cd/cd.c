@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 02:48:56 by linux             #+#    #+#             */
-/*   Updated: 2025/02/13 04:30:16 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/14 16:48:19 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ static	int	change_directory(char *target)
 	return (EXIT_SUCCESS);
 }
 
+static int	exec_cd(char *old_pwd, char **target, char **args)
+{
+	if (set_variables(old_pwd, target, args))
+		return (EXIT_SUCCESS);
+	if (change_directory(*target))
+		return (EXIT_FAILURE);
+	return (false);
+}
+
 int	cd(t_command *command)
 {
 	char			*target;
@@ -44,12 +53,15 @@ int	cd(t_command *command)
 	char			**args;
 
 	args = list_to_strs_array(command->command_args, args_list_to_args_array);
-	if (set_variables(old_pwd, &target, args))
+	if (args == NULL)
+		return (EXIT_FAILURE);
+	if (ft_lstsize(command->command_args) > 2)
 	{
 		ft_free_and_null(args);
+		ft_putstr_fd("cd: too many arguments\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	if (change_directory(target))
+	if (exec_cd(old_pwd, &target, args))
 	{
 		ft_free_and_null(args);
 		return (EXIT_FAILURE);
