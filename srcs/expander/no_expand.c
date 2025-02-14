@@ -32,7 +32,6 @@ t_lexem	no_expand(t_lexem word, size_t *i, t_lexem expanded_word,
 	t_lexem	tmp_no_expand;
 
 	i_nexp = *i;
-	printf("word[i_nexp] = %c\n", word[i_nexp]);
 	while (is_no_expand(word[i_nexp], *quote_state))
 	{
 		++i_nexp;
@@ -42,7 +41,6 @@ t_lexem	no_expand(t_lexem word, size_t *i, t_lexem expanded_word,
 		change_quote_state(word[i_nexp], quote_state);
 		++i_nexp;
 	}
-	printf("word[i_nexp] 2 = %c\n", word[i_nexp]);
 	tmp = expanded_word;
 	tmp_no_expand = ft_substr(word, *i, i_nexp - *i);
 	expanded_word = ft_strjoin(expanded_word, tmp_no_expand);
