@@ -31,7 +31,7 @@
 
 static void	sigint_routine(int signum)
 {
-	(void)signum;
+	g_received_signal = signum;
 	set_exit_status(128 + SIGINT);
 	write(STDIN_FILENO, "\n", 1);
 	rl_on_new_line();

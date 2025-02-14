@@ -19,7 +19,7 @@ static void	prompt_asks_next_history_entry(const char *user_input_line)
 
 char	*prompt_gets_user_input(bool is_subprompt)
 {
-	char					*user_input_line;
+	char	*user_input_line;
 
 	if (is_subprompt == false)
 	{
