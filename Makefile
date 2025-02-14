@@ -147,6 +147,7 @@ SRCS += no_expand.c
 SRCS += get_variable_from_env.c
 SRCS += quote.c
 SRCS += expander_exit.c
+SRCS += erase_quotes.c
 
 # srcs/exit_status
 

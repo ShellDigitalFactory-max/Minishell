@@ -1,18 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_input.c                                     :+:      :+:    :+:   */
+/*   erase_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 23:02:16 by linux             #+#    #+#             */
-/*   Updated: 2025/02/13 23:11:10 by linux            ###   ########.fr       */
+/*   Created: 2025/02/13 16:21:03 by linux             #+#    #+#             */
+/*   Updated: 2025/02/13 17:07:46 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	expand_input(t_token_list token_list)
+static char	*erase_quotes_in_word(t_lexem word, t_quote_state *quote_state)
+{
+	size_t	i;
+	size_t	j;
+	t_lexem	new_word;
+
+	i = 0;
+	j = 0;
+	new_word = ft_calloc(ft_strlen(word) + 1, sizeof(char));
+	if (new_word == NULL)
+		expander_exit();
+	while (word[i] != '\0')
+	{
+		if (is_quote(word[i], *quote_state) == false)
+		{
+			new_word[j] = word[i];
+			++j;
+		}
+		else
+			change_quote_state(word[i], quote_state);
+		++i;
+	}
+	return (new_word);
+}
+
+void	erase_quotes(t_token_list token_list)
 {
 	t_list			*current_token;
 	t_token			*token;
@@ -26,11 +51,11 @@ void	expand_input(t_token_list token_list)
 		token = current_token->content;
 		if (token->token_type == WORD)
 		{
-			expanded_token = expand_word(token->token_lexem, &quote_state);
+			expanded_token = erase_quotes_in_word(token->token_lexem,
+					&quote_state);
 			free(token->token_lexem);
 			token->token_lexem = expanded_token;
 		}
 		current_token = current_token->next;
 	}
-	erase_quotes(token_list);
 }
