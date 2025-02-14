@@ -24,6 +24,7 @@ PATH_SRCS += srcs/command_interpretation
 PATH_SRCS += srcs/builtins
 PATH_SRCS += srcs/execution_status
 PATH_SRCS += srcs/builtins/cd
+PATH_SRCS += srcs/builtins/echo
 
 PATH_SRCS += srcs/functions_for_debug
 
@@ -130,6 +131,11 @@ SRCS += env.c
 SRCS += export.c
 SRCS += display_sorted_exportables_variables.c
 SRCS += pwd.c
+
+# srcs/builtins/echo
+
+SRCS += echo.c
+SRCS += free_strs.c
 
 # srcs/builtins/cd/
 
