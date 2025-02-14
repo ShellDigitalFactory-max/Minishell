@@ -61,6 +61,14 @@ void	close_command_process_unused_fds(t_minishell_context *minishell_context,
 	}
 }
 
+static void	undefined_command_process(t_minishell_context *minishell_context)
+{
+	const int	exit_value = get_exit_status_value();
+
+	clean_command_process(minishell_context);
+	exit(exit_value);
+}
+
 void	command_process(t_minishell_context *minishell_context,
 			t_command *command)
 {
@@ -72,8 +80,7 @@ void	command_process(t_minishell_context *minishell_context,
 	}
 	if (command->command_nature == UNDEFINED)
 	{
-		clean_command_process(minishell_context);
-		exit(SUCCESS);
+		undefined_command_process(minishell_context);
 	}
 	if (command->command_nature == BUILTIN)
 		execute_builtin(minishell_context, command, BUILTIN_IN_PIPELINE);

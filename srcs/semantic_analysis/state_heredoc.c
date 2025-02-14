@@ -15,6 +15,8 @@
 static char	*process_data(char *heredoc_content, char *temp_line)
 {
 	ensure_stdin_is_open();
+	if (g_received_signal == 130)
+		set_exit_status(130);
 	free(temp_line);
 	return (heredoc_content);
 }
