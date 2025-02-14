@@ -138,6 +138,7 @@ int					get_exit_status_value(void);
 // SIGNALS HANDLING
 
 void				setup_default_signals_handling(void);
-void				setup_command_mode_signals(void);
+void				setup_command_mode_signals_handling(void);
+void				setup_heredoc_signals_handling(void);
 
 #endif

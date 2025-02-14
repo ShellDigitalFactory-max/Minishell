@@ -147,6 +147,7 @@ SRCS += erase_quotes.c
 
 SRCS += default_signals_handling.c
 SRCS += setup_command_mode_signals.c
+SRCS += setup_heredoc_signals_handling.c
 
 # srcs/exit_status
 

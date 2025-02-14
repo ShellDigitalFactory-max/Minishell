@@ -48,7 +48,7 @@ static void	launch_command(t_minishell_context *minishell_context,
 	}
 	if (command_process_pid == 0)
 	{
-		setup_command_mode_signals();
+		setup_command_mode_signals_handling();
 		command_process(minishell_context, command);
 	}
 }

@@ -1,25 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setup_command_mode_signals.                        :+:      :+:    :+:   */
+/*   setup_heredoc_signals_handling.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/13 23:23:17 by tchobert          #+#    #+#             */
-/*   Updated: 2025/02/13 23:23:31 by tchobert         ###   ########.fr       */
+/*   Created: 2025/02/14 15:53:56 by tchobert          #+#    #+#             */
+/*   Updated: 2025/02/14 15:54:12 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	setup_command_mode_signals_handling(void)
+static void simulate_eof(void)
 {
-	signal(SIGINT, SIG_DFL);
-	signal(SIGTERM, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGTSTP, SIG_DFL);
-	signal(SIGCONT, SIG_DFL);
-	signal(SIGTTIN, SIG_DFL);
-	signal(SIGTTOU, SIG_DFL);
-	signal(SIGPIPE, SIG_DFL);
+	const int devnull = open("/dev/null", O_RDONLY);
+
+	if (devnull != -1)
+	{
+		dup2(devnull, STDIN_FILENO);
+		close(devnull);
+	}
+}
+
+static void	sigint_for_heredoc(int signum)
+{
+	(void)signum;
+	stop = 1;
+	write(STDIN_FILENO, "\n", 1);
+	set_exit_status(128 + SIGINT);
+	rl_replace_line("", 0);
+	rl_done = 1;
+	simulate_eof();
+}
+
+void	setup_heredoc_signals_handling(void)
+{
+	signal(SIGINT, sigint_for_heredoc);
 }

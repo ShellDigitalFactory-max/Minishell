@@ -24,6 +24,7 @@
 // DEFINES
 
 # define MSH_PROMPT "SDF$> "
+# define HEREDOC_PROMPT "captain'hirdock>"
 # define CTRL_D 0
 # define FAILURE -1
 # define MAIN_PROMPT 0
