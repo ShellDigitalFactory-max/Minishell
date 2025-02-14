@@ -44,6 +44,7 @@ static void	launch_command(t_minishell_context *minishell_context,
 	command->command_pid = command_process_pid;
 	if (command_process_pid > 0)
 	{
+		setup_default_signals_handling();
 		main_process_io_management(command);
 	}
 	if (command_process_pid == 0)
