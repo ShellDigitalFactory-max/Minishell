@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:11:56 by hucherea          #+#    #+#             */
-/*   Updated: 2025/02/14 17:33:46 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/14 23:10:30 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,9 @@ typedef enum e_builtin_type
 {
 	ENV,
 	EXPORT,
-	PWD
+	PWD,
+	CD,
+	ECHO
 }			t_builtin_type;
 
 typedef enum e_new_line_status
@@ -79,10 +81,6 @@ typedef enum e_new_line_status
 	NEW_LINE,
 	NO_NEW_LINE
 }			t_new_line_status;
-{
-	COMMAND_SUCCESS,
-	COMMAND_FAILURE
-}			t_command_status;
 
 typedef int	(*t_builtin)(t_command *current_command);
 
@@ -138,6 +136,7 @@ int					env(t_command *current_command);
 int					export(t_command *command);
 void				display_sorted_exportables_variables(char **env);
 int					pwd(t_command *command);
+int					echo(t_command *command);
 
 // EXIT STATUS
 
