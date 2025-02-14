@@ -14,7 +14,7 @@
 
 #ifndef TEST_MODE
 
-int	stop;
+volatile sig_atomic_t	g_received_signal = 0;
 
 static int	launch_shell(char **env)
 {

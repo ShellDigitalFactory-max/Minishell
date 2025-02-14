@@ -13,8 +13,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-extern int	stop;
-
 // INCLUDES
 
 # include "history.h"
@@ -34,6 +32,11 @@ extern int	stop;
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <limits.h>
+# include <signal.h>
+
+// GLOBAL VARIABLE
+
+extern volatile sig_atomic_t	g_received_signal;
 
 // DEFINES
 

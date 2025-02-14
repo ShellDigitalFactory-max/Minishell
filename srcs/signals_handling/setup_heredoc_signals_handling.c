@@ -25,10 +25,9 @@ static void simulate_eof(void)
 
 static void	sigint_for_heredoc(int signum)
 {
-	(void)signum;
-	stop = 1;
-	write(STDIN_FILENO, "\n", 1);
-	set_exit_status(128 + SIGINT);
+	g_received_signal = signum;
+	write(STDOUT_FILENO, "\n", 1);
+	set_exit_status(128 + signum);
 	rl_replace_line("", 0);
 	rl_done = 1;
 	simulate_eof();

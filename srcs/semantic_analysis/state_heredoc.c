@@ -12,51 +12,53 @@
 
 #include "minishell.h"
 
-static bool	is_delimiter(const char *delimiter, const char *line)
+static char	*process_data(char *heredoc_content, char *temp_line)
 {
-	const size_t	delimiter_size = ft_strlen(delimiter);
-	const size_t	line_size = ft_strlen(line);
-
-	return (delimiter_size == line_size && ft_strcmp(line, delimiter) == 0);
+	ensure_stdin_is_open();
+	free(temp_line);
+	return (heredoc_content);
 }
 
-static void ensure_stdin_is_open(void)
+static void	update_heredoc_content(char **heredoc_content, char *temp_line,
+				char *new_line, int *heredoc_lines)
 {
-	const int tty_fd = open("/dev/tty", O_RDONLY);
-
-	if (tty_fd != -1)
-	{
-		dup2(tty_fd, STDIN_FILENO);
-		close(tty_fd);
-	}
+	ft_asprintf(&new_line, "%s%s\n", *heredoc_content, temp_line);
+	free(temp_line);
+	free(*heredoc_content);
+	*heredoc_content = new_line;
+	if (*heredoc_lines == 0)
+		*(heredoc_lines) += 2;
+	else
+		++*(heredoc_lines);
 }
 
 static char	*build_heredoc_content(const char *delimiter)
 {
-	char	*new_line;
-	char	*heredoc_content;
-	char	*temp_line;
+	char		*new_line;
+	char		*heredoc_content;
+	char		*temp_line;
+	int			lines;
 
+	lines = 0;
 	heredoc_content = ft_strdup("");
+	new_line = NULL;
 	while (HEREDOC_PROCESSING)
 	{
-		if (stop == 1)
-			break;
 		temp_line = prompt_gets_user_input(SUBPROMPT);
-		if (stop == 1)
+		if (g_received_signal == SIGINT)
 			break;
-		if (temp_line == CTRL_D || is_delimiter(delimiter, temp_line))
+		if (temp_line == CTRL_D)
 		{
-			free(temp_line);
+			heredoc_interruption_routine(delimiter, lines);
 			break ;
 		}
-		ft_asprintf(&new_line, "%s%s\n", heredoc_content, temp_line);
-		free(temp_line);
-		free(heredoc_content);
-		heredoc_content = new_line;
+			if (is_delimiter(delimiter, temp_line))
+		{
+			break ;
+		}
+		update_heredoc_content(&heredoc_content, temp_line, new_line, &lines);
 	}
-	ensure_stdin_is_open();
-	return (heredoc_content);
+	return (process_data(heredoc_content, temp_line));
 }
 
 static void	save_heredoc_content(t_command *current_command,
@@ -86,7 +88,6 @@ t_semantic_analysis_state_return	state_heredoc(
 		perror("pipe");
 		exit(FAILURE);
 	}
-	stop = 0;
 	heredoc_content = build_heredoc_content(current_token->token_lexem);
 	save_heredoc_content(current_command, heredoc_content, pipefd);
 	if (current_command->command_args == NULL)

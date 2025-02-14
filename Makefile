@@ -104,6 +104,9 @@ SRCS += get_command_name.c
 SRCS += is_builtin.c
 SRCS += delete_command_pipeline.c
 SRCS += setup_pipe.c
+SRCS += is_delimiter.c
+SRCS += ensure_stdin_is_open.c
+SRCS += heredoc_interruption_routine.c
 
 # srcs/command_interpretation
 

@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_interpreter_signals_handling.c             :+:      :+:    :+:   */
+/*   heredoc_interruption_routine.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/13 17:24:37 by tchobert          #+#    #+#             */
-/*   Updated: 2025/02/13 17:24:46 by tchobert         ###   ########.fr       */
+/*   Created: 2025/02/14 20:00:29 by tchobert          #+#    #+#             */
+/*   Updated: 2025/02/14 20:00:42 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	setup_default_signals_handling(void)
+void	heredoc_interruption_routine(const char *delimiter, int heredoc_lines)
 {
-	signal(SIGINT, SIG_IGN);
-	signal(SIGTERM, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTSTP, SIG_IGN);
-	signal(SIGCONT, SIG_IGN);
-	signal(SIGTTIN, SIG_IGN);
-	signal(SIGTTOU, SIG_IGN);
-	signal(SIGPIPE, SIG_IGN);
+	if (heredoc_lines == 0)
+		heredoc_lines = 1;
+	ft_dprintf(STDERR_FILENO, "minishell: warning: here-document "
+		"at line %d delimited by end-of-file (wanted `%s')\n",
+	heredoc_lines, delimiter);
 }

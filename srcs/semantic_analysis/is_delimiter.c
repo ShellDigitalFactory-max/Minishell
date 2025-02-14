@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_interpreter_signals_handling.c             :+:      :+:    :+:   */
+/*   is_delimiter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/13 17:24:37 by tchobert          #+#    #+#             */
-/*   Updated: 2025/02/13 17:24:46 by tchobert         ###   ########.fr       */
+/*   Created: 2025/02/14 19:57:18 by tchobert          #+#    #+#             */
+/*   Updated: 2025/02/14 19:57:30 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	setup_default_signals_handling(void)
+bool	is_delimiter(const char *delimiter, const char *line)
 {
-	signal(SIGINT, SIG_IGN);
-	signal(SIGTERM, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTSTP, SIG_IGN);
-	signal(SIGCONT, SIG_IGN);
-	signal(SIGTTIN, SIG_IGN);
-	signal(SIGTTOU, SIG_IGN);
-	signal(SIGPIPE, SIG_IGN);
+	const size_t	delimiter_size = ft_strlen(delimiter);
+	const size_t	line_size = ft_strlen(line);
+
+	return (delimiter_size == line_size && ft_strcmp(line, delimiter) == 0);
 }

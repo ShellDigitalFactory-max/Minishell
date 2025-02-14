@@ -43,6 +43,7 @@ void	setup_main_prompt_signals_handling(void)
 {
 	signal(SIGINT, sigint_routine);
 	signal(SIGTERM, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGCONT, SIG_IGN);
 	signal(SIGTTIN, SIG_IGN);

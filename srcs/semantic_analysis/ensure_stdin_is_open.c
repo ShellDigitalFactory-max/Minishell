@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_interpreter_signals_handling.c             :+:      :+:    :+:   */
+/*   ensure_stdin_is_open.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/13 17:24:37 by tchobert          #+#    #+#             */
-/*   Updated: 2025/02/13 17:24:46 by tchobert         ###   ########.fr       */
+/*   Created: 2025/02/14 19:58:56 by tchobert          #+#    #+#             */
+/*   Updated: 2025/02/14 19:59:05 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	setup_default_signals_handling(void)
+void ensure_stdin_is_open(void)
 {
-	signal(SIGINT, SIG_IGN);
-	signal(SIGTERM, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTSTP, SIG_IGN);
-	signal(SIGCONT, SIG_IGN);
-	signal(SIGTTIN, SIG_IGN);
-	signal(SIGTTOU, SIG_IGN);
-	signal(SIGPIPE, SIG_IGN);
+	const int tty_fd = open("/dev/tty", O_RDONLY);
+
+	if (tty_fd != -1)
+	{
+		dup2(tty_fd, STDIN_FILENO);
+		close(tty_fd);
+	}
 }
