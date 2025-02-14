@@ -44,6 +44,8 @@ static char	*build_heredoc_content(const char *delimiter)
 	new_line = NULL;
 	while (HEREDOC_PROCESSING)
 	{
+		if (g_received_signal == SIGINT)
+			break ;
 		temp_line = prompt_gets_user_input(SUBPROMPT);
 		if (g_received_signal == SIGINT)
 			break ;
@@ -53,9 +55,7 @@ static char	*build_heredoc_content(const char *delimiter)
 			break ;
 		}
 		if (is_delimiter(delimiter, temp_line))
-		{
 			break ;
-		}
 		update_heredoc_content(&heredoc_content, temp_line, new_line, &lines);
 	}
 	return (process_data(heredoc_content, temp_line));
