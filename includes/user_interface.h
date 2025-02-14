@@ -32,9 +32,10 @@
 
 // PROTOTYPES
 
-void	signal_handler(int signum);
-void	received_signal(void);
+//void	signal_handler(int signum);
+//void	received_signal(void);
 char	*prompt_gets_user_input(bool is_subprompt);
-void	setup_signals(struct sigaction *sa);
+void	setup_main_prompt_signals_handling(void);
+//void	setup_signals(struct sigaction *sa);
 
 #endif

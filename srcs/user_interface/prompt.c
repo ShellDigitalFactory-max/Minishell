@@ -19,20 +19,18 @@ static void	prompt_asks_next_history_entry(const char *user_input_line)
 
 char	*prompt_gets_user_input(bool is_subprompt)
 {
-	static struct sigaction	sa;
 	char					*user_input_line;
 
 	if (is_subprompt == false)
 	{
-		setup_signals(&sa);
+		setup_main_prompt_signals_handling();
 		user_input_line = readline(MSH_PROMPT);
 		prompt_asks_next_history_entry(user_input_line);
 	}
 	else
 	{
-		setup_signals(&sa);
 		setup_heredoc_signals_handling();
-		user_input_line = readline("HEREDOC_PROMPT");
+		user_input_line = readline(HEREDOC_PROMPT);
 	}
 	setup_default_signals_handling();
 	return (user_input_line);

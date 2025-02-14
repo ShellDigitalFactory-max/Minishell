@@ -14,7 +14,9 @@
 
 int	exit_shell_routine(void)
 {
+	const int	exit_value = get_exit_status_value();
+
 	delete_variables_list();
-	printf("exit\n");
-	exit (EXIT_SUCCESS);
+	ft_putstr_fd("exit\n", STDERR_FILENO);
+	exit(exit_value);
 }

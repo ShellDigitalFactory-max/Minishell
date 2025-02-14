@@ -37,4 +37,10 @@ static void	sigint_for_heredoc(int signum)
 void	setup_heredoc_signals_handling(void)
 {
 	signal(SIGINT, sigint_for_heredoc);
+	signal(SIGTERM, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGCONT, SIG_IGN);
+	signal(SIGTTIN, SIG_IGN);
+	signal(SIGTTOU, SIG_IGN);
+	signal(SIGPIPE, SIG_IGN);
 }

@@ -68,7 +68,7 @@ void	command_process(t_minishell_context *minishell_context,
 	if (setup_command_redirections(command) == EXIT_FAILURE)
 	{
 		clean_command_process(minishell_context);
-		exit(FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	if (command->command_nature == UNDEFINED)
 	{

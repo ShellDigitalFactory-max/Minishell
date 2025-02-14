@@ -21,6 +21,7 @@ static int	launch_shell(char **env)
 	t_minishell_context	minishell_context;
 
 	display_minishell_header();
+	setup_default_signals_handling();
 	ft_bzero(&minishell_context, sizeof(minishell_context));
 	if (build_environment(env) == PROCESS_FAILURE)
 	{
@@ -28,7 +29,7 @@ static int	launch_shell(char **env)
 			" environment\n");
 		exit(EXIT_FAILURE);
 	}
-	set_exit_status(0);
+	set_exit_status(EXIT_SUCCESS);
 	return (core_routine(&minishell_context));
 }
 

@@ -41,7 +41,6 @@ SRCS += exit_shell_routine.c
 
 # scrs/user_interface
 
-SRCS += signals.c
 SRCS += prompt.c
 
 # srcs/history
@@ -145,9 +144,11 @@ SRCS += erase_quotes.c
 
 # srcs/signals_handling
 
-SRCS += default_signals_handling.c
+SRCS += setup_main_process_signals_handling.c
 SRCS += setup_command_mode_signals.c
 SRCS += setup_heredoc_signals_handling.c
+#SRCS += setup_execution_mode_signal_handling.c
+SRCS += signals.c
 
 # srcs/exit_status
 
@@ -156,13 +157,13 @@ SRCS += get_exit_status_value.c
 
 # print_functions to use for debug and tests
 
-# SRCS += print_env.c
-# SRCS += print_token.c
-# SRCS += print_token_list.c
-# SRCS += print_argument.c
-# SRCS += print_arguments_list.c
-# SRCS += print_command.c
-# SRCS += print_command_pipeline_list.c
+SRCS += print_env.c
+SRCS += print_token.c
+SRCS += print_token_list.c
+SRCS += print_argument.c
+SRCS += print_arguments_list.c
+SRCS += print_command.c
+SRCS += print_command_pipeline_list.c
 
 vpath %.c $(PATH_SRCS)
 

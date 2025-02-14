@@ -12,15 +12,9 @@
 
 #include "minishell.h"
 
-static void sigint_handler(int sig)
-{
-	(void)sig;
-	write(STDOUT_FILENO, "\n", 1);
-}
-
 void	setup_default_signals_handling(void)
 {
-	signal(SIGINT, sigint_handler);
+	signal(SIGINT, SIG_IGN);
 	signal(SIGTERM, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGCONT, SIG_IGN);
