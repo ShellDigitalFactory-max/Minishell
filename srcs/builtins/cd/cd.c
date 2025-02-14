@@ -30,7 +30,7 @@ static	int	change_directory(char *target)
 	if (chdir(target) == -1)
 	{
 		free(target);
-		perror("chdir");
+		perror("cd");
 		return (EXIT_FAILURE);
 	}
 	free(target);
