@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 03:33:56 by linux             #+#    #+#             */
-/*   Updated: 2025/02/13 02:38:47 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/15 05:05:13 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ static t_lexem	manage_specific_case(t_lexem word, t_lexem expanded_word,
 	temp_expanded = expanded_word;
 	if (word[*i + 1] == '?')
 	{
-		expanded_word = ft_strjoin(temp_expanded,
-				ft_itoa(get_exit_status_value()));
+		expanded_word = manage_return_cmd(temp_expanded, expanded_word);
 		++(*i);
-		free(temp_expanded);
 	}
 	else if (quote_state == NO_QUOTE && ft_isalnum(word[*i + 1]) == 0
 		&& word[*i + 1] != '_' && word[*i + 1] != '\'' && word[*i + 1] != '\"')
