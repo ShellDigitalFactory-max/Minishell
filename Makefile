@@ -154,6 +154,7 @@ SRCS += get_variable_from_env.c
 SRCS += quote.c
 SRCS += expander_exit.c
 SRCS += erase_quotes.c
+SRCS += expand_variable_utils.c
 
 # srcs/exit_status
 
