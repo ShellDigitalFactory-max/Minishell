@@ -16,6 +16,13 @@
 
 volatile sig_atomic_t	g_received_signal = 0;
 
+static void	environment_initialisation_failure_exit_process(void)
+{
+	ft_dprintf(STDERR_FILENO, "Fatal error while initializing minishell's"
+		" environment. Aborting\n");
+	exit(EXIT_FAILURE);
+}
+
 static int	launch_shell(char **env)
 {
 	t_minishell_context	minishell_context;
@@ -23,11 +30,19 @@ static int	launch_shell(char **env)
 	display_minishell_header();
 	setup_default_signals_handling();
 	ft_bzero(&minishell_context, sizeof(minishell_context));
-	if (build_environment(env) == PROCESS_FAILURE)
+	if (*env != NULL)
 	{
-		ft_dprintf(STDERR_FILENO, "Fatal error while initializing minishell's"
-			" environment\n");
-		exit(EXIT_FAILURE);
+		if (build_environment(env) == PROCESS_FAILURE)
+		{
+			environment_initialisation_failure_exit_process();
+		}
+	}
+	else
+	{
+		if (build_minimal_environment() == PROCESS_FAILURE)
+		{
+			environment_initialisation_failure_exit_process();
+		}
 	}
 	set_exit_status(EXIT_SUCCESS);
 	return (core_routine(&minishell_context));

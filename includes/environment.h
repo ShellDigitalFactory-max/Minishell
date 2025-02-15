@@ -48,6 +48,7 @@ typedef struct s_variable
 
 t_variable_list	*get_environment(void);
 t_status		build_environment(char **variables);
+t_status		build_minimal_environment(void);
 t_status		set_variable_from_keyvalue_to_environment(
 					const char *keyvalue, bool make_it_exportable,
 					t_variable_list *environment);

@@ -88,6 +88,7 @@ SRCS += set_variable_to_environment.c
 # srcs/environment_building
 
 SRCS += build_environment.c
+SRCS += build_minimal_environment.c
 
 # srcs/semantic_analysis
 
