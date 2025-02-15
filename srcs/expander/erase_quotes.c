@@ -68,7 +68,8 @@ void	erase_quotes(t_token_list token_list)
 		token = current_token->content;
 		if (token->token_type == WORD)
 		{
-			token->is_surrounded_by_quotes = is_surrounded_by_quotes(token->token_lexem);
+			token->is_surrounded_by_quotes
+				= is_surrounded_by_quotes(token->token_lexem);
 			expanded_token = erase_quotes_in_word(token->token_lexem,
 					&quote_state);
 			free(token->token_lexem);
