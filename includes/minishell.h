@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:11:56 by hucherea          #+#    #+#             */
-/*   Updated: 2025/02/14 23:20:53 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/15 04:50:18 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void				display_sorted_exportables_variables(char **env);
 int					pwd(t_command *command);
 int					echo(t_command *command);
 void				free_strs(char **strs);
+char				*add_last_arg(char *line, char *arg);
 int					cd(t_command *command);
 char				*get_target_from_args(char	**args);
 int					update_env_variables(char *old_pwd);

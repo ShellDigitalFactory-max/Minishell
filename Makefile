@@ -135,7 +135,7 @@ SRCS += pwd.c
 # srcs/builtins/echo
 
 SRCS += echo.c
-SRCS += free_strs.c
+SRCS += utils.c
 
 # srcs/builtins/cd/
 

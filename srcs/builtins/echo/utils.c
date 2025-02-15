@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_strs.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 23:20:33 by linux             #+#    #+#             */
-/*   Updated: 2025/02/14 23:20:43 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/15 04:50:12 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,19 @@ void	free_strs(char **strs)
 		++incre;
 	}
 	free(strs);
+}
+
+char	*add_last_arg(char *line, char *arg)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(line, arg);
+	if (tmp == NULL)
+	{
+		free(line);
+		return (NULL);
+	}
+	free(line);
+	line = tmp;
+	return (line);
 }

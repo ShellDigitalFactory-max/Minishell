@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 17:34:01 by linux             #+#    #+#             */
-/*   Updated: 2025/02/14 23:48:48 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/15 04:57:29 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ static char	*make_line_from_args(char **args, size_t i,
 		return (NULL);
 	while (args[i] != NULL)
 	{
-		line = add_args(line, args[i]);
+		if (args[i + 1] == NULL)
+			line = add_last_arg(line, args[i]);
+		else
+			line = add_args(line, args[i]);
 		++i;
 	}
 	if (new_line_status == NEW_LINE)
@@ -68,14 +71,17 @@ static char	*make_line_from_args(char **args, size_t i,
 	return (line);
 }
 
-static bool	is_new_line_option(char **args, size_t *i)
+static t_new_line_status	is_new_line_option(char **args, size_t *i)
 {
-	if (ft_strncmp(args[*i], "-n", 2) == 0)
+	t_new_line_status	new_line_status;
+
+	new_line_status = NEW_LINE;
+	while (args[*i] != NULL && ft_strncmp(args[*i], "-n", 2) == 0)
 	{
 		++*i;
-		return (NO_NEW_LINE);
+		new_line_status = NO_NEW_LINE;
 	}
-	return (NEW_LINE);
+	return (new_line_status);
 }
 
 int	echo(t_command *command)
@@ -99,5 +105,6 @@ int	echo(t_command *command)
 	}
 	ft_putstr_fd(line_printed, STDOUT_FILENO);
 	free_strs(args);
+	free(line_printed);
 	return (EXIT_SUCCESS);
 }
