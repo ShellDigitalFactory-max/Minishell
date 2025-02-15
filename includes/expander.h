@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef EXPANDER_H
+# define EXPANDER_H
+
+# include "minishell.h"
 
 typedef enum e_quote_state
 {
@@ -33,3 +36,5 @@ void	change_quote_state(char quote, t_quote_state *quote_state);
 void	expander_exit(void);
 void	erase_quotes(t_token_list token_list);
 char	*manage_return_cmd(t_lexem temp_expanded, t_lexem expanded_word);
+
+#endif
