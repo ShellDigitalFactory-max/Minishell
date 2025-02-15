@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:21:50 by tchobert          #+#    #+#             */
-/*   Updated: 2025/02/14 23:15:02 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/15 05:08:32 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ int	execute_builtin(t_minishell_context *minishell_context,
 
 	builtin_return = 0;
 	if (is_in_pipeline == false)
-	{
 		return (execute_alone_builtin(command, builtins[builtin_type]));
-	}
 	if (is_in_pipeline == true)
 	{
 		builtin_return = builtins[builtin_type](command);
