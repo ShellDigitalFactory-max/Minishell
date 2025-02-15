@@ -60,6 +60,7 @@ typedef struct s_token
 {
 	t_lexem			token_lexem;
 	t_token_type	token_type;
+	bool			is_surrounded_by_quotes;
 }				t_token;
 
 typedef t_token		t_grammar_element;
