@@ -31,6 +31,8 @@ static t_command_status	check_complete_absolute_path(t_command *command,
 static t_command_status	check_uncomplete_absolute_path(t_command *command,
 							char **command_env)
 {
+	if (ft_getenv("PATH", command_env) == NULL)
+		return (INVALID_COMMAND);
 	return (build_complete_path(command, command_env));
 }
 
