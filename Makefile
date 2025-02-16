@@ -135,6 +135,7 @@ SRCS += env.c
 SRCS += export.c
 SRCS += display_sorted_exportables_variables.c
 SRCS += pwd.c
+SRCS += exit.c
 
 # srcs/builtins/echo
 

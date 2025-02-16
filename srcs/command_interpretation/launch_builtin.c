@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:21:50 by tchobert          #+#    #+#             */
-/*   Updated: 2025/02/15 05:08:32 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/15 17:24:07 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static t_builtin_type	get_builtin_type(const char *command_name)
 		"pwd",
 		"cd",
 		"echo",
+		"exit",
 		NULL,
 	};
 	t_builtin_type		type;
@@ -65,7 +66,8 @@ int	execute_builtin(t_minishell_context *minishell_context,
 		export,
 		pwd,
 		cd,
-		echo
+		echo,
+		exit_builtin,
 	};
 	int						builtin_return;
 
