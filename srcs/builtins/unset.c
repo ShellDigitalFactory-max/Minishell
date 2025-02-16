@@ -46,8 +46,8 @@ static void	unset_variable(char *variable)
 	variable_to_unset = get_variable_in_env(env, variable);
 	if (variable_to_unset == NULL)
 		return ;
-	previous_variable_in_env = ft_list_find_previous_element(env,
-			variable_to_unset);
+	previous_variable_in_env = (t_variable_list)ft_list_find_previous_element(
+			env, variable_to_unset);
 	if (previous_variable_in_env == NULL)
 		return ;
 	if (previous_variable_in_env != NULL)
