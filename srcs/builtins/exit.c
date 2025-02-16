@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:45:34 by linux             #+#    #+#             */
-/*   Updated: 2025/02/15 17:15:16 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/16 17:15:40 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ int	exit_builtin(t_command *command)
 		}
 		else
 		{
-			return (error_exit(args[1]));
+			return ((unsigned char)error_exit(args[1]));
 		}
 	}
 	ft_putstr_fd("exit\n", 2);
-	exit(exit_code);
-	return (exit_code);
+	exit((unsigned char)exit_code);
+	return ((unsigned char)exit_code);
 }
