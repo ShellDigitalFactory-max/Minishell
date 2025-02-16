@@ -17,6 +17,7 @@ static t_builtin_type	get_builtin_type(const char *command_name)
 	static const char	*builtins_dictionary[] = {
 		"env",
 		"export",
+		"unset",
 		"pwd",
 		"cd",
 		"echo",
@@ -64,6 +65,7 @@ int	execute_builtin(t_minishell_context *minishell_context,
 	static t_builtin		builtins[] = {
 		env,
 		export,
+		unset,
 		pwd,
 		cd,
 		echo,

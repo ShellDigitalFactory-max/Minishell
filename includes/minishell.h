@@ -76,6 +76,7 @@ typedef enum e_builtin_type
 {
 	ENV,
 	EXPORT,
+	UNSET,
 	PWD,
 	CD,
 	ECHO,
@@ -139,6 +140,7 @@ int					execute_builtin(t_minishell_context *minishell_context,
 						t_command *command, bool is_in_pipeline);
 int					env(t_command *current_command);
 int					export(t_command *command);
+int					unset(t_command *command);
 void				display_sorted_exportables_variables(char **env);
 int					pwd(t_command *command);
 int					echo(t_command *command);
