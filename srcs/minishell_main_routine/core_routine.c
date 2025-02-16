@@ -52,8 +52,9 @@ int	core_routine(t_minishell_context *minishell_context)
 {
 	while (MSH_LOOP)
 	{
+		g_received_signal = 0;
 		minishell_context->command_session.user_input_line
-			= prompt_gets_user_input();
+			= prompt_gets_user_input(MAIN_PROMPT);
 		current_loop_process(minishell_context);
 		clean_current_loop_context(minishell_context);
 	}

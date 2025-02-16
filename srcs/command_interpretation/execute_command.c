@@ -44,6 +44,8 @@ static t_command_status	get_command_validity(t_command *command,
 	const t_path_type	command_path_type = get_path_type(
 			command->command_name);
 
+	if (*(command->command_name) == '\0')
+		return (INVALID_COMMAND);
 	return (command_path_manager(command, command_env, command_path_type));
 }
 
@@ -61,7 +63,7 @@ t_command_status	execute_command(t_command *command)
 		execve(command->command_binary_path, command_arguments,
 			command_environment);
 	}
-	ft_dprintf(STDERR_FILENO, "minishell: command not found: %s\n",
+	ft_dprintf(STDERR_FILENO, "minishell: %s: command not found\n",
 		command->command_args->content);
 	clean_command_attributes(command_arguments, command_environment);
 	return (INVALID_COMMAND);

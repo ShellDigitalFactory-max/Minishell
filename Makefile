@@ -10,6 +10,7 @@ LIBFT := $(PATH_LIBFT)libft.a
 
 PATH_SRCS += srcs/
 PATH_SRCS += srcs/minishell_main_routine
+PATH_SRCS += srcs/signals_handling
 PATH_SRCS += srcs/exit_routines
 PATH_SRCS += srcs/user_interface
 PATH_SRCS += srcs/history
@@ -42,7 +43,6 @@ SRCS += exit_shell_routine.c
 
 # scrs/user_interface
 
-SRCS += signals.c
 SRCS += prompt.c
 
 # srcs/history
@@ -88,6 +88,7 @@ SRCS += set_variable_to_environment.c
 # srcs/environment_building
 
 SRCS += build_environment.c
+SRCS += build_minimal_environment.c
 
 # srcs/semantic_analysis
 
@@ -106,6 +107,9 @@ SRCS += get_command_name.c
 SRCS += is_builtin.c
 SRCS += delete_command_pipeline.c
 SRCS += setup_pipe.c
+SRCS += is_delimiter.c
+SRCS += ensure_stdin_is_open.c
+SRCS += heredoc_interruption_routine.c
 
 # srcs/command_interpretation
 
@@ -155,6 +159,14 @@ SRCS += quote.c
 SRCS += expander_exit.c
 SRCS += erase_quotes.c
 SRCS += expand_variable_utils.c
+
+# srcs/signals_handling
+
+SRCS += setup_main_process_signals_handling.c
+SRCS += setup_command_mode_signals.c
+SRCS += setup_heredoc_signals_handling.c
+#SRCS += setup_execution_mode_signal_handling.c
+SRCS += signals.c
 
 # srcs/exit_status
 

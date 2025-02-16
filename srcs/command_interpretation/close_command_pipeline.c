@@ -28,6 +28,8 @@ int	close_command_pipeline(t_command_pipeline cmd_pipeline,
 		{
 			if (WIFEXITED(last_command_status))
 				exit_status = WEXITSTATUS(last_command_status);
+			else if (WIFSTOPPED(last_command_status))
+				exit_status = 128 + WSTOPSIG(last_command_status);
 			else if (WIFSIGNALED(last_command_status))
 				exit_status = (128 + WTERMSIG(last_command_status));
 			else
