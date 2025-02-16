@@ -69,6 +69,25 @@ static void	undefined_command_process(t_minishell_context *minishell_context)
 	exit(exit_value);
 }
 
+static void	exit_errors(t_minishell_context	*minishell_context)
+{
+	if (errno == EACCES)
+	{
+		clean_command_process(minishell_context);
+		exit(126);
+	}
+	if (errno == ENOENT)
+	{
+		clean_command_process(minishell_context);
+		exit(127);
+	}
+	else
+	{
+		clean_command_process(minishell_context);
+		exit(1);
+	}
+}
+
 void	command_process(t_minishell_context *minishell_context,
 			t_command *command)
 {
@@ -92,7 +111,6 @@ void	command_process(t_minishell_context *minishell_context,
 	}
 	if (execute_command(command) == INVALID_COMMAND)
 	{
-		clean_command_process(minishell_context);
-		exit(COMMAND_NOT_FOUND_EXIT_STATUS);
+		exit_errors(minishell_context);
 	}
 }

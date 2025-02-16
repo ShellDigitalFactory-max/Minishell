@@ -162,4 +162,11 @@ void				setup_default_signals_handling(void);
 void				setup_command_mode_signals_handling(void);
 void				setup_heredoc_signals_handling(void);
 
+// CLEAN AND EXIT
+
+t_minishell_context	*get_minishell_context(t_minishell_context *ptr,
+						int reset);
+void				clean_process(t_minishell_context *minishell_context,
+						t_command *command);
+
 #endif

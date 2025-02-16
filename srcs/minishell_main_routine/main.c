@@ -30,6 +30,7 @@ static int	launch_shell(char **env)
 	display_minishell_header();
 	setup_default_signals_handling();
 	ft_bzero(&minishell_context, sizeof(minishell_context));
+	get_minishell_context(&minishell_context, 0);
 	if (*env != NULL)
 	{
 		if (build_environment(env) == PROCESS_FAILURE)

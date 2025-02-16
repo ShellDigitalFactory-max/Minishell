@@ -12,27 +12,6 @@
 
 #include "minishell.h"
 
-#include "minishell.h"
-
-static t_list	*ft_list_find_previous_element(t_list *lst, t_list *node)
-{
-	t_list	*previous_element;
-
-	if (lst != NULL)
-	{
-		previous_element = lst;
-		while (previous_element != NULL)
-		{
-			if (previous_element->next == node)
-			{
-				return (previous_element);
-			}
-			previous_element = previous_element->next;
-		}
-	}
-	return (NULL);
-}
-
 static size_t	ft_get_max_size(const char *a, const char *b)
 {
 	if (ft_strlen(a) > ft_strlen(b))
@@ -40,16 +19,17 @@ static size_t	ft_get_max_size(const char *a, const char *b)
 	return (ft_strlen(b));
 }
 
-static t_variable_list get_variable_in_env(t_variable_list env, char *variable_key)
+static t_variable_list	get_variable_in_env(t_variable_list env,
+							char *variable_key)
 {
 	t_variable_list	to_find;
 
 	to_find = env;
-	while(to_find != NULL)
+	while (to_find != NULL)
 	{
 		if (ft_strncmp(((t_variable *)to_find->content)->key, variable_key,
 				ft_get_max_size(((t_variable *)to_find->content)->key,
-				variable_key)) == 0)
+					variable_key)) == 0)
 			return (to_find);
 		to_find = to_find->next;
 	}
@@ -66,7 +46,8 @@ static void	unset_variable(char *variable)
 	variable_to_unset = get_variable_in_env(env, variable);
 	if (variable_to_unset == NULL)
 		return ;
-	previous_variable_in_env = ft_list_find_previous_element(env, variable_to_unset);
+	previous_variable_in_env = ft_list_find_previous_element(env,
+			variable_to_unset);
 	if (previous_variable_in_env == NULL)
 		return ;
 	if (previous_variable_in_env != NULL)
@@ -100,8 +81,8 @@ int	unset(t_command *command)
 			args_list_to_args_array);
 	if (variables_to_unset == NULL)
 	{
-		ft_dprintf(STDERR_FILENO, "minishell: malloc failure during export builtin "
-		 "process. Aborting\n");
+		ft_dprintf(STDERR_FILENO, "minishell: malloc "
+			"failure during export builtin process. Aborting\n");
 		exit(EXIT_FAILURE);
 	}
 	unset_variables(variables_to_unset + 1);

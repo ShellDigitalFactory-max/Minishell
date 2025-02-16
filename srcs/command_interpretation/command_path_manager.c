@@ -32,7 +32,11 @@ static t_command_status	check_uncomplete_absolute_path(t_command *command,
 							char **command_env)
 {
 	if (ft_getenv("PATH", command_env) == NULL)
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: %s: command not found\n",
+			command->command_args->content);
 		return (INVALID_COMMAND);
+	}
 	return (build_complete_path(command, command_env));
 }
 
