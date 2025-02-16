@@ -41,7 +41,7 @@ t_assignation_status	assignation_checker(char *assignation)
 	i = 1;
 	while (probable_key[i] != '\0')
 	{
-		if (ft_isalnum(probable_key[i]) == false)
+		if (ft_isalnum(probable_key[i]) == false && probable_key[i] != '_')
 		{
 			free(probable_key);
 			return (INVALID_ASSIGNATION);

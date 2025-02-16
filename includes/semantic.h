@@ -144,6 +144,12 @@ void								delete_command_pipeline(
 										t_command_pipeline *cmd_pipeline);
 void								get_command_name(t_command *command);
 bool								is_builtin(const char *command_name);
+bool								is_delimiter(const char *delimiter,
+										const char *line);
+void								ensure_stdin_is_open(void);
+void								heredoc_interruption_routine(
+										const char *delimiter,
+										int heredoc_lines);
 
 void								print_arguments_list(
 										t_command_args arguments_list);

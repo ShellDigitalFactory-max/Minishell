@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_shell_routine.c                               :+:      :+:    :+:   */
+/*   heredoc_interruption_routine.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchobert <tchobert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 18:01:58 by hucherea          #+#    #+#             */
-/*   Updated: 2024/12/11 13:56:45 by tchobert         ###   ########.fr       */
+/*   Created: 2025/02/14 20:00:29 by tchobert          #+#    #+#             */
+/*   Updated: 2025/02/14 20:00:42 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exit_shell_routine(void)
+void	heredoc_interruption_routine(const char *delimiter, int heredoc_lines)
 {
-	const int	exit_value = get_exit_status_value();
-
-	delete_variables_list();
-	ft_putstr_fd("exit\n", STDERR_FILENO);
-	exit(exit_value);
+	if (heredoc_lines == 0)
+		heredoc_lines = 1;
+	ft_dprintf(STDERR_FILENO, "minishell: warning: here-document "
+		"at line %d delimited by end-of-file (wanted `%s')\n",
+		heredoc_lines, delimiter);
 }

@@ -12,6 +12,23 @@
 
 #include "minishell.h"
 
+static bool	is_surrounded_by_quotes(char *word)
+{
+	size_t	word_len;
+
+	if (word == NULL || *word == '\0')
+		return (false);
+	word_len = ft_strlen(word);
+	if (word_len < 2)
+		return (false);
+	if (*word == '\"' && word[word_len -1] == '\"')
+		return (true);
+	else if (*word == '\'' && word[word_len -1] == '\'')
+		return (true);
+	else
+		return (false);
+}
+
 static char	*erase_quotes_in_word(t_lexem word, t_quote_state *quote_state)
 {
 	size_t	i;
@@ -51,6 +68,8 @@ void	erase_quotes(t_token_list token_list)
 		token = current_token->content;
 		if (token->token_type == WORD)
 		{
+			token->is_surrounded_by_quotes
+				= is_surrounded_by_quotes(token->token_lexem);
 			expanded_token = erase_quotes_in_word(token->token_lexem,
 					&quote_state);
 			free(token->token_lexem);

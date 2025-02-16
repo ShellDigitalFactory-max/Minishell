@@ -12,36 +12,49 @@
 
 #include "minishell.h"
 
-static void	init_signals(const struct sigaction *sa)
-{
-	if (sigaction(SIGINT, sa, NULL) == FAILURE)
-	{
-		perror("sigaction");
-		exit(EXIT_FAILURE);
-	}
-	signal(SIGQUIT, SIG_IGN);
-}
+// static void	init_signals(const struct sigaction *sa)
+// {
+// 	if (sigaction(SIGINT, sa, NULL) == FAILURE)
+// 	{
+// 		perror("sigaction");
+// 		exit(EXIT_FAILURE);
+// 	}
+// 	signal(SIGQUIT, SIG_IGN);
+// }
 
-void	setup_signals(struct sigaction *sa)
-{
-	ft_memset(sa, 0, sizeof(struct sigaction));
-	sa->sa_handler = signal_handler;
-	init_signals(sa);
-}
+// void	setup_signals(struct sigaction *sa)
+// {
+// 	ft_memset(sa, 0, sizeof(struct sigaction));
+// 	sa->sa_handler = signal_handler;
+// 	init_signals(sa);
+// }
 
-void	sigint_routine(void)
+static void	sigint_routine(int signum)
 {
+	g_received_signal = signum;
 	set_exit_status(128 + SIGINT);
-	printf("\n");
+	write(STDIN_FILENO, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
 
-void	signal_handler(int signum)
+void	setup_main_prompt_signals_handling(void)
 {
-	if (signum == SIGINT)
-	{
-		sigint_routine();
-	}
+	signal(SIGINT, sigint_routine);
+	signal(SIGTERM, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGCONT, SIG_IGN);
+	signal(SIGTTIN, SIG_IGN);
+	signal(SIGTTOU, SIG_IGN);
+	signal(SIGPIPE, SIG_IGN);
 }
+
+// void	signal_handler(int signum)
+// {
+// 	if (signum == SIGINT)
+// 	{
+// 		sigint_routine();
+// 	}
+// }

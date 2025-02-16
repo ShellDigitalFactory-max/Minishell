@@ -12,35 +12,55 @@
 
 #include "minishell.h"
 
-static bool	is_delimiter(const char *delimiter, const char *line)
+static char	*process_data(char *heredoc_content, char *temp_line)
 {
-	const size_t	delimiter_size = ft_strlen(delimiter);
-	const size_t	line_size = ft_strlen(line);
+	ensure_stdin_is_open();
+	if (g_received_signal == 130)
+		set_exit_status(130);
+	free(temp_line);
+	return (heredoc_content);
+}
 
-	return (delimiter_size == line_size && ft_strcmp(line, delimiter) == 0);
+static void	update_heredoc_content(char **heredoc_content, char *temp_line,
+				char *new_line, int *heredoc_lines)
+{
+	ft_asprintf(&new_line, "%s%s\n", *heredoc_content, temp_line);
+	free(temp_line);
+	free(*heredoc_content);
+	*heredoc_content = new_line;
+	if (*heredoc_lines == 0)
+		*(heredoc_lines) += 2;
+	else
+		++*(heredoc_lines);
 }
 
 static char	*build_heredoc_content(const char *delimiter)
 {
-	char	*new_line;
-	char	*heredoc_content;
-	char	*temp_line;
+	char		*new_line;
+	char		*heredoc_content;
+	char		*temp_line;
+	int			lines;
 
+	lines = 0;
 	heredoc_content = ft_strdup("");
+	new_line = NULL;
 	while (HEREDOC_PROCESSING)
 	{
-		temp_line = readline("captain'hirdock>");
-		if (is_delimiter(delimiter, temp_line))
+		if (g_received_signal == SIGINT)
+			break ;
+		temp_line = prompt_gets_user_input(SUBPROMPT);
+		if (g_received_signal == SIGINT)
+			break ;
+		if (temp_line == CTRL_D)
 		{
-			free(temp_line);
+			heredoc_interruption_routine(delimiter, lines);
 			break ;
 		}
-		ft_asprintf(&new_line, "%s%s\n", heredoc_content, temp_line);
-		free(temp_line);
-		free(heredoc_content);
-		heredoc_content = new_line;
+		if (is_delimiter(delimiter, temp_line))
+			break ;
+		update_heredoc_content(&heredoc_content, temp_line, new_line, &lines);
 	}
-	return (heredoc_content);
+	return (process_data(heredoc_content, temp_line));
 }
 
 static void	save_heredoc_content(t_command *current_command,

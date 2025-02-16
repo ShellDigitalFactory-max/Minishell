@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_shell_routine.c                               :+:      :+:    :+:   */
+/*   ensure_stdin_is_open.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchobert <tchobert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 18:01:58 by hucherea          #+#    #+#             */
-/*   Updated: 2024/12/11 13:56:45 by tchobert         ###   ########.fr       */
+/*   Created: 2025/02/14 19:58:56 by tchobert          #+#    #+#             */
+/*   Updated: 2025/02/14 19:59:05 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exit_shell_routine(void)
+void	ensure_stdin_is_open(void)
 {
-	const int	exit_value = get_exit_status_value();
+	const int	tty_fd = open("/dev/tty", O_RDONLY);
 
-	delete_variables_list();
-	ft_putstr_fd("exit\n", STDERR_FILENO);
-	exit(exit_value);
+	if (tty_fd != -1)
+	{
+		dup2(tty_fd, STDIN_FILENO);
+		close(tty_fd);
+	}
 }

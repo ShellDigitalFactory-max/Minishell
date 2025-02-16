@@ -65,6 +65,9 @@ t_semantic_analysis_state_return	state_command(
 		return (update_machine_state(current_token->token_type,
 				semantic_machine));
 	}
+	if (*current_token->token_lexem == '\0'
+		&& current_token->is_surrounded_by_quotes == false)
+		return (TOKEN_PROCESSED);
 	add_argument_to_command_args(current_token->token_lexem,
 		&current_command->command_args);
 	semantic_machine->machine_state = STATE_COMMAND;

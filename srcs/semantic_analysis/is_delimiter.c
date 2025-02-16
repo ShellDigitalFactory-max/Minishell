@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_shell_routine.c                               :+:      :+:    :+:   */
+/*   is_delimiter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchobert <tchobert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tchobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 18:01:58 by hucherea          #+#    #+#             */
-/*   Updated: 2024/12/11 13:56:45 by tchobert         ###   ########.fr       */
+/*   Created: 2025/02/14 19:57:18 by tchobert          #+#    #+#             */
+/*   Updated: 2025/02/14 19:57:30 by tchobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exit_shell_routine(void)
+bool	is_delimiter(const char *delimiter, const char *line)
 {
-	const int	exit_value = get_exit_status_value();
+	const size_t	delimiter_size = ft_strlen(delimiter);
+	const size_t	line_size = ft_strlen(line);
 
-	delete_variables_list();
-	ft_putstr_fd("exit\n", STDERR_FILENO);
-	exit(exit_value);
+	return (delimiter_size == line_size && ft_strcmp(line, delimiter) == 0);
 }

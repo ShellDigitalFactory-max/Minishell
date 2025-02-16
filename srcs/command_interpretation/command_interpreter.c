@@ -44,10 +44,12 @@ static void	launch_command(t_minishell_context *minishell_context,
 	command->command_pid = command_process_pid;
 	if (command_process_pid > 0)
 	{
+		setup_default_signals_handling();
 		main_process_io_management(command);
 	}
 	if (command_process_pid == 0)
 	{
+		setup_command_mode_signals_handling();
 		command_process(minishell_context, command);
 	}
 }
@@ -78,6 +80,7 @@ int	command_pipeline_interpreter(t_minishell_context *minishell_context)
 	t_command_pipeline	current_command;
 	pid_t				last_command_pid;
 
+	setup_default_signals_handling();
 	cmd_pipeline = minishell_context->command_session.command_pipeline;
 	current_command = cmd_pipeline;
 	while (current_command != NULL)
