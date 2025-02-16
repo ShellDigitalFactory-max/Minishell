@@ -27,7 +27,6 @@ static int	launch_shell(char **env)
 {
 	t_minishell_context	minishell_context;
 
-	display_minishell_header();
 	setup_default_signals_handling();
 	ft_bzero(&minishell_context, sizeof(minishell_context));
 	get_minishell_context(&minishell_context, 0);
