@@ -63,8 +63,16 @@ t_command_status	execute_command(t_command *command)
 		execve(command->command_binary_path, command_arguments,
 			command_environment);
 	}
-	ft_dprintf(STDERR_FILENO, "minishell: %s: command not found\n",
-		command->command_args->content);
+	if (errno == EACCES)
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: %s: permission denied\n",
+			command->command_args->content);
+	}
+	if (errno == ENOENT)
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: %s: command not found\n",
+			command->command_args->content);
+	}
 	clean_command_attributes(command_arguments, command_environment);
 	return (INVALID_COMMAND);
 }

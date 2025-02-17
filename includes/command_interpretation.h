@@ -33,6 +33,9 @@ typedef enum e_path_type
 
 typedef enum e_command_status
 {
+	ERROR_SYSTEM,
+	ERROR_DENIED,
+	ERROR_NOT_FOUND,
 	ERROR_COMMAND = -1,
 	INVALID_COMMAND = -1,
 	VALID_COMMAND
