@@ -6,7 +6,7 @@
 /*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 17:34:01 by linux             #+#    #+#             */
-/*   Updated: 2025/02/17 13:00:42 by hucherea         ###   ########.fr       */
+/*   Updated: 2025/02/17 13:22:51 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ static t_new_line_status	is_new_line_option(char **args, size_t *i)
 	new_line_status = NEW_LINE;
 	while (args[*i] != NULL && ft_strncmp(args[*i], "-", 1) == 0)
 	{
-		
 		++*i;
 		new_line_status = NO_NEW_LINE;
 	}
