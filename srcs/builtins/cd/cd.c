@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 02:48:56 by linux             #+#    #+#             */
-/*   Updated: 2025/02/14 16:48:19 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/17 13:20:49 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static	int	set_variables(char *old_pwd, char **target, char **args)
 {
 	if (getcwd(old_pwd, PATH_MAX) == NULL)
 	{
-		perror("getcwd");
-		return (EXIT_FAILURE);
+		old_pwd = ft_strcpy(old_pwd, "");
 	}
 	*target = get_target_from_args(args);
 	if (*target == NULL)
